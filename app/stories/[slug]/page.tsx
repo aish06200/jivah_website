@@ -1,0 +1,48 @@
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { stories } from "@/lib/data";
+
+export function generateStaticParams() {
+  return stories.map((s) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps<"/stories/[slug]">) {
+  const { slug } = await params;
+  const story = stories.find((s) => s.slug === slug);
+  return { title: story?.title ?? "Story" };
+}
+
+export default async function StoryPage({ params }: PageProps<"/stories/[slug]">) {
+  const { slug } = await params;
+  const story = stories.find((s) => s.slug === slug);
+  if (!story) notFound();
+
+  return (
+    <article className="bg-white pb-24">
+      <header className="site-pad mx-auto max-w-3xl py-16 md:py-24">
+        <p className="text-[11px] tracking-[0.16em] uppercase text-muted">
+          {story.category} · {story.date} · {story.readTime}
+        </p>
+        <h1 className="mt-4 font-serif text-4xl md:text-6xl">{story.title}</h1>
+        <p className="mt-6 text-lg text-muted">{story.excerpt}</p>
+      </header>
+      <div className="relative mx-auto aspect-[16/8] max-w-5xl">
+        <Image src={story.image} alt={story.title} fill className="object-cover" sizes="100vw" />
+      </div>
+      <div className="site-pad mx-auto max-w-2xl space-y-6 py-16 text-[17px] leading-relaxed text-muted">
+        {story.body.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+        <p className="pt-4">
+          <Link
+            href={`/projects/${story.projectSlug}`}
+            className="text-[13px] tracking-wide text-ink underline-offset-4 hover:underline"
+          >
+            See the project
+          </Link>
+        </p>
+      </div>
+    </article>
+  );
+}

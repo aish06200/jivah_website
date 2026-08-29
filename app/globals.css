@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+:root {
+  --accent: #2e6a47;
+  --accent-hover: #24573a;
+  --on-accent: #f7f3eb;
+  --ink: #1a1916;
+  --muted: #5e5950;
+  --paper: #f5f1e9;
+  --line: #e4e1d8;
+  --forest: #2e6a47;
+}
+
+@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-forest: var(--forest);
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.site-pad {
+  padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+}
