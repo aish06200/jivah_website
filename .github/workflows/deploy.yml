@@ -1,0 +1,275 @@
+name: deploy
+
+# Every push to any branch builds and deploys:
+#   master      -> production, served at  https://<cf-domain>/
+#   any branch  -> preview,    served at  https://<cf-domain>/p/<slug>/
+# The preview URL is posted back as a commit status ("preview/website") and in
+# the run summary, so a designer can push and get a shareable link with no PR.
+#
+# Slug collisions: the preview slug is a punctuation-flattened branch name, so
+# two branches differing only in case/punctuation would map to the same folder.
+# To avoid silently clobbering each other, the FIRST branch to deploy a slug
+# claims it (recorded in s3://.../p/<slug>/.owner). A later, conflicting branch
+# falls back to a unique hashed slug "<slug>-<6hex(branch)>" instead of stealing
+# the folder. Pretty URLs stay pretty for whoever got there first.
+on:
+  push:
+    branches: ['**']
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write   # assume the AWS role via GitHub OIDC (no stored keys)
+  contents: read
+  statuses: write   # post the preview link as a commit status
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      DIST_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+      CF_DOMAIN: ${{ vars.CLOUDFRONT_DOMAIN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve branch + candidate slugs
+        id: meta
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+          if [ "$BRANCH" = "master" ]; then
+            echo "is_prod=true" >> "$GITHUB_OUTPUT"
+          else
+            # slugify: lowercase, non-alphanumerics -> "-", trim leading/trailing "-"
+            PRETTY=$(printf '%s' "$BRANCH" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+            # hash of the FULL ref (case/punctuation-sensitive) -> unique per branch
+            HASH=$(printf '%s' "$BRANCH" | sha1sum | cut -c1-6)
+            {
+              echo "is_prod=false"
+              echo "pretty=$PRETTY"
+              echo "hash=$HASH"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      # Configured before slug resolution: previews read/write the .owner marker
+      # in S3 to decide pretty-vs-hashed slug, which the build's --base depends on.
+      # Role by branch: master -> prod role (live/ only); any other branch -> preview
+      # role (p/* only). The prod role's OIDC trust is master-only, so a non-master
+      # run cannot assume it even if this expression were tampered with.
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ github.ref_name == 'master' && vars.AWS_ROLE_ARN_PROD || vars.AWS_ROLE_ARN_PREVIEW }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Claim slug (prod vs preview, collision-aware)
+        id: target
+        run: |
+          if [ "${{ steps.meta.outputs.is_prod }}" = "true" ]; then
+            {
+              echo "base=/"
+              echo "prefix=live"
+              echo "url=https://${CF_DOMAIN}/"
+              echo "invalidation=/*"
+            } >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          REF="${GITHUB_REF_NAME}"
+          PRETTY="${{ steps.meta.outputs.pretty }}"
+          HASH="${{ steps.meta.outputs.hash }}"
+
+          # Who (if anyone) owns the pretty slug already? Distinguish "no
+          # marker" (404) from transient read failures: treating a throttle as
+          # "unowned" would overwrite another branch's claim and steal its
+          # preview URL. (Both CI roles hold s3:ListBucket on the bucket, so a
+          # missing key surfaces as a real 404, not 403.)
+          if OWNER=$(aws s3 cp "s3://${S3_BUCKET}/p/${PRETTY}/.owner" - \
+                       2>"$RUNNER_TEMP/owner.err"); then
+            :
+          elif grep -qE "\(404\)|NoSuchKey|does not exist" "$RUNNER_TEMP/owner.err"; then
+            OWNER=""
+          else
+            cat "$RUNNER_TEMP/owner.err" >&2
+            exit 1
+          fi
+          if [ -z "$OWNER" ] || [ "$OWNER" = "$REF" ]; then
+            SLUG="$PRETTY"
+          else
+            SLUG="${PRETTY}-${HASH}"
+            echo "::notice::preview slug '${PRETTY}' is owned by branch '${OWNER}'; using unique hashed slug '${SLUG}'"
+          fi
+
+          # Claim ownership of the folder we're about to deploy to. Repeat
+          # pushes (OWNER already == REF) skip the write: cleanup.yml compares
+          # the .owner VALUE, never its mtime, and the bucket lifecycle has no
+          # current-object expiration, so the marker never needs refreshing.
+          if [ "$OWNER" != "$REF" ]; then
+            printf '%s' "$REF" | aws s3 cp - "s3://${S3_BUCKET}/p/${SLUG}/.owner" \
+              --content-type "text/plain" --cache-control "no-cache"
+          fi
+
+          {
+            echo "slug=$SLUG"
+            echo "base=/p/$SLUG/"
+            echo "prefix=p/$SLUG"
+            echo "url=https://${CF_DOMAIN}/p/$SLUG/"
+            echo "invalidation=/p/$SLUG/*"
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build (base-aware)
+        # Next.js static export. BASE_PATH is `/` on master and `/p/<slug>/` on
+        # preview branches. Output is `out/`; rename to `dist/` so the S3 sync
+        # below stays shared with the Vite branches.
+        env:
+          BASE_PATH: ${{ steps.target.outputs.base }}
+        run: |
+          pnpm build
+          rm -rf dist
+          mv out dist
+
+      # Incremental, manifest-guarded sync. Rebuilds refresh every mtime, so a
+      # plain sync re-uploads all ~80MB/220 files (~17s); --size-only alone
+      # would skip same-size content changes (index.html swaps chunk hashes at
+      # identical byte size; short/stable-named public/ files). So: hash dist,
+      # compare against the manifest the last SUCCESSFUL deploy wrote, force-
+      # upload content mismatches, and let --size-only handle new/renamed/
+      # deleted keys.
+      #
+      # Invariant: the .manifest object exists only while the prefix content
+      # exactly matches it. It is deleted BEFORE the first content write and
+      # rewritten as the LAST write, so any interrupted/cancelled run leaves no
+      # manifest and the next run degrades to a genuinely-full sync — always
+      # toward re-uploading more, never toward skipping content.
+      - name: Sync to S3
+        run: |
+          PREFIX="${{ steps.target.outputs.prefix }}"
+          DEST="s3://${S3_BUCKET}/${PREFIX}"
+          # Rename this key (e.g. .manifest-v2) to force one full re-upload —
+          # required if the --cache-control values below ever change, since an
+          # incremental pass never re-stamps unchanged objects.
+          MANIFEST=".manifest"
+          # Hashed assets: cache hard (filenames change on every build).
+          CACHE="public,max-age=31536000,immutable"
+
+          aws configure set default.s3.max_concurrent_requests 32
+
+          # Hash everything in dist (find, not globs: dist contains dotfiles),
+          # overlapped with the remote-manifest fetch below (independent work).
+          # Line format: <64-hex sha256><2 spaces>./<path>
+          (cd dist && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 -r sha256sum) \
+            > "$RUNNER_TEMP/local.manifest" &
+          HASH_JOB=$!
+
+          FULL=false
+          aws s3 cp "${DEST}/${MANIFEST}" "$RUNNER_TEMP/remote.manifest" \
+            || { echo "no remote manifest -> full sync"; FULL=true; }
+          # An empty manifest can't be trusted (and would defeat the awk
+          # two-file idiom below).
+          [ -s "$RUNNER_TEMP/remote.manifest" ] || FULL=true
+
+          # Drop the old manifest before the first content write (see
+          # invariant). MUST be fatal on failure: proceeding to mutate content
+          # under an intact stale manifest is the one path back to staleness.
+          # (DeleteObject is idempotent — a missing key still exits 0.)
+          aws s3 rm "${DEST}/${MANIFEST}"
+
+          wait "$HASH_JOB"
+          # sha256sum escapes exotic filenames (newline/backslash) with a
+          # leading '\', breaking fixed-offset parsing below -> take full path.
+          if grep -q '^\\' "$RUNNER_TEMP/local.manifest"; then FULL=true; fi
+
+          GUARD_JOB=""
+          if [ "$FULL" = "false" ]; then
+            # Same-name files whose CONTENT changed since the last successful
+            # deploy — the set --size-only would miss when sizes happen to match.
+            awk 'NR==FNR { r[substr($0,67)] = substr($0,1,64); next }
+                 { p = substr($0,67); h = substr($0,1,64) }
+                 (p in r) && r[p] != h && p != "./index.html" { print substr(p,3) }' \
+              "$RUNNER_TEMP/remote.manifest" "$RUNNER_TEMP/local.manifest" \
+              > "$RUNNER_TEMP/changed.txt"
+            CHANGED=$(wc -l < "$RUNNER_TEMP/changed.txt")
+            echo "content-changed same-name files: $CHANGED"
+            if [ "$CHANGED" -gt 32 ]; then
+              FULL=true   # per-file cp (~1-2s each, 8-way) loses to one full sync here
+            elif [ "$CHANGED" -gt 0 ]; then
+              # Runs concurrently with the --size-only sync below: the key sets
+              # are disjoint (these keys exist remotely at unchanged size, so
+              # that sync always skips them; it only touches new/renamed/
+              # deleted keys).
+              xargs -d '\n' -r -P 8 -I{} \
+                aws s3 cp "dist/{}" "${DEST}/{}" --cache-control "$CACHE" \
+                < "$RUNNER_TEMP/changed.txt" &
+              GUARD_JOB=$!
+            fi
+          fi
+
+          # Keep the .owner marker and manifest (never in dist/, so --delete
+          # would remove them).
+          if [ "$FULL" = "true" ]; then
+            # Genuinely full (size+mtime): a fresh build has fresh mtimes, so
+            # everything re-uploads — an absent/stale manifest self-heals here.
+            aws s3 sync dist/ "${DEST}/" \
+              --delete --exclude "index.html" --exclude ".owner" --exclude "${MANIFEST}" \
+              --cache-control "$CACHE"
+          else
+            # New/renamed/deleted keys only; same-size content changes were
+            # force-uploaded above.
+            aws s3 sync dist/ "${DEST}/" --size-only \
+              --delete --exclude "index.html" --exclude ".owner" --exclude "${MANIFEST}" \
+              --cache-control "$CACHE"
+          fi
+
+          # A failed guard upload must abort BEFORE the manifest is written
+          # (no manifest -> next run full-syncs).
+          if [ -n "$GUARD_JOB" ]; then wait "$GUARD_JOB"; fi
+
+          # Entry HTML: never cache, so a new deploy is visible immediately.
+          # Runs concurrently with the manifest write: index.html sits outside
+          # the manifest guard (it is re-uploaded unconditionally every run),
+          # and all assets it references are already in place above.
+          aws s3 cp dist/index.html "${DEST}/index.html" \
+            --cache-control "no-cache" --content-type "text/html" &
+          INDEX_JOB=$!
+
+          # LAST guarded write: manifest present <=> guarded prefix content
+          # matches this build exactly.
+          aws s3 cp "$RUNNER_TEMP/local.manifest" "${DEST}/${MANIFEST}" \
+            --content-type "text/plain" --cache-control "no-cache"
+
+          wait "$INDEX_JOB"
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "$DIST_ID" \
+            --paths "${{ steps.target.outputs.invalidation }}"
+
+      - name: Publish link
+        env:
+          GH_TOKEN: ${{ github.token }}
+          URL: ${{ steps.target.outputs.url }}
+        run: |
+          {
+            echo "### 🚀 Deployed"
+            echo ""
+            echo "**${URL}**"
+          } >> "$GITHUB_STEP_SUMMARY"
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state=success \
+            -f context=preview/website \
+            -f target_url="${URL}" \
+            -f description="Deployed — click Details to open" >/dev/null

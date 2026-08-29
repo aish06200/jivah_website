@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { withBase } from "@/lib/base";
 
 export function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -30,10 +31,10 @@ export function HeroVideo() {
       loop
       playsInline
       preload="auto"
-      poster="/images/hero-poster.jpg"
+      poster={withBase("/images/hero-poster.jpg")}
       aria-hidden
     >
-      <source src="/videos/hero.mp4?v=2" type="video/mp4" />
+      <source src={`${withBase("/videos/hero.mp4")}?v=2`} type="video/mp4" />
     </video>
   );
 }
