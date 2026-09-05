@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { projects } from "@/lib/data";
 
-const intents = ["General enquiry", "Schedule a site visit", "Home loan help", "Channel partner"] as const;
+const intents = ["General enquiry", "Schedule a site visit", "Home loan help"] as const;
 
 export function EnquireForm({
   defaultProject = "",

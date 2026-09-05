@@ -1,49 +1,96 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+/* ─────────────────────────────────────────────────────────
+ * ANIMATION STORYBOARD — strict sequence, no overlap
+ *
+ *  PHASE 1  FILL   (~3.5s) J fills upward slowly until 100%
+ *  PHASE 2  HOLD   (~1s)   full J sits still — nothing moves
+ *  PHASE 3  MELT   (~1s)   J drifts away as the white screen fades out
+ * ───────────────────────────────────────────────────────── */
+
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { JivahMark, type PreloaderStage } from "./JivahMark";
+
+const TIMING = {
+  fill: 3.5,
+  hold: 1,
+  melt: 1,
+};
+
+const MELT_EASE = [0.45, 0, 0.2, 1] as const;
 
 export function Preloader() {
-  const [progress, setProgress] = useState(0);
-  const [done, setDone] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const [visible, setVisible] = useState(true);
+  const [stage, setStage] = useState<PreloaderStage>("fill");
+  const holdTimerRef = useRef<number | null>(null);
+  const meltDoneRef = useRef(false);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("jivah-loaded")) {
-      setDone(true);
-      return;
-    }
+  const fillDuration = reduceMotion ? 0.35 : TIMING.fill;
+  const holdDuration = reduceMotion ? 0.2 : TIMING.hold;
+  const meltDuration = reduceMotion ? 0.25 : TIMING.melt;
 
-    const timer = window.setInterval(() => {
-      setProgress((p) => {
-        if (p >= 100) {
-          window.clearInterval(timer);
-          sessionStorage.setItem("jivah-loaded", "1");
-          window.setTimeout(() => setDone(true), 380);
-          return 100;
-        }
-        const step = p < 68 ? 3 : p < 90 ? 1.4 : 0.8;
-        return Math.min(100, p + step);
-      });
-    }, 28);
+  const onFillComplete = useCallback(() => {
+    setStage("hold");
 
-    return () => window.clearInterval(timer);
+    holdTimerRef.current = window.setTimeout(() => {
+      setStage("melt");
+    }, holdDuration * 1000);
+  }, [holdDuration]);
+
+  const finishPreloader = useCallback(() => {
+    setVisible(false);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      if (holdTimerRef.current) window.clearTimeout(holdTimerRef.current);
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!visible) document.body.style.overflow = "";
+  }, [visible]);
+
   return (
-    <AnimatePresence>
-      {!done ? (
+    <AnimatePresence mode="wait">
+      {visible ? (
         <motion.div
-          className="fixed inset-0 z-[80] flex flex-col bg-cream"
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-white"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: stage === "melt" ? 0 : 1 }}
+          transition={
+            stage === "melt"
+              ? { duration: meltDuration, ease: MELT_EASE }
+              : { duration: 0 }
+          }
+          onAnimationComplete={(definition) => {
+            if (
+              stage !== "melt" ||
+              meltDoneRef.current ||
+              typeof definition !== "object" ||
+              !definition ||
+              !("opacity" in definition)
+            ) {
+              return;
+            }
+            meltDoneRef.current = true;
+            finishPreloader();
+          }}
         >
-          <div className="h-[3px] bg-forest" style={{ width: `${progress}%` }} />
-          <div className="mt-auto flex items-end justify-between px-6 pb-8 md:px-12">
-            <p className="text-[11px] tracking-[0.28em] uppercase text-muted">Jivah Realty</p>
-            <p className="font-serif text-7xl tabular-nums text-ink md:text-8xl">
-              {String(Math.round(progress)).padStart(2, "0")}
-            </p>
-          </div>
+          <JivahMark
+            preloader
+            preloaderStage={stage}
+            animate={!reduceMotion}
+            size={128}
+            fillDuration={fillDuration}
+            meltDuration={meltDuration}
+            onFillComplete={onFillComplete}
+          />
         </motion.div>
       ) : null}
     </AnimatePresence>

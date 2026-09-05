@@ -1,29 +1,30 @@
 import type { LifePillar, Project, Story } from "./types";
 
 export const navItems = [
-  { href: "/projects", label: "Projects" },
-  { href: "/#philosophy", label: "Philosophy" },
-  { href: "/#stories", label: "Stories" },
-] as const;
-
-export const menuItems = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "Philosophy" },
-  { href: "/stories", label: "Stories" },
-  { href: "/life", label: "The Jivah Life" },
-  { href: "/locations", label: "Locations" },
-  { href: "/guide", label: "Homebuyer Guide" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#projects", label: "Projects", match: ["/projects"] },
+  { href: "/why-jivah", label: "Why Jivah", match: ["/why-jivah", "/about"] },
+  {
+    href: "/resources",
+    label: "Buyer Resources",
+    match: ["/resources", "/guide", "/downloads", "/rera", "/blog", "/buying-for-investment"],
+  },
+  {
+    href: "/contact",
+    label: "Contact Us",
+    match: ["/contact", "/channel-partner", "/partners"],
+  },
 ] as const;
 
 export const u = (id: string, extras = "") =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1800&q=80${extras}`;
 
+export const pexels = (id: string) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1600`;
+
 export const projects: Project[] = [
   {
     slug: "jivah-greens-nashik",
-    name: "Jivah Greens",
+    name: "Jivah Ganges",
     location: "Gangapur Road, Nashik",
     city: "Nashik",
     status: "ongoing",
@@ -56,41 +57,171 @@ export const projects: Project[] = [
       { group: "Play", items: ["Children’s park", "Indoor games", "Skating rink", "Community hall"] },
     ],
     connectivity: [
-      { place: "Nashik Road station", time: "18 min" },
-      { place: "Gangapur dam & ghats", time: "12 min" },
-      { place: "College Road", time: "10 min" },
-      { place: "Mumbai–Agra highway", time: "8 min" },
+      {
+        place: "Nashik Road railway station",
+        mapLabel: "Station",
+        time: "18 min",
+        distance: "6.8 km",
+        icon: "station",
+        coordinates: [73.8421, 19.9472],
+      },
+      {
+        place: "Criticare Hospital, City Centre",
+        mapLabel: "Hospital",
+        time: "12 min",
+        distance: "4.2 km",
+        icon: "hospital",
+        coordinates: [73.8055, 19.9678],
+      },
+      {
+        place: "College Road",
+        mapLabel: "College Road",
+        time: "10 min",
+        distance: "3.1 km",
+        icon: "market",
+        coordinates: [73.760559, 20.003805],
+      },
+      {
+        place: "DPS Nashik, Gangapur Road",
+        mapLabel: "DPS Nashik",
+        time: "8 min",
+        distance: "2.6 km",
+        icon: "school",
+        coordinates: [73.7862, 20.0112],
+      },
     ],
+    locationSection: {
+      headline: "Everything important, within reach.",
+      description:
+        "Jivah Greens sits on Gangapur Road with easy access to schools, healthcare, markets and transport across Nashik.",
+      coordinates: [73.7898, 20.0089],
+      zoom: 13.2,
+    },
+    constructionProgress: {
+      percent: 38,
+      phase: "Superstructure & landscape",
+    },
     updates: [
-      { date: "Aug 2026", title: "Tower A structure complete", body: "Slab work on Tower A has reached terrace level. Façade sampling begins next month." },
-      { date: "Jun 2026", title: "Clubhouse raft completed", body: "The wellness wing foundation is cast. Landscape contours around the central lawn are underway." },
-      { date: "Mar 2026", title: "Sample apartment open", body: "The 3 BHK show apartment is now available for weekend walkthroughs by appointment." },
+      {
+        date: "Aug 2026",
+        title: "Tower A structure complete",
+        body: "Slab work on Tower A has reached terrace level. Façade sampling begins next month.",
+        image: "/images/figma/project-detail/lifestyle-exterior.png",
+      },
+      {
+        date: "Jun 2026",
+        title: "Clubhouse raft completed",
+        body: "The wellness wing foundation is cast. Landscape contours around the central lawn are underway.",
+        image: "/images/figma/project-detail/lifestyle-pool.png",
+      },
+      {
+        date: "Mar 2026",
+        title: "Sample apartment open",
+        body: "The 3 BHK show apartment is now available for weekend walkthroughs by appointment.",
+        image: "/images/banner-interior.jpg",
+      },
+    ],
+    floorPlans: [
+      {
+        id: "2bhk",
+        label: "2 BHK",
+        title: "2 BHK Classic",
+        summary: "Efficient family homes with a winter balcony — cross-ventilated living that opens onto greenery.",
+        image: "/images/figma/project-detail/floor-plan-2bhk.png",
+        carpetArea: "825 sq ft",
+        saleableArea: "1,110 sq ft",
+        includes: [
+          { icon: "bed", label: "2 Bedrooms" },
+          { icon: "bath", label: "2 Bathrooms" },
+          { icon: "living", label: "Living & Dining" },
+          { icon: "balcony", label: "1 Balcony" },
+          { icon: "kitchen", label: "Kitchen" },
+          { icon: "utility", label: "Utility" },
+        ],
+      },
+      {
+        id: "3bhk",
+        label: "3 BHK",
+        title: "3 BHK Classic",
+        summary: "A third room ready for grandparents, study, or guest — with space that actually gets used.",
+        image: "/images/figma/project-detail/floor-plan-3bhk.png",
+        carpetArea: "1,050 sq ft",
+        saleableArea: "1,340 sq ft",
+        includes: [
+          { icon: "bed", label: "3 Bedrooms" },
+          { icon: "bath", label: "3 Bathrooms" },
+          { icon: "living", label: "Living & Dining" },
+          { icon: "balcony", label: "1 Balcony" },
+          { icon: "kitchen", label: "Kitchen" },
+          { icon: "utility", label: "Utility" },
+        ],
+      },
     ],
     downloads: [
       { title: "Brochure", type: "PDF · 8.4 MB" },
       { title: "Floor plans", type: "PDF · 3.1 MB" },
       { title: "RERA certificate", type: "PDF · 0.4 MB" },
     ],
+    featured: {
+      eyebrow: "Amenities",
+      headline: "World-class amenities",
+      intro: "Park, pool, gym and clubhouse — everyday life on one campus.",
+      highlights: [
+        {
+          title: "Park",
+          body: "A central lawn with shaded paths — space for evening walks, children at play and neighbours catching up outdoors.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/figma/project-detail/lifestyle-park.png",
+        },
+        {
+          title: "Gymnasium",
+          body: "A fully equipped indoor fitness centre for cardio, strength training and daily workouts without leaving the neighbourhood.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/figma/project-detail/lifestyle-gym.png",
+        },
+        {
+          title: "Swimming pool",
+          body: "A landscaped pool deck for laps, leisure swims and family time on weekends — with loungers and shade around the water.",
+          icon: "/images/figma/project-detail/featured/icon-pool.svg",
+          image: "/images/figma/project-detail/lifestyle-pool.png",
+        },
+        {
+          title: "Clubhouse",
+          body: "A community hall for festivals, gatherings and everyday social life — the shared room when home needs company.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/figma/project-detail/lifestyle-community.png",
+        },
+      ],
+      images: [
+        "/images/figma/project-detail/lifestyle-park.png",
+        "/images/figma/project-detail/lifestyle-gym.png",
+        "/images/figma/project-detail/lifestyle-pool.png",
+        "/images/figma/project-detail/lifestyle-community.png",
+      ],
+      priceNote: "Starting price",
+    },
   },
   {
-    slug: "jivah-courtyard-nagpur",
-    name: "Jivah Courtyard",
+    slug: "jivah-gardens-nagpur",
+    name: "Jivah Gardens",
     location: "Wardha Road, Nagpur",
     city: "Nagpur",
-    status: "ongoing",
+    status: "completed",
     typology: "1.5, 2 & 3 BHK",
     units: "248 homes",
-    startingPrice: "₹54 L",
-    possession: "Mar 2028",
+    startingPrice: "Sold out",
+    possession: "Handed over 2026",
     rera: "P50500023456",
     excerpt: "Courtyard living for a city that still walks — shade, water and neighbours in one frame.",
     overview:
-      "Nagpur’s heat asks for shade before spectacle. Jivah Courtyard is organised around a planted inner court, with residences looking inward to trees and outward to a quiet street. The ground plane holds a clinic, a grocer and a senior sit-out so daily life does not require a car.",
-    image: "/images/courtyard.png",
+      "Nagpur’s heat asks for shade before spectacle. Jivah Gardens is organised around a planted inner court, with residences looking inward to trees and outward to a quiet street. The ground plane holds a clinic, a grocer and a senior sit-out so daily life does not require a car.",
+    image: "/images/jivah-gardens-hero.jpg",
+    imageClass: "object-bottom",
     gallery: [
-      "/images/courtyard.png",
-      u("photo-1600585154526-990dced4db0d"),
-      u("photo-1416879595882-3373a0480b5b"),
+      "/images/jivah-gardens-hero.jpg",
+      "/images/jivah-gardens-lifestyle-yoga.jpg",
+      "/images/jivah-gardens-lifestyle-courtyard.jpg",
+      "/images/jivah-gardens-lifestyle-amenities.jpg",
       u("photo-1479839672679-a46483c0e7c8"),
     ],
     residences: [
@@ -110,10 +241,76 @@ export const projects: Project[] = [
       { place: "AIIMS Nagpur", time: "15 min" },
     ],
     updates: [
-      { date: "Jul 2026", title: "Podium landscape started", body: "Soil and irrigation for the inner court are in place. Native species planting follows the monsoon." },
+      {
+        date: "Jun 2026",
+        title: "Handover complete",
+        body: "All 248 homes have been handed over. The inner courtyard, grocer and clinic are in daily use.",
+        image: "/images/jivah-gardens-handover.jpg",
+      },
+      {
+        date: "Apr 2026",
+        title: "Ground-floor retail opens",
+        body: "The neighbourhood grocer and clinic have completed fit-out. Residents are using both daily.",
+        image: "/images/figma/project-detail/lifestyle-community.png",
+      },
+      {
+        date: "Jan 2026",
+        title: "Courtyard landscaping complete",
+        body: "The inner court is fully planted — shade trees, seating and the senior sit-out are ready for use.",
+        image: "/images/courtyard.png",
+      },
+      {
+        date: "Oct 2025",
+        title: "Common areas & MEP complete",
+        body: "Lift cores, lobbies and services are finished across all towers. Sample flats are open for walkthroughs.",
+        image: "/images/banner-interior.jpg",
+      },
+      {
+        date: "Jul 2025",
+        title: "Structure complete",
+        body: "All residential towers have reached full height. Façade work and waterproofing are underway.",
+        image: "/images/figma/project-detail/lifestyle-exterior.png",
+      },
     ],
+    featured: {
+      eyebrow: "Amenities",
+      headline: "Courtyard-first living",
+      intro: "Shade, wellness and recreation — everyday amenities organised around the inner court.",
+      highlights: [
+        {
+          title: "Inner courtyard",
+          body: "A planted central court with shade trees, seating and paths — the neighbourhood room Nagpur heat asks for first.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/jivah-gardens-lifestyle-courtyard.jpg",
+        },
+        {
+          title: "Yoga studio",
+          body: "A quiet indoor studio opening to the courtyard — for morning practice, meditation and resident wellness programmes.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/jivah-gardens-lifestyle-yoga.jpg",
+        },
+        {
+          title: "Swimming pool",
+          body: "A landscaped pool deck for laps, leisure swims and family time at dusk — with loungers and shade around the water.",
+          icon: "/images/figma/project-detail/featured/icon-pool.svg",
+          image: "/images/jivah-gardens-pool.jpg",
+        },
+        {
+          title: "Festival lawn",
+          body: "A central lawn for community gatherings, children at play and the festivals that still happen in the same city.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/figma/project-detail/lifestyle-park.png",
+        },
+      ],
+      images: [
+        "/images/jivah-gardens-lifestyle-courtyard.jpg",
+        "/images/jivah-gardens-lifestyle-yoga.jpg",
+        "/images/jivah-gardens-pool.jpg",
+        "/images/figma/project-detail/lifestyle-park.png",
+      ],
+    },
     downloads: [
-      { title: "Brochure", type: "PDF · 6.2 MB" },
+      { title: "As-built brochure", type: "PDF · 5.1 MB" },
       { title: "RERA certificate", type: "PDF · 0.4 MB" },
     ],
   },
@@ -155,6 +352,43 @@ export const projects: Project[] = [
     updates: [
       { date: "Aug 2026", title: "Pre-launch briefings", body: "Priority registration is open for channel partners and early homebuyers." },
     ],
+    featured: {
+      eyebrow: "Amenities",
+      headline: "Life among the trees",
+      intro: "Orchard trails, wellness spaces and a seasonal market — slower amenities for Kolhapur families.",
+      highlights: [
+        {
+          title: "Retained orchard",
+          body: "Mango and coconut lines kept on the plot — homes set back from trees that were already here before the foundations.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/orchard.png",
+        },
+        {
+          title: "Swimming pool",
+          body: "A landscaped pool deck for laps, leisure swims and family time on weekends — with loungers and shade around the water.",
+          icon: "/images/figma/project-detail/featured/icon-pool.svg",
+          image: "/images/figma/project-detail/lifestyle-pool.png",
+        },
+        {
+          title: "Yoga shala",
+          body: "An open-air and indoor wellness space for morning practice, breathing room and unhurried mornings.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/jivah-gardens-lifestyle-yoga.jpg",
+        },
+        {
+          title: "Community farm",
+          body: "Walking trails and a seasonal market edge — the agricultural memory of the plot kept visible in daily life.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/figma/project-detail/lifestyle-park.png",
+        },
+      ],
+      images: [
+        "/images/orchard.png",
+        "/images/figma/project-detail/lifestyle-pool.png",
+        "/images/jivah-gardens-lifestyle-yoga.jpg",
+        "/images/figma/project-detail/lifestyle-park.png",
+      ],
+    },
     downloads: [
       { title: "Teaser brochure", type: "PDF · 2.8 MB" },
     ],
@@ -192,7 +426,44 @@ export const projects: Project[] = [
       { place: "Airport", time: "25 min" },
       { place: "Prozone Mall", time: "12 min" },
     ],
-    updates: [],
+    updates: [    ],
+    featured: {
+      eyebrow: "Amenities",
+      headline: "Street life, quiet homes",
+      intro: "Shops on the ground floor, a lifted garden deck above — the week happens without leaving the block.",
+      highlights: [
+        {
+          title: "High street",
+          body: "A café, pharmacy and everyday shops on the public edge — errands handled before you reach the car.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/figma/project-detail/lifestyle-community.png",
+        },
+        {
+          title: "Garden deck",
+          body: "A raised green deck above the street — play courts, reading room and festival terrace in one quiet layer.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/philosophy-lake.png",
+        },
+        {
+          title: "Play court",
+          body: "A compact court for children after school and evening games — visible from home, close enough to walk down.",
+          icon: "/images/figma/project-detail/featured/icon-pool.svg",
+          image: "/images/figma/project-detail/lifestyle-park.png",
+        },
+        {
+          title: "Reading room",
+          body: "A shared quiet room for study, tuition and the hour you need away from the living room.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/banner-interior.jpg",
+        },
+      ],
+      images: [
+        "/images/figma/project-detail/lifestyle-community.png",
+        "/images/philosophy-lake.png",
+        "/images/figma/project-detail/lifestyle-park.png",
+        "/images/banner-interior.jpg",
+      ],
+    },
     downloads: [{ title: "Expression of interest", type: "PDF · 1.1 MB" }],
   },
   {
@@ -209,9 +480,10 @@ export const projects: Project[] = [
     excerpt: "Our first completed neighbourhood — still the clearest proof of how Jivah is meant to be lived.",
     overview:
       "Jivah Park was designed as a test of a simple idea: if daily needs sit on the ground floor, and the garden is not an afterthought, people stay. The community is fully occupied, the grocer is independently run, and the courtyard is used every evening.",
-    image: "/images/park.png",
+    image: "/images/jivah-park-card.png",
+    imageClass: "object-top",
     gallery: [
-      "/images/park.png",
+      "/images/jivah-park-card.png",
       "/images/park.png",
       u("photo-1605276374104-dee2a0ed3cd6"),
     ],
@@ -229,6 +501,43 @@ export const projects: Project[] = [
     updates: [
       { date: "Nov 2025", title: "Handover complete", body: "All 164 homes have been handed over. Society formation is complete." },
     ],
+    featured: {
+      eyebrow: "Amenities",
+      headline: "Amenities that stayed open",
+      intro: "Grocery, clinic and courtyard — lived-in ground-floor life a year after handover.",
+      highlights: [
+        {
+          title: "Central park",
+          body: "A central lawn with shaded paths — space for evening walks, children at play and neighbours catching up outdoors.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/park.png",
+        },
+        {
+          title: "Neighbourhood grocer",
+          body: "An independently run grocery on the ground floor — open daily, used by residents, not a showpiece.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/figma/project-detail/lifestyle-community.png",
+        },
+        {
+          title: "Courtyard sit-out",
+          body: "Benches and shade used every evening — the proof that occupied buildings keep their value.",
+          icon: "/images/figma/project-detail/featured/icon-pool.svg",
+          image: "/images/courtyard.png",
+        },
+        {
+          title: "Society hall",
+          body: "A community hall for festivals, gatherings and everyday social life — the shared room when home needs company.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/jivah-park-card.png",
+        },
+      ],
+      images: [
+        "/images/park.png",
+        "/images/figma/project-detail/lifestyle-community.png",
+        "/images/courtyard.png",
+        "/images/jivah-park-card.png",
+      ],
+    },
     downloads: [
       { title: "As-built brochure", type: "PDF · 4.6 MB" },
       { title: "RERA certificate", type: "PDF · 0.4 MB" },
@@ -272,6 +581,43 @@ export const projects: Project[] = [
     updates: [
       { date: "Aug 2026", title: "Tower B at 12th slab", body: "Structure is on programme. Sample apartment opens in September." },
     ],
+    featured: {
+      eyebrow: "Amenities",
+      headline: "World-class amenities",
+      intro: "Pool, gym, trails and co-working — a complete weekday on Pune's eastern edge.",
+      highlights: [
+        {
+          title: "Swimming pool",
+          body: "A landscaped pool deck for laps, leisure swims and family time on weekends — with loungers and shade around the water.",
+          icon: "/images/figma/project-detail/featured/icon-pool.svg",
+          image: "/images/figma/project-detail/lifestyle-pool.png",
+        },
+        {
+          title: "Gymnasium",
+          body: "A fully equipped indoor fitness centre for cardio, strength training and daily workouts without leaving the neighbourhood.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/figma/project-detail/lifestyle-gym.png",
+        },
+        {
+          title: "Jogging trail",
+          body: "A shaded loop for morning runs, evening walks and the school run that does not need a car.",
+          icon: "/images/figma/project-detail/featured/icon-energy.svg",
+          image: "/images/figma/project-detail/lifestyle-walkway.png",
+        },
+        {
+          title: "Co-working loft",
+          body: "A shared work room for hybrid weeks — quiet enough to take a call, close enough to come home for lunch.",
+          icon: "/images/figma/project-detail/featured/icon-smart.svg",
+          image: "/images/figma/project-detail/lifestyle-community.png",
+        },
+      ],
+      images: [
+        "/images/figma/project-detail/lifestyle-pool.png",
+        "/images/figma/project-detail/lifestyle-gym.png",
+        "/images/figma/project-detail/lifestyle-walkway.png",
+        "/images/figma/project-detail/lifestyle-community.png",
+      ],
+    },
     downloads: [
       { title: "Brochure", type: "PDF · 9.1 MB" },
       { title: "Floor plans", type: "PDF · 4.0 MB" },
@@ -341,99 +687,106 @@ export const lifePillars: LifePillar[] = [
 
 export const stories: Story[] = [
   {
-    slug: "inside-jivah-greens-nashik",
-    title: "Jivah Greens: 312 homes around a courtyard, not a parking deck",
+    slug: "anaya-rohan-kulkarni-nashik",
+    person: "Anaya & Rohan Kulkarni",
+    title: "We did not want to leave Nashik for a ‘better’ address",
     category: "Jivah Greens · Nashik",
     date: "12 Aug 2026",
-    readTime: "5 min",
+    readTime: "4 min",
     excerpt:
-      "Gangapur Road’s mixed-use neighbourhood — 2 & 3 BHK residences, a grocer on the ground floor, and a garden the cars are kept out of.",
-    image: "/images/greens.png",
+      "The children go downstairs after homework. Grandparents still live ten minutes away. We wanted a better week — not a different city.",
+    image: pexels("37453850"),
     projectSlug: "jivah-greens-nashik",
     body: [
-      "Jivah Greens is planned around how families in Nashik already live — close to work, grandparents, and the evening errand. Residences look onto a courtyard, not a podium of parked cars.",
-      "The mix is practical: 2 BHKs from 745 sq.ft, 3 BHKs that can take a grandparent, and corner decks for those who want more garden. Tower A is at terrace level; the sample apartment is open on weekends.",
-      "RERA P51700012345. Possession December 2027. From ₹68 L.",
+      "Rohan’s office is still on College Road. My parents are still in that same Gangapur house. Every ‘upgrade’ we were shown assumed we would leave both. We did not want a better city. We wanted Tuesday to be easier.",
+      "Jivah Greens put the grocer under the building and the cars at the edge. The children go down after homework. We can see them from the kitchen. That is the whole brief, said out loud.",
+      "We took a 3 BHK because the third room is for when my mother stays, not for storage we never unpack. Possession is still ahead. The sample apartment was enough to know the courtyard would be used.",
     ],
   },
   {
-    slug: "jivah-courtyard-nagpur",
-    title: "Jivah Courtyard: shade first, then the city",
-    category: "Jivah Courtyard · Nagpur",
+    slug: "sneha-patil-nagpur",
+    person: "Sneha Patil",
+    title: "The homebuyer guide was slower than every other sales office",
+    category: "Jivah Gardens · Nagpur",
     date: "28 Jul 2026",
     readTime: "4 min",
     excerpt:
-      "A planted inner court on Wardha Road — 1.5, 2 & 3 BHK homes sized for first-time buyers who still want neighbours, not a highway.",
-    image: "/images/courtyard.png",
-    projectSlug: "jivah-courtyard-nagpur",
+      "First home, same city. I needed paperwork I could actually check, a clinic downstairs, and time to decide — not a faster close.",
+    image: pexels("10450563"),
+    projectSlug: "jivah-gardens-nagpur",
     body: [
-      "Nagpur’s heat asks for shade before spectacle. Jivah Courtyard turns inward to trees, with a clinic, grocer and senior sit-out on the same ground as the homes.",
-      "Plans run from a 580 sq.ft first home to a 1,180 sq.ft family 3 BHK. The podium landscape is in soil; native planting follows the monsoon.",
-      "RERA P50500023456. Possession March 2028. From ₹54 L.",
+      "I walked into three sales offices in one weekend. Each one had a faster close. Jivah handed me a guide and told me to come back with questions. That is why I trusted it.",
+      "Nagpur in April is not a glass façade problem. It is a shade problem. The inner court, the clinic and the grocer on the same ground — that is what I could explain to my father without a brochure.",
+      "I bought a 2 BHK. First home. Wardha Road is still my city. I did not need a highway address to feel I had arrived.",
     ],
   },
   {
-    slug: "jivah-park-one-year-on",
-    title: "Jivah Park, Solapur: 164 homes, one year after handover",
+    slug: "vikram-shah-solapur",
+    person: "Vikram Shah",
+    title: "I bought for yield and stayed for the courtyard",
     category: "Jivah Park · Solapur",
     date: "02 Jun 2026",
     readTime: "4 min",
     excerpt:
-      "Our first completed neighbourhood — grocer independently run, courtyard in daily use, society already formed.",
-    image: "/images/park.png",
+      "A year after handover, the grocer is still open and the benches are still used. That is how I know the neighbourhood works.",
+    image: "/images/story-vikram-shah.png",
+    video: true,
     projectSlug: "jivah-park-solapur",
     body: [
-      "Jivah Park was the test: if daily needs sit on the ground floor and the garden is not an afterthought, people stay. A year on, all 164 homes are handed over.",
-      "The grocer asked for a second refrigerator. The senior sit-out needed more shade — we added it. Scuffed benches are the brief for every project that follows.",
-      "RERA P52800011220. Handed over 2025. Sold out — a handful of resales are facilitated on request.",
+      "I did not plan to live here. Solapur was a yield calculation — completed stock, a society already formed, a grocer that was not a showpiece. Then I sat in the courtyard on a Saturday and did not leave.",
+      "A year on, the benches are scuffed. The grocer asked for a second refrigerator. Someone’s parents occupy the sit-out every evening. Occupied buildings keep their value. Empty amenities do not.",
+      "If you are buying to rent, look at whether people actually use the ground floor. If they do, the rest of the spreadsheet follows.",
     ],
   },
   {
-    slug: "jivah-ridge-wagholi",
-    title: "Jivah Ridge: east Pune without a life lived in traffic",
+    slug: "meera-joshi-pune",
+    person: "Meera Joshi",
+    title: "East Pune, without a life lived in traffic",
     category: "Jivah Ridge · Pune",
     date: "19 Jun 2026",
-    readTime: "5 min",
+    readTime: "4 min",
     excerpt:
-      "420 homes in Wagholi — school run, grocer, pharmacy and a walk, sized for people who work in Pune but refuse the commute as a lifestyle.",
-    image: "/images/ridge.png",
+      "School run, grocer, pharmacy, a walk. I work in the city. I refused to make the commute a personality.",
+    image: pexels("15602469"),
     projectSlug: "jivah-ridge-pune",
     body: [
-      "Jivah Ridge sits on Pune’s eastern edge as a complete weekday: crèche, grocery, a trail, a third room that is not leftover storage. Tower B is at the 12th slab; the sample opens in September.",
-      "2 BHKs from 810 sq.ft, 3 BHKs to 1,380 sq.ft. Kharadi is 18 minutes. The school belt is six.",
-      "RERA P52100044512. Possession June 2028. From ₹89 L.",
+      "Wagholi is where a lot of us landed because Kharadi filled up. The mistake is treating that as a waiting room for a ‘real’ neighbourhood. I wanted the weekday to finish at the building, not in a car.",
+      "The crèche, the grocer and the trail are why we signed. The third room is my mother’s when she visits, not a dumping ground for cartons. Kharadi is eighteen minutes when I need it. Most days I do not.",
+      "I am not waiting for the city to come to us. The errands already live downstairs.",
     ],
   },
   {
-    slug: "jivah-orchard-kolhapur",
-    title: "Jivah Orchard: villas along a retained mango edge",
+    slug: "aditya-more-kolhapur",
+    person: "Aditya More",
+    title: "The mango trees were already here. The house had to fit around them",
     category: "Jivah Orchard · Kolhapur",
     date: "04 Jul 2026",
     readTime: "4 min",
     excerpt:
-      "186 homes in Kawala Naka — 2 & 3 BHK apartments and garden villas that keep the orchard visible.",
-    image: "/images/orchard.png",
+      "Kawala Naka is still home. We wanted a garden villa that did not pretend the orchard was landscaping.",
+    image: pexels("5746790"),
     projectSlug: "jivah-orchard-kolhapur",
     body: [
-      "Jivah Orchard steps residences back from mango and coconut that were already on the plot. A small high street of daily shops sits on the public edge.",
-      "Garden villas at 1,820 sq.ft share the orchard line; 3 BHKs organise around a dining court. Pre-launch briefings are open.",
-      "RERA registration underway. Possession 2029. From ₹72 L.",
+      "My parents still measure distance in temples and market days, not in kilometres to a ring road. Kolhapur did not need replacing. The house did.",
+      "Jivah Orchard kept the mango and coconut line. The shops sit on the public edge so the inside stays a court. We are looking at a garden villa because the dining room should see trees, not a parking deck.",
+      "Pre-launch meant more conversation than pressure. That suited a family that already knows the street.",
     ],
   },
   {
-    slug: "jivah-ghat-cidco",
-    title: "Jivah Ghat: a compact block in Cidco, with a public ground floor",
+    slug: "asha-pawar-sambhajinagar",
+    person: "Asha Pawar",
+    title: "Cidco is where we work. The ground floor is where the week happens",
     category: "Jivah Ghat · Sambhajinagar",
     date: "15 May 2026",
     readTime: "4 min",
     excerpt:
-      "220 homes above shops, a pharmacy and a café — sized for first-time buyers who work in Cidco and still want grandparents nearby.",
-    image: "/images/philosophy-lake.png",
+      "A compact home above a pharmacy and a café — sized for a first salary, and for grandparents who still live in the same city.",
+    image: pexels("37607665"),
     projectSlug: "jivah-ghat-aurangabad",
     body: [
-      "Jivah Ghat treats the street as part of the home. Retail occupies the base; residences begin at a lifted garden deck.",
-      "2 BHKs from 720 sq.ft, 3 BHKs that fit a joint family without wasting carpet. The bus hub is six minutes.",
-      "RERA registration underway. Possession 2029. From ₹61 L.",
+      "I did not want a far suburb and a story about the future. I work in Cidco. My in-laws are twenty minutes away. The home had to sit in that triangle.",
+      "Jivah Ghat puts shops on the street and the residences on a lifted garden. I can send my father for milk without a two-wheeler. That sounds small until you live it.",
+      "We took a 2 BHK we can actually furnish. The bus hub is six minutes. First home, same city — that was the requirement.",
     ],
   },
 ];
@@ -482,6 +835,22 @@ export const values = [
     title: "Clarity over urgency",
     body: "RERA numbers, timelines and prices are published. If it cannot be said slowly, it should not be said.",
   },
+  {
+    title: "Vastu-aware planning",
+    body: "Orientation, light and ventilation planned for how families actually live — not sticker claims on a brochure.",
+  },
+  {
+    title: "Open space by design",
+    body: "Lawns, walkways and play areas are drawn first. We do not fill a site and call the gaps green.",
+  },
+  {
+    title: "Mixed-use downstairs",
+    body: "Grocer, pharmacy and clinic on the ground floor — leased to operators who serve residents first.",
+  },
+  {
+    title: "Quality that lasts",
+    body: "Structure, waterproofing and common areas built for daily use — occupied buildings keep their value.",
+  },
 ];
 
 export const leaders = [
@@ -489,16 +858,19 @@ export const leaders = [
     name: "Meera Kulkarni",
     role: "Founder & Managing Director",
     bio: "A developer’s daughter who left the metro model behind — Meera started Jivah to prove that emerging cities deserve finished neighbourhoods, not leftover planning.",
+    image: pexels("1181690"),
   },
   {
     name: "Arjun Deshpande",
     role: "Head of Design",
     bio: "Architect. Obsessed with kitchens, shade and the width of a corridor. Holds the line between what looks good in a render and what works in April heat.",
+    image: pexels("2182970"),
   },
   {
     name: "Sana Qureshi",
     role: "Head of Customer Experience",
     bio: "The person who reads every site-visit note. Builds the homebuyer path so first-time buyers are never the last to understand the paperwork.",
+    image: pexels("3777943"),
   },
 ];
 
@@ -513,7 +885,7 @@ export const offices = [
   {
     city: "Nagpur",
     name: "Sales office",
-    address: "Jivah Courtyard site office, Wardha Road, Nagpur 440015",
+    address: "Jivah Gardens site office, Wardha Road, Nagpur 440015",
     hours: "Tue–Sun · 10:00–7:00",
     phone: "+91 712 660 2100",
   },
@@ -598,9 +970,9 @@ export const featuredListings = [
     image: "/images/greens.png",
   },
   {
-    slug: "jivah-courtyard-nagpur",
+    slug: "jivah-gardens-nagpur",
     n: "02.",
-    title: "Courtyard 2 BHK in Nagpur",
+    title: "Garden 2 BHK at Jivah Gardens",
     body: "Cross-ventilated living around a planted inner court — shade first, then the city, in a home sized for first-time buyers.",
     specs: "2 Bed | 2 Bath | 860 sq.ft",
     image: "/images/courtyard.png",
@@ -688,17 +1060,38 @@ export const testimonials = [
       "We did not want to leave Nashik for a ‘better’ address. Jivah Greens is the first place that felt like the city we already had — only easier.",
     name: "Anaya & Rohan Kulkarni",
     place: "Jivah Greens, Nashik",
+    image: pexels("21319609"),
   },
   {
     quote:
       "The homebuyer guide was slower than every other sales office. That is why we trusted it. EMI, RERA, documents — all in language we could check.",
     name: "Sneha Patil",
     place: "First-time buyer, Nagpur",
+    image: u("photo-1573497019940-1c28c88b4f3e", "&crop=faces"),
   },
   {
     quote:
       "I bought for yield and stayed for the courtyard. The grocer is open. The benches are used. That is the whole investment thesis.",
     name: "Vikram Shah",
     place: "Investor, Jivah Park",
+    image: pexels("12366973"),
   },
 ];
+
+function parseHomeCount(units: string): number {
+  const match = units.match(/\d+/);
+  return match ? Number(match[0]) : 0;
+}
+
+const totalHomes = projects.reduce((total, project) => total + parseHomeCount(project.units), 0);
+const handedOverHomes = projects
+  .filter((project) => project.status === "completed")
+  .reduce((total, project) => total + parseHomeCount(project.units), 0);
+const liveProjects = projects.filter((project) => project.status !== "upcoming").length;
+
+export const heroMetrics = [
+  { label: "Live projects", value: String(liveProjects) },
+  { label: "Homes planned", value: totalHomes.toLocaleString("en-IN"), suffix: "+" },
+  { label: "Keys handed over", value: handedOverHomes.toLocaleString("en-IN") },
+  { label: "RERA registered", value: "100", suffix: "%" },
+] as const;

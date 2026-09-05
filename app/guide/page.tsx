@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { EmiCalculator } from "@/components/EmiCalculator";
+import { PageIntro } from "@/components/PageIntro";
 import { faqs } from "@/lib/data";
 
 export const metadata = { title: "Homebuyer Guide" };
@@ -23,13 +25,20 @@ const docs = [
 export default function GuidePage() {
   return (
     <div className="bg-white">
-      <header className="site-pad py-20 text-center md:py-28">
-        <p className="text-[13px] tracking-wide text-muted">Practical, not sales-led</p>
-        <h1 className="mt-4 font-serif text-5xl md:text-7xl">Homebuyer Guide</h1>
-        <p className="mx-auto mt-8 max-w-2xl text-[17px] leading-relaxed text-muted">
-          Built for first-time buyers. Slow questions, clear answers — loans, RERA, documents and the walk from enquiry to keys.
-        </p>
-      </header>
+      <PageIntro
+        kicker={
+          <>
+            <Link href="/resources" className="hover:text-ink">
+              Buyer Resources
+            </Link>
+            {" / Practical, not sales-led"}
+          </>
+        }
+        title="Homebuyer Guide"
+      >
+        Built for first-time buyers. Slow questions, clear answers — loans, RERA, documents and the
+        walk from enquiry to keys.
+      </PageIntro>
 
       <section className="site-pad mx-auto max-w-3xl pb-16">
         <h2 className="font-serif text-4xl">Buying your first home</h2>

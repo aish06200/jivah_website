@@ -66,7 +66,7 @@ export function ProcessSection() {
 
       <div className="mt-12 text-center">
         <Link
-          href="/#contact"
+          href="/contact"
           className="inline-flex bg-ink px-8 py-3.5 text-[13px] tracking-wide text-on-accent hover:bg-ink/90"
         >
           Get a Free Consultation

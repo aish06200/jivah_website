@@ -1,15 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap");
 @import "tailwindcss";
 
 :root {
-  --accent: #2e6a47;
-  --accent-hover: #24573a;
-  --on-accent: #f7f3eb;
-  --ink: #1a1916;
-  --muted: #5e5950;
-  --paper: #f5f1e9;
-  --line: #e4e1d8;
-  --forest: #2e6a47;
+  --accent: #0c7b54;
+  --accent-hover: #0a6847;
+  --on-accent: #ffffff;
+  --ink: #12161d;
+  --muted: #61656e;
+  --paper: #fafbfa;
+  --line: #e5e5e6;
+  --forest: #0c7b54;
+  --editorial: "Cormorant Garamond", Georgia, "Times New Roman", serif;
 }
 
 @theme inline {
@@ -22,8 +23,9 @@
   --color-line: var(--line);
   --color-forest: var(--forest);
   --font-sans: Inter, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-serif: var(--editorial);
+  --font-mono: Inter, ui-monospace, monospace;
+  --font-editorial: var(--editorial);
 }
 
 html {
@@ -43,6 +45,194 @@ body {
 
 .font-serif {
   font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.editorial-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.editorial-rule {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.article-dropcap::first-letter {
+  float: left;
+  margin: 0.05em 0.12em 0 0;
+  font-family: var(--font-editorial);
+  font-size: 4.75rem;
+  font-weight: 500;
+  line-height: 0.78;
+  color: var(--ink);
+}
+
+.article-prose {
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.82;
+}
+
+.article-prose p + p {
+  margin-top: 1.35em;
+}
+
+.article-caption {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.article-dek {
+  color: var(--ink);
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.article-byline {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.article-date {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.article-section-title {
+  color: var(--ink);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.article-cta-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255, 255, 255, 0.08), transparent 70%),
+    linear-gradient(165deg, #1a2420 0%, #12161d 55%, #0f1814 100%);
+  padding: clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+}
+
+.page-title {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.section-heading {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: -1.12px;
+  }
+
+  .section-heading {
+    font-size: 44px;
+    line-height: 52px;
+    letter-spacing: -0.88px;
+  }
+}
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.btn-pill:hover {
+  opacity: 0.82;
+}
+
+.btn-pill.btn-forest {
+  background: var(--forest);
+}
+
+.btn-pill.btn-forest:hover {
+  background: var(--accent-hover);
+  opacity: 1;
+}
+
+.btn-pill.btn-white {
+  background: #fff;
+  color: var(--forest);
+}
+
+.btn-pill.btn-white:hover {
+  background: #fff;
+  opacity: 0.9;
+}
+
+.icon-tint-forest {
+  filter: brightness(0) saturate(100%) invert(33%) sepia(54%) saturate(1839%) hue-rotate(123deg)
+    brightness(92%) contrast(90%);
+}
+
+.contact-field {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.contact-field::placeholder {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+}
+
+.contact-field:focus {
+  border-color: var(--forest);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--forest) 14%, transparent);
+}
+
+.contact-field-label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 .font-mono {
@@ -50,5 +240,175 @@ body {
 }
 
 .site-pad {
-  padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  padding-inline: clamp(1.5rem, 5.5vw, 5rem);
+}
+
+.project-location-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.project-location-marker__pin {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--forest);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(12, 123, 84, 0.35), 0 0 0 4px #fff;
+}
+
+.project-location-marker__label {
+  margin-top: 0.5rem;
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.25rem 0.75rem;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(18, 22, 29, 0.08);
+}
+
+.mapboxgl-map {
+  font-family: Inter, system-ui, sans-serif;
+  width: 100%;
+  height: 100%;
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+.project-location-poi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.project-location-poi__dot {
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: #8a6a3d;
+  box-shadow: 0 0 0 3px #fff, 0 2px 8px rgba(18, 22, 29, 0.12);
+}
+
+.project-location-poi__label {
+  margin-top: 0.35rem;
+  max-width: 7.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 0.2rem 0.55rem;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(18, 22, 29, 0.08);
+}
+
+.project-location-poi--station .project-location-poi__dot {
+  background: #3e545d;
+}
+
+.project-location-poi--hospital .project-location-poi__dot {
+  background: #b85c4a;
+}
+
+.project-location-poi--market .project-location-poi__dot {
+  background: #8a6a3d;
+}
+
+.project-location-poi--school .project-location-poi__dot {
+  background: var(--forest);
+}
+
+.project-location-poi--highway .project-location-poi__dot {
+  background: #61656e;
+}
+
+.project-location-poi--landmark .project-location-poi__dot {
+  background: #61656e;
+}
+
+@keyframes amenity-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(14px, -10px, 0) scale(1.02);
+  }
+}
+
+@keyframes amenity-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.amenity-bg-drift {
+  animation: amenity-drift 20s ease-in-out infinite;
+}
+
+.amenity-header-glow {
+  animation: amenity-glow 4s ease-in-out infinite;
+}
+
+.amenity-card-cut {
+  clip-path: polygon(2rem 0, 100% 0, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 0 100%, 0 2rem);
+}
+
+@keyframes about-gallery-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.about-gallery-marquee {
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.about-gallery-track {
+  animation: about-gallery-scroll 36s linear infinite;
+}
+
+.about-gallery-marquee:hover .about-gallery-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-gallery-track {
+    animation: none;
+  }
+}
+
+@keyframes amenity-card-in {
+  from {
+    opacity: 0.6;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

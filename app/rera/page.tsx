@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { projects } from "@/lib/data";
 
 export const metadata = { title: "RERA" };
@@ -5,7 +6,14 @@ export const metadata = { title: "RERA" };
 export default function ReraPage() {
   return (
     <div className="site-pad mx-auto max-w-3xl py-20 md:py-28">
-      <h1 className="font-serif text-5xl">RERA</h1>
+      <p className="text-[13px] tracking-wide text-muted">
+        <Link href="/resources" className="hover:text-ink">
+          Buyer Resources
+        </Link>
+        {" / "}
+        RERA
+      </p>
+      <h1 className="page-title mt-4 text-ink">RERA</h1>
       <p className="mt-8 text-[16px] leading-relaxed text-muted">
         All ongoing Jivah projects are registered under MahaRERA. Upcoming projects remain listed as registration underway until a number is issued. We do not accept bookings before registration.
       </p>

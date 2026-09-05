@@ -1,23 +1,42 @@
 import Link from "next/link";
+import { withBase } from "@/lib/base";
 
-export function Logo({ light = false }: { light?: boolean }) {
+export function Logo({
+  light = false,
+  footer = false,
+}: {
+  light?: boolean;
+  footer?: boolean;
+}) {
+  if (footer) {
+    return (
+      <Link
+        href="/"
+        className="inline-block w-fit leading-none no-underline notranslate"
+        aria-label="Jivah Realty home"
+      >
+        <span className="block h-10 w-[112px] overflow-hidden md:h-12 md:w-[134px]">
+          <img
+            src={withBase("/images/figma/logo-hero.png")}
+            alt=""
+            className="block h-10 w-auto max-w-none origin-top-left scale-[1.34] object-left md:h-12 md:scale-[1.34]"
+          />
+        </span>
+      </Link>
+    );
+  }
+
   return (
-    <Link href="/" className="flex items-center gap-2.5" aria-label="Jivah Realty home">
-      <svg
-        viewBox="0 0 36 36"
-        className={`h-8 w-8 ${light ? "text-on-accent" : "text-accent"}`}
-        aria-hidden
-      >
-        <path
-          fill="currentColor"
-          d="M4 32V16.5L10.2 11.2V25.5h8.4V4.8L26 0v32H4Z"
-        />
-      </svg>
-      <span
-        className={`font-serif text-[22px] font-medium leading-none tracking-tight md:text-[26px] ${light ? "text-on-accent" : "text-ink"}`}
-      >
-        Jivah Realty
-      </span>
+    <Link
+      href="/"
+      className="relative block h-[32px] w-[118px] no-underline notranslate md:h-[36px] md:w-[132px]"
+      aria-label="Jivah Realty home"
+    >
+      <img
+        src={withBase("/images/figma/logo-header.png")}
+        alt=""
+        className="absolute inset-0 h-full w-full object-contain object-left"
+      />
     </Link>
   );
 }
