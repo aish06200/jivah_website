@@ -71,6 +71,7 @@ export function AboutPageContent() {
         columns={3}
         cardLayout="stacked"
         contentClassName="pb-10 md:px-10"
+        titleClassName="page-title text-[#172023]"
         mobileFlush
       />
 
@@ -80,7 +81,7 @@ export function AboutPageContent() {
             <SectionKicker icon="/images/figma/about/section-icon.svg" light>
               Meet our Team
             </SectionKicker>
-            <h2 className="mt-3 text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.2] tracking-[-0.06em]">
+            <h2 className="section-heading mt-3 md:text-[clamp(2rem,4vw,3.25rem)] md:leading-[1.2] md:tracking-[-0.06em]">
               Leadership
             </h2>
             <p className="mt-2 max-w-xl text-[18px] leading-[1.4] tracking-[-0.01em] text-white/70">

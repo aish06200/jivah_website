@@ -25,11 +25,18 @@ export function Preloader() {
   const [visible, setVisible] = useState(true);
   const [stage, setStage] = useState<PreloaderStage>("fill");
   const holdTimerRef = useRef<number | null>(null);
-  const meltDoneRef = useRef(false);
+  const meltTimerRef = useRef<number | null>(null);
+  const finishedRef = useRef(false);
 
   const fillDuration = reduceMotion ? 0.35 : TIMING.fill;
   const holdDuration = reduceMotion ? 0.2 : TIMING.hold;
   const meltDuration = reduceMotion ? 0.25 : TIMING.melt;
+
+  const finishPreloader = useCallback(() => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
+    setVisible(false);
+  }, []);
 
   const onFillComplete = useCallback(() => {
     setStage("hold");
@@ -39,18 +46,29 @@ export function Preloader() {
     }, holdDuration * 1000);
   }, [holdDuration]);
 
-  const finishPreloader = useCallback(() => {
-    setVisible(false);
-  }, []);
-
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
+    const totalMs = (fillDuration + holdDuration + meltDuration + 0.75) * 1000;
+    const safetyTimer = window.setTimeout(finishPreloader, totalMs);
+
     return () => {
       if (holdTimerRef.current) window.clearTimeout(holdTimerRef.current);
+      if (meltTimerRef.current) window.clearTimeout(meltTimerRef.current);
+      window.clearTimeout(safetyTimer);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, [fillDuration, holdDuration, meltDuration, finishPreloader]);
+
+  useEffect(() => {
+    if (stage !== "melt") return;
+
+    meltTimerRef.current = window.setTimeout(finishPreloader, meltDuration * 1000 + 150);
+
+    return () => {
+      if (meltTimerRef.current) window.clearTimeout(meltTimerRef.current);
+    };
+  }, [stage, meltDuration, finishPreloader]);
 
   useEffect(() => {
     if (!visible) document.body.style.overflow = "";
@@ -68,18 +86,8 @@ export function Preloader() {
               ? { duration: meltDuration, ease: MELT_EASE }
               : { duration: 0 }
           }
-          onAnimationComplete={(definition) => {
-            if (
-              stage !== "melt" ||
-              meltDoneRef.current ||
-              typeof definition !== "object" ||
-              !definition ||
-              !("opacity" in definition)
-            ) {
-              return;
-            }
-            meltDoneRef.current = true;
-            finishPreloader();
+          onAnimationComplete={() => {
+            if (stage === "melt") finishPreloader();
           }}
         >
           <JivahMark

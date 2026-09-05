@@ -69,7 +69,7 @@ export function IntentBanner() {
                     <p className="text-[11px] font-semibold tracking-[0.2em] text-[#7dffb8] uppercase">
                       {path.eyebrow}
                     </p>
-                    <h3 className="mt-2 text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.08] tracking-[-0.03em] text-white md:text-[44px] lg:text-[48px]">
+                    <h3 className="mt-2 text-[22px] font-medium leading-[1.15] tracking-[-0.03em] text-white md:text-[44px] md:leading-[1.08] lg:text-[48px]">
                       {path.title}
                     </h3>
                     <p className="mt-2 text-[17px] leading-[1.45] text-white/80 md:mt-2.5 md:text-[20px] md:leading-[1.5]">

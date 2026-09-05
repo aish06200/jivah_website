@@ -76,7 +76,7 @@ export function BlogIndexContent() {
     <div className="bg-white pb-24 md:pb-32">
       <header className="site-pad border-b border-ink/10 py-14 md:py-20">
         <EditorialLabel>Resources</EditorialLabel>
-        <h1 className="font-editorial mt-5 max-w-4xl text-[clamp(2.75rem,7vw,5rem)] leading-[0.92] tracking-[-0.04em] text-ink">
+        <h1 className="font-editorial mt-5 max-w-4xl text-[28px] leading-[1.12] tracking-[-0.04em] text-ink md:text-[clamp(2.75rem,7vw,5rem)] md:leading-[0.92]">
           The Journal
         </h1>
         <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-muted md:text-[18px]">
@@ -98,7 +98,7 @@ export function BlogIndexContent() {
           </div>
           <div className="site-pad py-10 md:mx-auto md:max-w-4xl md:py-14 md:text-center lg:py-16">
             <EditorialLabel>{featuredPost.tag}</EditorialLabel>
-            <h2 className="font-editorial mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.02] tracking-[-0.035em] text-ink transition-opacity duration-300 group-hover:opacity-65">
+            <h2 className="font-editorial mt-5 text-[22px] leading-[1.15] tracking-[-0.035em] text-ink transition-opacity duration-300 group-hover:opacity-65 md:text-[clamp(2rem,4.5vw,3.5rem)] md:leading-[1.02]">
               {featuredPost.title}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[17px] leading-[1.7] text-muted md:text-[18px]">
@@ -123,7 +123,7 @@ export function BlogIndexContent() {
         <section className="site-pad pb-8">
           <div className="border-t border-ink/10 pt-14 md:pt-16">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <h2 className="font-editorial text-[clamp(2rem,3.5vw,2.75rem)] leading-none tracking-[-0.03em] text-ink">
+              <h2 className="font-editorial text-[22px] leading-[1.15] tracking-[-0.03em] text-ink md:text-[clamp(2rem,3.5vw,2.75rem)] md:leading-none">
                 More to read
               </h2>
               <p className="max-w-sm text-[15px] leading-relaxed text-muted">

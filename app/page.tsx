@@ -40,7 +40,7 @@ export default function Home() {
 
       <section id="projects" className="bg-white py-16 md:py-[120px]">
         <div className="site-pad flex items-center justify-between gap-6">
-          <h2 className="section-heading text-ink">
+          <h2 className="page-title text-ink">
             Projects
           </h2>
           <Link
@@ -69,7 +69,7 @@ export default function Home() {
 
                 <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-5 md:p-6">
                   <p
-                    className={`text-[32px] font-semibold leading-none tracking-[-0.03em] md:text-[40px] ${
+                    className={`text-[24px] font-semibold leading-none tracking-[-0.03em] md:text-[40px] ${
                       project.startingPrice === "Sold out" ? "text-white/80" : "text-white"
                     }`}
                   >

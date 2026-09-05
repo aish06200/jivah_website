@@ -12,7 +12,7 @@ export default function PartnersPage() {
         {" / "}
         Channel partners
       </p>
-      <h1 className="mt-4 font-serif text-5xl">Channel Partner Login</h1>
+      <h1 className="mt-4 font-serif text-[28px] leading-[1.15] md:text-5xl">Channel Partner Login</h1>
       <p className="mt-6 text-sm text-muted">Inventories, collaterals and site-visit slots for registered partners.</p>
       <form className="mt-10 grid gap-5 text-left">
         <input className="border-b border-ink/25 py-3 outline-none" placeholder="Partner ID or email" />

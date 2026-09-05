@@ -55,7 +55,7 @@ export function AboutIntroSection() {
       <div className="site-pad">
         <div className="mx-auto flex max-w-[720px] flex-col items-center gap-6 text-center">
           <p className="editorial-label">About Us</p>
-          <h1 className="font-serif text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.12] tracking-[-0.03em] text-[#172023]">
+          <h1 className="page-title text-[#172023]">
             Delivering since 2001
           </h1>
           <div className="space-y-4 text-[18px] leading-[1.5] tracking-[-0.01em] text-[#172023]/50">

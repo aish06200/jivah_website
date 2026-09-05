@@ -116,7 +116,7 @@ export function AboutStoryCarousel() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-white py-20 md:py-28 lg:py-[112px]">
+    <section className="relative bg-white py-20 md:py-28 lg:py-[112px]">
       <Image
         src={withBase("/images/figma/about/vector-bg.svg")}
         alt=""
@@ -128,7 +128,7 @@ export function AboutStoryCarousel() {
 
       <div className="site-pad relative">
         <div
-          className="relative mx-auto w-full max-w-[1400px] pb-24 md:pb-28 lg:pb-32"
+          className="relative mx-auto w-full max-w-[1400px] lg:pb-32"
           aria-roledescription="carousel"
           aria-label="Vision and Why Jivah"
         >
@@ -148,8 +148,8 @@ export function AboutStoryCarousel() {
               }
             }}
           >
-            <div className="relative">
-              <div className="amenity-card-cut relative h-[min(52vh,480px)] overflow-hidden shadow-[0_24px_60px_rgba(18,22,29,0.14)] sm:h-[min(58vh,540px)] lg:h-[min(62vh,600px)]">
+            <div className="relative flex flex-col gap-6 lg:block lg:gap-0">
+              <div className="amenity-card-cut relative h-[220px] overflow-hidden shadow-[0_24px_60px_rgba(18,22,29,0.14)] sm:h-[min(52vh,480px)] sm:min-h-[280px] lg:h-[min(62vh,600px)]">
                 <Image
                   src={withBase(slide.image)}
                   alt={slide.imageAlt}
@@ -168,11 +168,11 @@ export function AboutStoryCarousel() {
                 />
               </div>
 
-              <div className="absolute inset-x-5 bottom-0 z-10 translate-y-1/2 sm:inset-x-8 lg:inset-x-10">
+              <div className="relative z-10 lg:absolute lg:inset-x-10 lg:bottom-0 lg:translate-y-1/2">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
                   <div className="w-full max-w-[720px] rounded-[20px] border border-line/40 bg-white p-6 shadow-[0_16px_48px_rgba(18,22,29,0.18)] md:p-8">
                     <SectionKicker>{slide.kicker}</SectionKicker>
-                    <h2 className="mt-3 text-[clamp(1.75rem,3vw,2.5rem)] font-medium leading-[1.2] tracking-[-0.04em] text-[#172023] md:text-[36px]">
+                    <h2 className="section-heading mt-3 text-[#172023] md:text-[36px]">
                       {slide.title}
                     </h2>
                     {slide.paragraphs.map((paragraph) => (

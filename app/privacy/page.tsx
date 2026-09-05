@@ -12,7 +12,7 @@ export default function PrivacyPage() {
 export function Legal({ title, body }: { title: string; body: string }) {
   return (
     <div className="site-pad mx-auto max-w-2xl py-20 md:py-28">
-      <h1 className="font-serif text-5xl">{title}</h1>
+      <h1 className="font-serif text-[28px] leading-[1.15] md:text-5xl">{title}</h1>
       <p className="mt-8 text-[16px] leading-relaxed text-muted">{body}</p>
     </div>
   );

@@ -6,7 +6,7 @@ export function GuidanceSection({ id = "services" }: { id?: string }) {
       <div className="site-pad grid gap-16 lg:grid-cols-2 lg:gap-24">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <p className="text-[12px] tracking-[0.18em] uppercase text-muted">Exclusive Guidance for</p>
-          <h2 className="mt-5 font-serif text-4xl leading-[1.1] text-ink md:text-6xl">
+          <h2 className="mt-5 font-serif text-[22px] leading-[1.25] md:text-6xl">
             Buyers, Sellers & Investors
           </h2>
         </div>

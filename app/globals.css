@@ -136,16 +136,16 @@ body {
 }
 
 .page-title {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 500;
-  line-height: 1.12;
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 .section-heading {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.25;
   letter-spacing: -0.02em;
 }
 

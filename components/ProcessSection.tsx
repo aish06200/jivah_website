@@ -37,7 +37,7 @@ export function ProcessSection() {
     <section id="process" className="bg-paper py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <p className="font-serif text-[17px] italic text-ink">Scroll Down For</p>
-        <h2 className="mt-4 font-serif text-4xl leading-[1.05] text-ink md:text-[3.5rem] lg:text-6xl">
+        <h2 className="section-heading mt-4 leading-[1.05] text-ink md:text-[3.5rem] lg:text-6xl">
           A Curated Portfolio
           <br />
           of Homes

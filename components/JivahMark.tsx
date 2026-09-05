@@ -77,6 +77,7 @@ export function JivahMark({
   const height = (size * 691) / 558;
   const fillDoneRef = useRef(false);
   const meltDoneRef = useRef(false);
+  const fillTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!preloader || shouldAnimate) return;
@@ -88,6 +89,20 @@ export function JivahMark({
 
     return () => window.clearTimeout(timer);
   }, [preloader, shouldAnimate, onFillComplete, onMeltComplete]);
+
+  useEffect(() => {
+    if (!preloader || !shouldAnimate || preloaderStage !== "fill") return;
+
+    fillTimerRef.current = window.setTimeout(() => {
+      if (fillDoneRef.current) return;
+      fillDoneRef.current = true;
+      onFillComplete?.();
+    }, fillDuration * 1000 + 150);
+
+    return () => {
+      if (fillTimerRef.current) window.clearTimeout(fillTimerRef.current);
+    };
+  }, [preloader, shouldAnimate, preloaderStage, fillDuration, onFillComplete]);
 
   if (preloader && shouldAnimate) {
     return (
@@ -104,15 +119,8 @@ export function JivahMark({
             initial={{ clipPath: "inset(100% 0 0 0)" }}
             animate={{ clipPath: "inset(0% 0 0 0)" }}
             transition={{ duration: fillDuration, ease: PRELOADER_FILL_EASE }}
-            onAnimationComplete={(definition) => {
-              if (
-                fillDoneRef.current ||
-                typeof definition !== "object" ||
-                !definition ||
-                !("clipPath" in definition)
-              ) {
-                return;
-              }
+            onAnimationComplete={() => {
+              if (fillDoneRef.current) return;
               fillDoneRef.current = true;
               onFillComplete?.();
             }}

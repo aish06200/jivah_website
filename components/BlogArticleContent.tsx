@@ -80,7 +80,7 @@ export function BlogArticleContent({ article }: Props) {
             >
               Blog
             </Link>
-            <h1 className="font-editorial mt-5 text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.06] tracking-[-0.03em] text-ink md:mt-6">
+            <h1 className="font-editorial mt-5 text-[28px] leading-[1.12] tracking-[-0.03em] text-ink md:mt-6 md:text-[clamp(2.25rem,5vw,3.5rem)] md:leading-[1.06]">
               {article.title}
             </h1>
             <p className="article-byline mt-5 md:mt-6">
@@ -126,7 +126,7 @@ export function BlogArticleContent({ article }: Props) {
           })}
 
           <aside className="article-cta-banner mt-16 flex flex-col items-center md:mt-20">
-            <h2 className="font-editorial text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.08] tracking-[-0.03em] text-white">
+            <h2 className="font-editorial text-[22px] leading-[1.15] tracking-[-0.03em] text-white md:text-[clamp(1.75rem,3.5vw,2.5rem)] md:leading-[1.08]">
               Talk to our team, today.
             </h2>
             <p className="mt-4 max-w-md text-[16px] leading-[1.65] text-white/78 md:text-[17px]">

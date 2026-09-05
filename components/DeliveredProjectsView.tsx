@@ -79,7 +79,7 @@ export function DeliveredProjectsView() {
                 </span>
                 <p className="text-[16px] font-semibold tracking-[-0.01em] text-[#3e545d]">Lifestyle</p>
               </div>
-              <h2 className="text-[36px] font-medium leading-[1.12] tracking-[-0.04em] text-ink md:text-[44px] lg:text-[52px] lg:leading-[1.2] lg:tracking-[-0.06em]">
+              <h2 className="section-heading tracking-[-0.04em] text-ink md:tracking-[-0.06em] lg:leading-[1.2] lg:text-[52px]">
                 Delivered Projects
               </h2>
               <p className="max-w-2xl text-[16px] leading-[1.4] tracking-[-0.01em] text-muted md:text-[18px]">

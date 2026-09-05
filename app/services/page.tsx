@@ -10,7 +10,7 @@ export default function ServicesPage() {
       <GuidanceSection />
       <section className="bg-paper py-20">
         <div className="site-pad mx-auto max-w-3xl">
-          <h2 className="font-serif text-4xl">Talk to us</h2>
+          <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">Talk to us</h2>
           <p className="mt-4 text-sm text-muted">
             First-time buyers can start with the{" "}
             <Link href="/guide" className="underline">

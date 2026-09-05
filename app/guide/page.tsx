@@ -41,7 +41,7 @@ export default function GuidePage() {
       </PageIntro>
 
       <section className="site-pad mx-auto max-w-3xl pb-16">
-        <h2 className="font-serif text-4xl">Buying your first home</h2>
+        <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">Buying your first home</h2>
         <p className="mt-6 text-[17px] leading-relaxed text-muted">
           A first home is not a race. Start with how you live, then with what you can comfortably borrow, then with a neighbourhood you will still like in ten years. Jivah is built for people who want to stay in their city — not leave it for a thinner version of somewhere else.
         </p>
@@ -49,7 +49,7 @@ export default function GuidePage() {
 
       <section className="bg-paper py-20">
         <div className="site-pad mx-auto max-w-3xl">
-          <h2 className="font-serif text-4xl">Understanding home loans</h2>
+          <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">Understanding home loans</h2>
           <p className="mt-6 text-[17px] leading-relaxed text-muted">
             Banks look at income, existing EMIs and the project’s RERA status. We introduce a short list of lenders; we do not lock you to one. Compare processing fees, prepayment rules and the true rate — not only the headline.
           </p>
@@ -57,7 +57,7 @@ export default function GuidePage() {
       </section>
 
       <section className="site-pad mx-auto max-w-5xl py-20">
-        <h2 className="font-serif text-4xl">EMI calculator</h2>
+        <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">EMI calculator</h2>
         <p className="mt-4 max-w-xl text-sm text-muted">Indicative only. Your sanction depends on the lender and your eligibility.</p>
         <div className="mt-10">
           <EmiCalculator />
@@ -66,7 +66,7 @@ export default function GuidePage() {
 
       <section className="bg-paper py-20">
         <div className="site-pad mx-auto max-w-3xl">
-          <h2 className="font-serif text-4xl">Buying process</h2>
+          <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">Buying process</h2>
           <div className="mt-10 divide-y divide-line border-y border-line">
             {steps.map((s, i) => (
               <div key={s.t} className="grid gap-2 py-8 md:grid-cols-[88px_1fr]">
@@ -82,7 +82,7 @@ export default function GuidePage() {
       </section>
 
       <section className="site-pad mx-auto max-w-3xl py-20">
-        <h2 className="font-serif text-4xl">Documentation</h2>
+        <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">Documentation</h2>
         <ul className="mt-8 list-disc space-y-2 pl-5 text-[15px] text-muted">
           {docs.map((d) => (
             <li key={d}>{d}</li>
@@ -92,7 +92,7 @@ export default function GuidePage() {
 
       <section className="bg-accent py-16">
         <div className="site-pad mx-auto max-w-3xl">
-          <h2 className="font-serif text-4xl text-on-accent">RERA guide</h2>
+          <h2 className="font-serif text-[22px] leading-[1.25] text-on-accent md:text-4xl">RERA guide</h2>
           <p className="mt-4 text-[15px] leading-relaxed text-on-accent/85">
             Every ongoing Jivah project carries a MahaRERA number on the listing, in downloads, and on site. Upcoming projects stay “registration underway” until the number is issued — we do not take bookings before then. You can verify any number on the MahaRERA website.
           </p>
@@ -100,7 +100,7 @@ export default function GuidePage() {
       </section>
 
       <section className="site-pad mx-auto max-w-3xl py-20">
-        <h2 className="font-serif text-4xl">FAQs</h2>
+        <h2 className="font-serif text-[22px] leading-[1.25] md:text-4xl">FAQs</h2>
         <div className="mt-10 divide-y divide-line border-y border-line">
           {faqs.map((f) => (
             <div key={f.q} className="py-8">

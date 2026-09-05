@@ -49,7 +49,7 @@ export default function ResourcesPage() {
               href={item.href}
               className="rounded-[16px] border border-line p-8 transition-colors hover:border-ink/40"
             >
-              <h2 className="text-[24px] font-medium leading-8 text-ink">{item.title}</h2>
+              <h2 className="text-[22px] font-medium leading-8 text-ink md:text-[24px]">{item.title}</h2>
               <p className="mt-4 text-sm leading-relaxed text-muted">{item.body}</p>
               <p className="mt-6 text-[13px] tracking-wide text-forest">Read</p>
             </Link>
@@ -64,7 +64,7 @@ export default function ResourcesPage() {
             href={tool.href}
             className="rounded-[16px] border border-line p-8 transition-colors hover:border-ink/40"
           >
-            <h2 className="text-[24px] font-medium leading-8 text-ink">{tool.title}</h2>
+            <h2 className="text-[22px] font-medium leading-8 text-ink md:text-[24px]">{tool.title}</h2>
             <p className="mt-4 text-sm leading-relaxed text-muted">{tool.body}</p>
             <p className="mt-6 text-[13px] tracking-wide text-forest">Read</p>
           </Link>

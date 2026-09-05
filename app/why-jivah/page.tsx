@@ -24,7 +24,7 @@ export default function WhyJivahPage() {
       </div>
 
       <section className="site-pad mx-auto max-w-3xl py-20">
-        <h2 className="text-[36px] font-medium leading-[1.18] tracking-[-0.02em] text-ink md:text-[44px] md:leading-[52px]">Another possibility</h2>
+        <h2 className="section-heading text-ink md:leading-[52px]">Another possibility</h2>
         <p className="mt-6 text-[17px] leading-relaxed text-muted">
           Jivah is building another possibility. We develop thoughtfully planned residential communities across
           West Bengal, Andhra Pradesh and Odisha — so people do not have to leave their hometown to enjoy a
@@ -37,7 +37,7 @@ export default function WhyJivahPage() {
 
       <section className="bg-paper py-20">
         <div className="site-pad mx-auto max-w-4xl">
-          <h2 className="text-[36px] font-medium leading-[1.18] tracking-[-0.02em] text-ink md:text-[44px] md:leading-[52px]">What we will not build</h2>
+          <h2 className="section-heading text-ink md:leading-[52px]">What we will not build</h2>
           <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-muted">
             Everyday before spectacle. If it does not make a family Tuesday easier, it does not belong in the budget.
           </p>
@@ -45,7 +45,7 @@ export default function WhyJivahPage() {
       </section>
 
       <section className="site-pad mx-auto max-w-4xl py-20">
-        <h2 className="text-[36px] font-medium leading-[1.18] tracking-[-0.02em] text-ink md:text-[44px] md:leading-[52px]">How we build</h2>
+        <h2 className="section-heading text-ink md:leading-[52px]">How we build</h2>
         <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-muted">
           We start with how people already live in a city, then draw the ground floor, the garden and the apartment around that sequence. Retail is leased to operators who serve residents first. RERA numbers, timelines and prices are published. Urgency is not a strategy.
         </p>
@@ -53,7 +53,7 @@ export default function WhyJivahPage() {
 
       <section className="bg-paper py-20">
         <div className="site-pad mx-auto max-w-5xl">
-          <h2 className="text-[36px] font-medium leading-[1.18] tracking-[-0.02em] text-ink md:text-[44px] md:leading-[52px]">Leadership</h2>
+          <h2 className="section-heading text-ink md:leading-[52px]">Leadership</h2>
           <div className="mt-12 grid gap-12 md:grid-cols-3">
             {leaders.map((person) => (
               <article key={person.name}>
@@ -68,7 +68,7 @@ export default function WhyJivahPage() {
       </section>
 
       <section className="site-pad mx-auto max-w-4xl py-20">
-        <h2 className="text-[36px] font-medium leading-[1.18] tracking-[-0.02em] text-ink md:text-[44px] md:leading-[52px]">Values</h2>
+        <h2 className="section-heading text-ink md:leading-[52px]">Values</h2>
         <div className="mt-10 divide-y divide-line border-y border-line">
           {values.map((v, i) => (
             <div key={v.title} className="grid gap-3 py-8 md:grid-cols-[88px_1fr]">

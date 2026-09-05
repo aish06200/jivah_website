@@ -18,7 +18,7 @@ export default function DownloadsPage() {
       <div className="mt-12 space-y-10">
         {projects.map((p) => (
           <section key={p.slug}>
-            <h2 className="text-[24px] font-medium leading-8 text-ink">
+            <h2 className="text-[22px] font-medium leading-8 text-ink md:text-[24px]">
               {p.name} · {p.city}
             </h2>
             <ul className="mt-4 divide-y divide-line border-y border-line">

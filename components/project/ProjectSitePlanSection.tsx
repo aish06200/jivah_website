@@ -35,7 +35,7 @@ export function ProjectSitePlanSection({ project, sitePlanImage }: Props) {
           <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-white/70">
             Masterplan
           </p>
-          <h2 className="mt-3 text-[32px] font-medium leading-[1.12] tracking-[-0.02em] md:text-[40px] md:leading-[44px]">
+          <h2 className="section-heading mt-3 md:leading-[44px] md:text-[40px]">
             Site plan &amp; downloads
           </h2>
           <p className="mt-4 max-w-md text-[15px] leading-[1.65] text-white/80">

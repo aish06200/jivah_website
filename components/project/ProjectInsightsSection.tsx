@@ -34,7 +34,7 @@ export function ProjectInsightsSection({ articles }: Props) {
               </span>
               <p className="text-[16px] font-semibold tracking-[-0.01em] text-[#3e545d]">Blog</p>
             </div>
-            <h2 className="mt-3 text-[40px] font-medium leading-[1.12] tracking-[-0.02em] text-ink md:text-[48px] lg:text-[52px]">
+            <h2 className="section-heading mt-3 text-ink lg:text-[52px]">
               Real estate insights
             </h2>
             <p className="mt-2 text-[17px] leading-[1.55] text-muted md:text-[18px]">

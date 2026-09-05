@@ -126,6 +126,7 @@ export function IconFeatureSection({
   id,
   contentClassName,
   mobileFlush = false,
+  titleClassName,
 }: {
   kicker: string;
   title: ReactNode;
@@ -136,6 +137,7 @@ export function IconFeatureSection({
   id?: string;
   contentClassName?: string;
   mobileFlush?: boolean;
+  titleClassName?: string;
 }) {
   const gridClass =
     columns === 4
@@ -155,9 +157,10 @@ export function IconFeatureSection({
               </SectionKicker>
               <h2
                 className={
-                  cardLayout === "stacked"
-                    ? "text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.2] tracking-[-0.04em] text-[#172023] md:text-[52px] md:tracking-[-1.04px]"
-                    : "text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.2] tracking-[-0.04em] text-[#172023]"
+                  titleClassName ??
+                  (cardLayout === "stacked"
+                    ? "section-heading text-[#172023] md:text-[52px] md:tracking-[-1.04px]"
+                    : "section-heading text-[#172023]")
                 }
               >
                 {title}

@@ -99,7 +99,7 @@ export function ProjectDetailHero({ project, heroImage, imageClass }: Props) {
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-5 p-5 md:flex-row md:items-end md:justify-between md:p-8 lg:p-10">
           <div className="max-w-xl text-white">
             <p className="text-[14px] font-medium leading-5 md:text-[15px]">{project.location}</p>
-            <h1 className="mt-1 text-[32px] font-medium leading-[1.1] tracking-[-0.02em] md:text-[48px] md:leading-[52px] lg:text-[56px] lg:leading-[62px]">
+            <h1 className="mt-1 text-[32px] font-medium leading-[1.15] tracking-[-0.02em] md:text-[48px] md:leading-[52px] lg:text-[56px] lg:leading-[62px]">
               {project.name}
             </h1>
             <div className="mt-5 flex flex-wrap gap-3">

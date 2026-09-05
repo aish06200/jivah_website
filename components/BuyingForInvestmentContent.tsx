@@ -280,6 +280,49 @@ function ComparisonStatCell({
   );
 }
 
+function MobileCompareCard({ project }: { project: Project }) {
+  return (
+    <article className="overflow-hidden rounded-[20px] border border-line/60 bg-white shadow-[0_8px_24px_rgba(18,22,29,0.06)]">
+      <Link href={`/projects/${project.slug}/`} className="group block">
+        <div className="relative aspect-[16/10] overflow-hidden bg-paper">
+          <img
+            src={withBase(project.image)}
+            alt={project.name}
+            className={`absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03] ${project.imageClass ?? ""}`}
+          />
+        </div>
+        <div className="border-b border-line/50 px-5 py-4 text-center">
+          <p className="text-[14px] font-bold uppercase tracking-[0.12em] text-ink group-hover:text-forest">
+            {project.name}
+          </p>
+        </div>
+      </Link>
+
+      <dl className="divide-y divide-line/50">
+        {propertyComparisonRows.map((row) => {
+          const detail = row.getDetail?.(project);
+
+          return (
+            <div key={row.label} className="flex items-start justify-between gap-4 px-5 py-4">
+              <dt className="max-w-[42%] text-[12px] font-bold uppercase tracking-[0.1em] text-ink">
+                {row.label}
+              </dt>
+              <dd className="min-w-0 text-right">
+                <p className="text-[16px] font-medium leading-snug tracking-[-0.01em] text-ink">
+                  {row.getValue(project)}
+                </p>
+                {detail ? (
+                  <p className="mt-1 text-[13px] leading-snug text-muted">{detail}</p>
+                ) : null}
+              </dd>
+            </div>
+          );
+        })}
+      </dl>
+    </article>
+  );
+}
+
 function InvestmentOpportunitiesSection() {
   const compareProjects = compareProjectSlugs
     .map((slug) => projects.find((project) => project.slug === slug))
@@ -293,7 +336,7 @@ function InvestmentOpportunitiesSection() {
             <SectionKicker icon="/images/figma/about/section-icon.svg" centered>
               Compare projects
             </SectionKicker>
-            <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.2] tracking-[-0.06em] text-ink">
+            <h2 className="section-heading md:text-[clamp(2rem,4vw,3.25rem)] md:leading-[1.2] md:tracking-[-0.06em] text-ink">
               Which Jivah project fits your investment plan?
             </h2>
             <p className="max-w-[632px] text-[18px] leading-[1.4] tracking-[-0.01em] text-ink/50">
@@ -305,6 +348,15 @@ function InvestmentOpportunitiesSection() {
       </div>
 
       <div className="mt-10 md:mt-14">
+        <div className="site-pad lg:hidden">
+          <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6">
+            {compareProjects.map((project) => (
+              <MobileCompareCard key={project.slug} project={project} />
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden lg:block">
         <div className="border-b border-line/50 bg-white">
           <div className="site-pad">
             <div className="mx-auto w-full max-w-[1400px] overflow-x-auto">
@@ -373,6 +425,7 @@ function InvestmentOpportunitiesSection() {
             </div>
           ))}
         </div>
+        </div>
       </div>
 
       <div className="site-pad">
@@ -419,7 +472,7 @@ function InvestorProofSection() {
 
           <div className="max-w-xl">
             <SectionKicker icon="/images/figma/about/blog-icon.svg">Investor story</SectionKicker>
-            <h2 className="mt-3 text-[clamp(1.75rem,3vw,2.5rem)] font-medium leading-[1.15] tracking-[-0.03em] text-ink">
+            <h2 className="section-heading mt-3 md:text-[clamp(1.75rem,3vw,2.5rem)] md:leading-[1.15] md:tracking-[-0.03em] text-ink">
               {story.title}
             </h2>
             <p className="mt-5 text-[20px] leading-[1.5] text-ink/80">&ldquo;{story.excerpt}&rdquo;</p>
@@ -465,7 +518,7 @@ function InvestmentClosingSection() {
     <section className="bg-forest py-16 text-white md:py-20">
       <div className="site-pad">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center md:gap-8">
-          <h2 className="max-w-[640px] text-[clamp(1.75rem,3vw,2.75rem)] font-medium leading-[1.15] tracking-[-0.03em]">
+          <h2 className="section-heading max-w-[640px] md:text-[clamp(1.75rem,3vw,2.75rem)] md:leading-[1.15] md:tracking-[-0.03em]">
             Ready to shortlist a project?
           </h2>
           <p className="max-w-[560px] text-[17px] leading-[1.55] text-white/80">
@@ -534,7 +587,7 @@ export function BuyingForInvestmentContent() {
         <div className="site-pad relative flex min-h-[100svh] flex-col items-center justify-start pb-24 pt-[20vh] md:pt-[24vh]">
           <div className="flex max-w-[640px] flex-col items-center gap-8 text-center md:gap-10">
             <div className="flex flex-col gap-4">
-              <h1 className="text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[1.05] tracking-[-0.04em] text-white/95">
+              <h1 className="text-[28px] font-medium leading-[1.12] tracking-[-0.04em] text-white/95 md:text-[clamp(2.25rem,5vw,4rem)] md:leading-[1.05]">
                 Invest where real life is growing
               </h1>
               <p className="text-[18px] leading-[26px] text-white">

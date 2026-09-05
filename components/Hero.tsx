@@ -17,8 +17,8 @@ export function Hero() {
         }}
       />
 
-      <div className="site-pad relative z-10 flex min-h-[88svh] flex-col items-start justify-end pb-16 pt-[61px] text-left md:pb-20 md:pt-[69px]">
-        <h1 className="max-w-[18ch] text-[48px] font-medium leading-[1.08] tracking-[-0.03em] text-white/95 sm:text-[60px] sm:leading-[1.06] md:max-w-[16ch] md:text-[72px] md:leading-[1.04] md:tracking-[-1.6px]">
+      <div className="site-pad relative z-10 flex min-h-[88svh] flex-col items-center justify-center pb-16 pt-[61px] text-center md:items-start md:justify-end md:pb-20 md:pt-[69px] md:text-left">
+        <h1 className="max-w-[18ch] text-[32px] font-medium leading-[1.12] tracking-[-0.03em] text-white/95 sm:text-[40px] sm:leading-[1.08] md:max-w-[16ch] md:text-[72px] md:leading-[1.04] md:tracking-[-1.6px]">
           Better Homes.
           <br />
           Familiar Roots.

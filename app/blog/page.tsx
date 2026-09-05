@@ -82,7 +82,7 @@ export default function BlogPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/45 to-ink/10" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 lg:p-10">
               <CategoryPill label={featuredPost.tag} light />
-              <h2 className="mt-4 max-w-2xl text-[clamp(1.5rem,2.4vw,2rem)] font-medium leading-[1.15] tracking-[-0.03em] text-white">
+              <h2 className="mt-4 max-w-2xl text-[22px] font-medium leading-[1.2] tracking-[-0.03em] text-white md:text-[clamp(1.5rem,2.4vw,2rem)] md:leading-[1.15]">
                 {featuredPost.title}
               </h2>
               <p className="mt-3 text-[14px] text-white/75">

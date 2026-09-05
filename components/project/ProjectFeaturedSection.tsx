@@ -110,7 +110,7 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
             </div>
 
             <div className="space-y-3">
-              <h2 className="text-[36px] font-medium leading-[1.12] tracking-[-0.04em] text-white md:text-[44px] lg:text-[52px] lg:leading-[1.2] lg:tracking-[-0.06em]">
+              <h2 className="section-heading tracking-[-0.04em] text-white md:tracking-[-0.06em] lg:leading-[1.2] lg:text-[52px]">
                 {headline}
               </h2>
               {intro ? (

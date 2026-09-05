@@ -93,10 +93,12 @@ export function ContactPageBody({ initial = "home-buyer" }: { initial?: ContactD
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const type = params.get("type");
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
     if (isDeskId(type)) {
       setDesk(type);
     } else {
-      setDesk(initial);
+      setDesk(isDesktop ? initial : "");
     }
 
     const nextIntent = params.get("intent");

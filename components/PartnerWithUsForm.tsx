@@ -45,7 +45,7 @@ export function PartnerWithUsForm() {
   return (
     <div>
       <div className="text-center">
-        <h2 className="text-[clamp(2rem,3.5vw,2.75rem)] font-medium leading-[1.2] tracking-[-0.06em] text-ink">
+        <h2 className="section-heading md:text-[clamp(2rem,3.5vw,2.75rem)] md:leading-[1.2] md:tracking-[-0.06em]">
           Partner with Us
         </h2>
         <p className="mx-auto mt-4 max-w-[540px] text-[17px] leading-[1.55] text-muted md:text-[18px]">
