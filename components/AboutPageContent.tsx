@@ -72,7 +72,6 @@ export function AboutPageContent() {
         cardLayout="stacked"
         contentClassName="pb-10 md:px-10"
         titleClassName="page-title text-[#172023]"
-        mobileFlush
       />
 
       <section className="bg-forest py-20 text-white md:py-28 lg:py-[112px]">
