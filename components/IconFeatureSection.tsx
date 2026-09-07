@@ -85,33 +85,43 @@ function StackedFeatureCard({
   if (!iconSrc && !Icon) return null;
 
   return (
-    <article className="flex min-h-[240px] flex-col gap-10 rounded-md bg-[#f7f7f7] px-7 py-[26px] md:gap-12">
-      {iconSrc ? (
-        <Image
-          src={withBase(iconSrc)}
-          alt=""
-          width={32}
-          height={32}
-          className="icon-tint-forest size-8 shrink-0"
-        />
-      ) : Icon ? (
-        <span className="flex size-8 shrink-0 items-center justify-center text-[#172023]">
-          <Icon />
-        </span>
-      ) : null}
-      <div className="flex flex-col gap-0.5">
-        <h3 className="text-[18px] font-medium leading-[1.4] tracking-[-0.01em] text-[#172023]">
-          {title}
-        </h3>
-        <p className="text-[16px] leading-[1.4] tracking-[-0.01em] text-[#172023]/50">
-          {body}
-        </p>
-        {footer ? (
-          <p className="mt-2 text-[14px] leading-[1.4] tracking-[-0.01em] text-[#172023]">
-            {footer}
-          </p>
+    <article className="flex flex-col gap-3 rounded-md bg-[#f7f7f7] px-6 py-7 md:min-h-[240px] md:gap-10 md:px-7 md:py-[26px] lg:gap-12">
+      <div className="flex items-start gap-3 md:flex-col md:gap-12">
+        {iconSrc ? (
+          <Image
+            src={withBase(iconSrc)}
+            alt=""
+            width={32}
+            height={32}
+            className="icon-tint-forest size-8 shrink-0"
+          />
+        ) : Icon ? (
+          <span className="flex size-8 shrink-0 items-center justify-center text-[#172023]">
+            <Icon />
+          </span>
         ) : null}
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5 md:flex-initial">
+          <h3 className="text-[18px] font-medium leading-[1.4] tracking-[-0.01em] text-[#172023]">
+            {title}
+          </h3>
+          <p className="hidden text-[16px] leading-[1.4] tracking-[-0.01em] text-[#172023]/50 md:block">
+            {body}
+          </p>
+          {footer ? (
+            <p className="mt-2 hidden text-[14px] leading-[1.4] tracking-[-0.01em] text-[#172023] md:block">
+              {footer}
+            </p>
+          ) : null}
+        </div>
       </div>
+      <p className="text-[16px] leading-[1.4] tracking-[-0.01em] text-[#172023]/50 md:hidden">
+        {body}
+      </p>
+      {footer ? (
+        <p className="mt-1 text-[14px] leading-[1.4] tracking-[-0.01em] text-[#172023] md:hidden">
+          {footer}
+        </p>
+      ) : null}
     </article>
   );
 }

@@ -19,11 +19,6 @@ const HOME_PROJECTS = [
     image: "/images/figma/project-2.png",
     crop: "absolute h-[150.95%] w-[116.12%] max-w-none left-[-8.06%] top-[-50.93%]",
   },
-  {
-    slug: "jivah-orchard-kolhapur",
-    image: "/images/figma/project-3.png",
-    crop: "absolute h-[127.27%] w-[167%] max-w-none left-[-33.46%] top-[-10.34%]",
-  },
 ] as const;
 
 export default function Home() {

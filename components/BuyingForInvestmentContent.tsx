@@ -63,8 +63,7 @@ function DeliveredIcon() {
 
 const compareProjectSlugs = [
   "jivah-greens-nashik",
-  "jivah-ridge-pune",
-  "jivah-orchard-kolhapur",
+  "jivah-gardens-nagpur",
 ] as const;
 
 const investmentReasons: {
@@ -159,7 +158,7 @@ function getComparisonValue(project: Project, key: ComparisonRowKey): string {
 }
 
 const comparisonGrid =
-  "grid grid-cols-[minmax(160px,220px)_repeat(3,minmax(0,1fr))]";
+  "grid grid-cols-[minmax(160px,220px)_repeat(2,minmax(0,1fr))]";
 
 function CompareIcon({ children }: { children: ReactNode }) {
   return (
@@ -340,7 +339,7 @@ function InvestmentOpportunitiesSection() {
               Which Jivah project fits your investment plan?
             </h2>
             <p className="max-w-[632px] text-[18px] leading-[1.4] tracking-[-0.01em] text-ink/50">
-              Three active neighbourhoods side by side — configuration, pricing and features in one
+              Two active neighbourhoods side by side — configuration, pricing and features in one
               view.
             </p>
           </div>
@@ -360,7 +359,7 @@ function InvestmentOpportunitiesSection() {
         <div className="border-b border-line/50 bg-white">
           <div className="site-pad">
             <div className="mx-auto w-full max-w-[1400px] overflow-x-auto">
-              <div className={`${comparisonGrid} min-w-[920px] pb-10 pt-4`} role="row">
+              <div className={`${comparisonGrid} min-w-[680px] pb-10 pt-4`} role="row">
                 <div aria-hidden />
 
                 {compareProjects.map((project) => {
@@ -400,7 +399,7 @@ function InvestmentOpportunitiesSection() {
               <div className="site-pad">
                 <div className="mx-auto w-full max-w-[1400px] overflow-x-auto">
                   <div
-                    className={`${comparisonGrid} min-w-[920px] py-4 md:py-5 items-center`}
+                    className={`${comparisonGrid} min-w-[680px] py-4 md:py-5 items-center`}
                   >
                     <div className="self-center px-4 md:px-6" role="rowheader">
                       <ComparisonRowLabel>{row.label}</ComparisonRowLabel>
@@ -449,7 +448,7 @@ function InvestmentOpportunitiesSection() {
 }
 
 function InvestorProofSection() {
-  const story = stories.find((item) => item.slug === "vikram-shah-solapur");
+  const story = stories.find((item) => item.slug === "sneha-patil-nagpur");
   if (!story) return null;
 
   return (

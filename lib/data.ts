@@ -314,316 +314,6 @@ export const projects: Project[] = [
       { title: "RERA certificate", type: "PDF · 0.4 MB" },
     ],
   },
-  {
-    slug: "jivah-orchard-kolhapur",
-    name: "Jivah Orchard",
-    location: "Kawala Naka, Kolhapur",
-    city: "Kolhapur",
-    status: "upcoming",
-    typology: "2, 3 BHK & villas",
-    units: "186 homes",
-    startingPrice: "₹72 L",
-    possession: "2029",
-    rera: "Registration underway",
-    excerpt: "Homes set among mango and coconut — a slower register of mixed-use living.",
-    overview:
-      "Jivah Orchard keeps the agricultural memory of the plot visible. Residences step back from a retained orchard, with a small high street of daily shops along the public edge. It is designed for families who want more room, more trees, and no reason to leave Kolhapur for a ‘better’ address.",
-    image: "/images/orchard.png",
-    gallery: [
-      "/images/orchard.png",
-      u("photo-1416879595882-3373a0480b5b"),
-      u("photo-1613490493576-7fde63acd811"),
-      u("photo-1441974231531-c6227db76b6e"),
-    ],
-    residences: [
-      { type: "2 BHK", size: "860 sq.ft", note: "Garden-facing with a deep verandah." },
-      { type: "3 BHK", size: "1,260–1,410 sq.ft", note: "A family plan organised around a dining court." },
-      { type: "Garden villa", size: "1,820 sq.ft", note: "Two-storey homes with a private orchard edge." },
-    ],
-    amenities: [
-      { group: "Landscape", items: ["Retained orchard", "Walking trails", "Community farm", "Seasonal market"] },
-      { group: "Wellness", items: ["Pool", "Yoga shala", "Cycling", "Pet lawn"] },
-    ],
-    connectivity: [
-      { place: "Mahalaxmi Temple", time: "14 min" },
-      { place: "Kolhapur airport", time: "16 min" },
-      { place: "IT Park", time: "11 min" },
-    ],
-    updates: [
-      { date: "Aug 2026", title: "Pre-launch briefings", body: "Priority registration is open for channel partners and early homebuyers." },
-    ],
-    featured: {
-      eyebrow: "Amenities",
-      headline: "Life among the trees",
-      intro: "Orchard trails, wellness spaces and a seasonal market — slower amenities for Kolhapur families.",
-      highlights: [
-        {
-          title: "Retained orchard",
-          body: "Mango and coconut lines kept on the plot — homes set back from trees that were already here before the foundations.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/orchard.png",
-        },
-        {
-          title: "Swimming pool",
-          body: "A landscaped pool deck for laps, leisure swims and family time on weekends — with loungers and shade around the water.",
-          icon: "/images/figma/project-detail/featured/icon-pool.svg",
-          image: "/images/figma/project-detail/lifestyle-pool.png",
-        },
-        {
-          title: "Yoga shala",
-          body: "An open-air and indoor wellness space for morning practice, breathing room and unhurried mornings.",
-          icon: "/images/figma/project-detail/featured/icon-smart.svg",
-          image: "/images/jivah-gardens-lifestyle-yoga.jpg",
-        },
-        {
-          title: "Community farm",
-          body: "Walking trails and a seasonal market edge — the agricultural memory of the plot kept visible in daily life.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/figma/project-detail/lifestyle-park.png",
-        },
-      ],
-      images: [
-        "/images/orchard.png",
-        "/images/figma/project-detail/lifestyle-pool.png",
-        "/images/jivah-gardens-lifestyle-yoga.jpg",
-        "/images/figma/project-detail/lifestyle-park.png",
-      ],
-    },
-    downloads: [
-      { title: "Teaser brochure", type: "PDF · 2.8 MB" },
-    ],
-  },
-  {
-    slug: "jivah-ghat-aurangabad",
-    name: "Jivah Ghat",
-    location: "Cidco, Chhatrapati Sambhajinagar",
-    city: "Chhatrapati Sambhajinagar",
-    status: "upcoming",
-    typology: "2 & 3 BHK",
-    units: "220 homes",
-    startingPrice: "₹61 L",
-    possession: "2029",
-    rera: "Registration underway",
-    excerpt: "A compact urban block with a public ground floor and quiet homes above.",
-    overview:
-      "Jivah Ghat treats the street as part of the home. Shops, a pharmacy and a café occupy the base; residences begin at a lifted garden deck. The project is sized for first-time buyers who work in Cidco and still want grandparents nearby.",
-    image: "/images/philosophy-lake.png",
-    gallery: [
-      "/images/philosophy-lake.png",
-      u("photo-1545324418-cc1a3fa10c00"),
-      u("photo-1487958449943-2429e8be8625"),
-    ],
-    residences: [
-      { type: "2 BHK", size: "720–810 sq.ft", note: "A practical first home with storage that actually works." },
-      { type: "3 BHK", size: "1,050–1,190 sq.ft", note: "An extra room for joint families without wasting carpet." },
-    ],
-    amenities: [
-      { group: "Street", items: ["Café", "Pharmacy", "Tuition rooms", "ATM"] },
-      { group: "Deck", items: ["Play court", "Reading room", "Festival terrace"] },
-    ],
-    connectivity: [
-      { place: "Cidco bus hub", time: "6 min" },
-      { place: "Airport", time: "25 min" },
-      { place: "Prozone Mall", time: "12 min" },
-    ],
-    updates: [    ],
-    featured: {
-      eyebrow: "Amenities",
-      headline: "Street life, quiet homes",
-      intro: "Shops on the ground floor, a lifted garden deck above — the week happens without leaving the block.",
-      highlights: [
-        {
-          title: "High street",
-          body: "A café, pharmacy and everyday shops on the public edge — errands handled before you reach the car.",
-          icon: "/images/figma/project-detail/featured/icon-smart.svg",
-          image: "/images/figma/project-detail/lifestyle-community.png",
-        },
-        {
-          title: "Garden deck",
-          body: "A raised green deck above the street — play courts, reading room and festival terrace in one quiet layer.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/philosophy-lake.png",
-        },
-        {
-          title: "Play court",
-          body: "A compact court for children after school and evening games — visible from home, close enough to walk down.",
-          icon: "/images/figma/project-detail/featured/icon-pool.svg",
-          image: "/images/figma/project-detail/lifestyle-park.png",
-        },
-        {
-          title: "Reading room",
-          body: "A shared quiet room for study, tuition and the hour you need away from the living room.",
-          icon: "/images/figma/project-detail/featured/icon-smart.svg",
-          image: "/images/banner-interior.jpg",
-        },
-      ],
-      images: [
-        "/images/figma/project-detail/lifestyle-community.png",
-        "/images/philosophy-lake.png",
-        "/images/figma/project-detail/lifestyle-park.png",
-        "/images/banner-interior.jpg",
-      ],
-    },
-    downloads: [{ title: "Expression of interest", type: "PDF · 1.1 MB" }],
-  },
-  {
-    slug: "jivah-park-solapur",
-    name: "Jivah Park",
-    location: "Hotgi Road, Solapur",
-    city: "Solapur",
-    status: "completed",
-    typology: "2 & 3 BHK",
-    units: "164 homes",
-    startingPrice: "Sold out",
-    possession: "Handed over 2025",
-    rera: "P52800011220",
-    excerpt: "Our first completed neighbourhood — still the clearest proof of how Jivah is meant to be lived.",
-    overview:
-      "Jivah Park was designed as a test of a simple idea: if daily needs sit on the ground floor, and the garden is not an afterthought, people stay. The community is fully occupied, the grocer is independently run, and the courtyard is used every evening.",
-    image: "/images/jivah-park-card.png",
-    imageClass: "object-top",
-    gallery: [
-      "/images/jivah-park-card.png",
-      "/images/park.png",
-      u("photo-1605276374104-dee2a0ed3cd6"),
-    ],
-    residences: [
-      { type: "2 BHK", size: "760 sq.ft", note: "Occupied. Reference layouts available at the sales office." },
-      { type: "3 BHK", size: "1,110 sq.ft", note: "Occupied. A handful of resales are facilitated on request." },
-    ],
-    amenities: [
-      { group: "Lived-in", items: ["Operating grocery", "Clinic", "Park", "Society hall"] },
-    ],
-    connectivity: [
-      { place: "Solapur station", time: "12 min" },
-      { place: "Akkalkot Road", time: "8 min" },
-    ],
-    updates: [
-      { date: "Nov 2025", title: "Handover complete", body: "All 164 homes have been handed over. Society formation is complete." },
-    ],
-    featured: {
-      eyebrow: "Amenities",
-      headline: "Amenities that stayed open",
-      intro: "Grocery, clinic and courtyard — lived-in ground-floor life a year after handover.",
-      highlights: [
-        {
-          title: "Central park",
-          body: "A central lawn with shaded paths — space for evening walks, children at play and neighbours catching up outdoors.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/park.png",
-        },
-        {
-          title: "Neighbourhood grocer",
-          body: "An independently run grocery on the ground floor — open daily, used by residents, not a showpiece.",
-          icon: "/images/figma/project-detail/featured/icon-smart.svg",
-          image: "/images/figma/project-detail/lifestyle-community.png",
-        },
-        {
-          title: "Courtyard sit-out",
-          body: "Benches and shade used every evening — the proof that occupied buildings keep their value.",
-          icon: "/images/figma/project-detail/featured/icon-pool.svg",
-          image: "/images/courtyard.png",
-        },
-        {
-          title: "Society hall",
-          body: "A community hall for festivals, gatherings and everyday social life — the shared room when home needs company.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/jivah-park-card.png",
-        },
-      ],
-      images: [
-        "/images/park.png",
-        "/images/figma/project-detail/lifestyle-community.png",
-        "/images/courtyard.png",
-        "/images/jivah-park-card.png",
-      ],
-    },
-    downloads: [
-      { title: "As-built brochure", type: "PDF · 4.6 MB" },
-      { title: "RERA certificate", type: "PDF · 0.4 MB" },
-    ],
-  },
-  {
-    slug: "jivah-ridge-pune",
-    name: "Jivah Ridge",
-    location: "Wagholi, Pune",
-    city: "Pune",
-    status: "ongoing",
-    typology: "2 & 3 BHK",
-    units: "420 homes",
-    startingPrice: "₹89 L",
-    possession: "Jun 2028",
-    rera: "P52100044512",
-    excerpt: "For families who work in Pune but refuse a life lived entirely in traffic.",
-    overview:
-      "Jivah Ridge sits on the eastern edge of Pune, planned as a complete weekday — school run, grocer, pharmacy, a walk, a meal at home. Residences are sized for first-time Pune buyers who still want a parent’s room and a balcony that is not a leftover.",
-    image: "/images/ridge.png",
-    gallery: [
-      "/images/ridge.png",
-      u("photo-1487958449943-2429e8be8625"),
-      u("photo-1600585154526-990dced4db0d"),
-      u("photo-1512917774080-9991f1c4c750"),
-    ],
-    residences: [
-      { type: "2 BHK", size: "810–940 sq.ft", note: "East-facing living with a utility." },
-      { type: "3 BHK", size: "1,210–1,380 sq.ft", note: "A flexible third room and a family balcony." },
-    ],
-    amenities: [
-      { group: "Everyday", items: ["Grocery", "Pharmacy", "Crèche", "Co-working loft"] },
-      { group: "Active", items: ["Pool", "Badminton", "Gym", "Jogging trail"] },
-      { group: "Quiet", items: ["Library", "Senior lounge", "Pet park", "Roof garden"] },
-    ],
-    connectivity: [
-      { place: "Kharadi IT parks", time: "18 min" },
-      { place: "Pune airport", time: "28 min" },
-      { place: "Wagholi school belt", time: "6 min" },
-    ],
-    updates: [
-      { date: "Aug 2026", title: "Tower B at 12th slab", body: "Structure is on programme. Sample apartment opens in September." },
-    ],
-    featured: {
-      eyebrow: "Amenities",
-      headline: "World-class amenities",
-      intro: "Pool, gym, trails and co-working — a complete weekday on Pune's eastern edge.",
-      highlights: [
-        {
-          title: "Swimming pool",
-          body: "A landscaped pool deck for laps, leisure swims and family time on weekends — with loungers and shade around the water.",
-          icon: "/images/figma/project-detail/featured/icon-pool.svg",
-          image: "/images/figma/project-detail/lifestyle-pool.png",
-        },
-        {
-          title: "Gymnasium",
-          body: "A fully equipped indoor fitness centre for cardio, strength training and daily workouts without leaving the neighbourhood.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/figma/project-detail/lifestyle-gym.png",
-        },
-        {
-          title: "Jogging trail",
-          body: "A shaded loop for morning runs, evening walks and the school run that does not need a car.",
-          icon: "/images/figma/project-detail/featured/icon-energy.svg",
-          image: "/images/figma/project-detail/lifestyle-walkway.png",
-        },
-        {
-          title: "Co-working loft",
-          body: "A shared work room for hybrid weeks — quiet enough to take a call, close enough to come home for lunch.",
-          icon: "/images/figma/project-detail/featured/icon-smart.svg",
-          image: "/images/figma/project-detail/lifestyle-community.png",
-        },
-      ],
-      images: [
-        "/images/figma/project-detail/lifestyle-pool.png",
-        "/images/figma/project-detail/lifestyle-gym.png",
-        "/images/figma/project-detail/lifestyle-walkway.png",
-        "/images/figma/project-detail/lifestyle-community.png",
-      ],
-    },
-    downloads: [
-      { title: "Brochure", type: "PDF · 9.1 MB" },
-      { title: "Floor plans", type: "PDF · 4.0 MB" },
-      { title: "RERA certificate", type: "PDF · 0.5 MB" },
-    ],
-  },
 ];
 
 export const lifePillars: LifePillar[] = [
@@ -718,75 +408,6 @@ export const stories: Story[] = [
       "I walked into three sales offices in one weekend. Each one had a faster close. Jivah handed me a guide and told me to come back with questions. That is why I trusted it.",
       "Nagpur in April is not a glass façade problem. It is a shade problem. The inner court, the clinic and the grocer on the same ground — that is what I could explain to my father without a brochure.",
       "I bought a 2 BHK. First home. Wardha Road is still my city. I did not need a highway address to feel I had arrived.",
-    ],
-  },
-  {
-    slug: "vikram-shah-solapur",
-    person: "Vikram Shah",
-    title: "I bought for yield and stayed for the courtyard",
-    category: "Jivah Park · Solapur",
-    date: "02 Jun 2026",
-    readTime: "4 min",
-    excerpt:
-      "A year after handover, the grocer is still open and the benches are still used. That is how I know the neighbourhood works.",
-    image: "/images/story-vikram-shah.png",
-    video: true,
-    projectSlug: "jivah-park-solapur",
-    body: [
-      "I did not plan to live here. Solapur was a yield calculation — completed stock, a society already formed, a grocer that was not a showpiece. Then I sat in the courtyard on a Saturday and did not leave.",
-      "A year on, the benches are scuffed. The grocer asked for a second refrigerator. Someone’s parents occupy the sit-out every evening. Occupied buildings keep their value. Empty amenities do not.",
-      "If you are buying to rent, look at whether people actually use the ground floor. If they do, the rest of the spreadsheet follows.",
-    ],
-  },
-  {
-    slug: "meera-joshi-pune",
-    person: "Meera Joshi",
-    title: "East Pune, without a life lived in traffic",
-    category: "Jivah Ridge · Pune",
-    date: "19 Jun 2026",
-    readTime: "4 min",
-    excerpt:
-      "School run, grocer, pharmacy, a walk. I work in the city. I refused to make the commute a personality.",
-    image: pexels("15602469"),
-    projectSlug: "jivah-ridge-pune",
-    body: [
-      "Wagholi is where a lot of us landed because Kharadi filled up. The mistake is treating that as a waiting room for a ‘real’ neighbourhood. I wanted the weekday to finish at the building, not in a car.",
-      "The crèche, the grocer and the trail are why we signed. The third room is my mother’s when she visits, not a dumping ground for cartons. Kharadi is eighteen minutes when I need it. Most days I do not.",
-      "I am not waiting for the city to come to us. The errands already live downstairs.",
-    ],
-  },
-  {
-    slug: "aditya-more-kolhapur",
-    person: "Aditya More",
-    title: "The mango trees were already here. The house had to fit around them",
-    category: "Jivah Orchard · Kolhapur",
-    date: "04 Jul 2026",
-    readTime: "4 min",
-    excerpt:
-      "Kawala Naka is still home. We wanted a garden villa that did not pretend the orchard was landscaping.",
-    image: pexels("5746790"),
-    projectSlug: "jivah-orchard-kolhapur",
-    body: [
-      "My parents still measure distance in temples and market days, not in kilometres to a ring road. Kolhapur did not need replacing. The house did.",
-      "Jivah Orchard kept the mango and coconut line. The shops sit on the public edge so the inside stays a court. We are looking at a garden villa because the dining room should see trees, not a parking deck.",
-      "Pre-launch meant more conversation than pressure. That suited a family that already knows the street.",
-    ],
-  },
-  {
-    slug: "asha-pawar-sambhajinagar",
-    person: "Asha Pawar",
-    title: "Cidco is where we work. The ground floor is where the week happens",
-    category: "Jivah Ghat · Sambhajinagar",
-    date: "15 May 2026",
-    readTime: "4 min",
-    excerpt:
-      "A compact home above a pharmacy and a café — sized for a first salary, and for grandparents who still live in the same city.",
-    image: pexels("37607665"),
-    projectSlug: "jivah-ghat-aurangabad",
-    body: [
-      "I did not want a far suburb and a story about the future. I work in Cidco. My in-laws are twenty minutes away. The home had to sit in that triangle.",
-      "Jivah Ghat puts shops on the street and the residences on a lifted garden. I can send my father for milk without a two-wheeler. That sounds small until you live it.",
-      "We took a 2 BHK we can actually furnish. The bus hub is six minutes. First home, same city — that was the requirement.",
     ],
   },
 ];
@@ -889,13 +510,6 @@ export const offices = [
     hours: "Tue–Sun · 10:00–7:00",
     phone: "+91 712 660 2100",
   },
-  {
-    city: "Pune",
-    name: "Sales office",
-    address: "Jivah Ridge site office, Wagholi, Pune 412207",
-    hours: "Mon–Sun · 10:00–7:00",
-    phone: "+91 20 6602 1000",
-  },
 ];
 
 export const locations = [
@@ -910,30 +524,6 @@ export const locations = [
     name: "Nagpur",
     line: "The country’s centre — and a climate that demands shade.",
     image: u("photo-1441974231531-c6227db76b6e"),
-  },
-  {
-    slug: "pune",
-    name: "Pune",
-    line: "Work on the eastern edge, life that does not dissolve into traffic.",
-    image: u("photo-1515263487990-61b07816b324"),
-  },
-  {
-    slug: "kolhapur",
-    name: "Kolhapur",
-    line: "A slower register. Orchards, temples, room to grow a family.",
-    image: u("photo-1416879595882-3373a0480b5b"),
-  },
-  {
-    slug: "chhatrapati-sambhajinagar",
-    name: "Chhatrapati Sambhajinagar",
-    line: "Cidco’s urban grain — compact, connected, ready for a first home.",
-    image: u("photo-1479839672679-a46483c0e7c8"),
-  },
-  {
-    slug: "solapur",
-    name: "Solapur",
-    line: "Where we finished first — a lived-in proof of the Jivah idea.",
-    image: "/images/park.png",
   },
 ];
 
@@ -951,7 +541,7 @@ export const whyJivah = [
   {
     n: "03",
     title: "Cities people already love",
-    body: "We build in Nashik, Nagpur, Kolhapur, Solapur — not as catchments of a metro, but as homes in their own right.",
+    body: "We build in Nashik and Nagpur — not as catchments of a metro, but as homes in their own right.",
   },
   {
     n: "04",
@@ -976,22 +566,6 @@ export const featuredListings = [
     body: "Cross-ventilated living around a planted inner court — shade first, then the city, in a home sized for first-time buyers.",
     specs: "2 Bed | 2 Bath | 860 sq.ft",
     image: "/images/courtyard.png",
-  },
-  {
-    slug: "jivah-ridge-pune",
-    n: "03.",
-    title: "Parkside apartment at Jivah Ridge",
-    body: "An east-facing 2 BHK on Pune’s eastern edge, planned around the school run, the grocer downstairs, and an evening walk.",
-    specs: "2 Bed | 2 Bath | 890 sq.ft",
-    image: "/images/ridge.png",
-  },
-  {
-    slug: "jivah-orchard-kolhapur",
-    n: "04.",
-    title: "Orchard villa in Kolhapur",
-    body: "A two-storey garden home along a retained mango edge — slower living, more trees, no reason to leave the city you already love.",
-    specs: "3 Bed | 3 Bath | 1,820 sq.ft",
-    image: "/images/orchard.png",
   },
 ];
 
@@ -1035,31 +609,25 @@ export const processSteps = [
 
 export const recentSales = [
   {
-    title: "Jivah Park, Solapur",
-    body: "Our first completed neighbourhood — 164 homes handed over, grocer independently run, courtyard in daily use.",
-    specs: "2 & 3 BHK | Handed over 2025",
-    image: "/images/park.png",
-  },
-  {
     title: "Jivah Greens show apartment",
     body: "The 3 BHK sample is open — a kitchen that faces the garden, and a third room that is not a leftover store.",
     specs: "3 Bed | 2 Bath | 1,240 sq.ft",
     image: u("photo-1600585154526-990dced4db0d"),
   },
   {
-    title: "Jivah Ridge, Wagholi",
-    body: "East-facing family plans for people who work in Pune but refuse a life lived entirely in traffic.",
-    specs: "2 & 3 BHK | From ₹89 L",
-    image: "/images/ridge.png",
+    title: "Jivah Gardens sample home",
+    body: "A 2 BHK around the inner court — shade first, then the city, sized for first-time buyers in Nagpur.",
+    specs: "2 Bed | 2 Bath | 860 sq.ft",
+    image: "/images/courtyard.png",
   },
 ];
 
 export const testimonials = [
   {
     quote:
-      "We did not want to leave Nashik for a ‘better’ address. Jivah Greens is the first place that felt like the city we already had — only easier.",
+      "We did not want to leave Nashik for a ‘better’ address. Jivah Ganges is the first place that felt like the city we already had — only easier.",
     name: "Anaya & Rohan Kulkarni",
-    place: "Jivah Greens, Nashik",
+    place: "Jivah Ganges, Nashik",
     image: pexels("21319609"),
   },
   {
@@ -1068,13 +636,6 @@ export const testimonials = [
     name: "Sneha Patil",
     place: "First-time buyer, Nagpur",
     image: u("photo-1573497019940-1c28c88b4f3e", "&crop=faces"),
-  },
-  {
-    quote:
-      "I bought for yield and stayed for the courtyard. The grocer is open. The benches are used. That is the whole investment thesis.",
-    name: "Vikram Shah",
-    place: "Investor, Jivah Park",
-    image: pexels("12366973"),
   },
 ];
 

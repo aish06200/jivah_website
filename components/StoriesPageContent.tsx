@@ -11,10 +11,6 @@ const FILTERS = [
   "All",
   "Jivah Greens · Nashik",
   "Jivah Gardens · Nagpur",
-  "Jivah Park · Solapur",
-  "Jivah Ridge · Pune",
-  "Jivah Orchard · Kolhapur",
-  "Jivah Ghat · Sambhajinagar",
 ] as const;
 
 const STORY_STATS: Record<string, { value: string; label: string }[]> = {
@@ -25,22 +21,6 @@ const STORY_STATS: Record<string, { value: string; label: string }[]> = {
   "sneha-patil-nagpur": [
     { value: "2 BHK", label: "First home" },
     { value: "Wardha Road", label: "Nagpur address" },
-  ],
-  "vikram-shah-solapur": [
-    { value: "1 year", label: "Since handover" },
-    { value: "Daily", label: "Courtyard use" },
-  ],
-  "meera-joshi-pune": [
-    { value: "2 BHK", label: "East Pune" },
-    { value: "18 min", label: "To Kharadi" },
-  ],
-  "aditya-more-kolhapur": [
-    { value: "Villa", label: "Garden home" },
-    { value: "Orchard", label: "Trees retained" },
-  ],
-  "asha-pawar-sambhajinagar": [
-    { value: "2 BHK", label: "First salary" },
-    { value: "6 min", label: "To bus hub" },
   ],
 };
 
