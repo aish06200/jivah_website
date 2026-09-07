@@ -75,16 +75,18 @@ export function ProjectFloorPlansSection({ plans }: Props) {
             </h2>
           </div>
 
-          <div className="order-2 max-lg:relative max-lg:left-1/2 max-lg:w-screen max-lg:-translate-x-1/2 lg:order-1 lg:col-span-7 lg:col-start-1 lg:row-span-2 lg:row-start-1">
-            <Image
-              key={active.id}
-              src={withBase(active.image)}
-              alt={`${active.title} floor plan`}
-              width={1024}
-              height={819}
-              className="h-auto w-full max-lg:min-h-[min(72vw,420px)] max-lg:object-contain max-lg:px-3 max-lg:py-2"
-              sizes="(min-width: 1024px) 55vw, 100vw"
-            />
+          <div className="order-2 w-full lg:order-1 lg:col-span-7 lg:col-start-1 lg:row-span-2 lg:row-start-1">
+            <div className="relative min-h-[min(88vw,480px)] w-full overflow-hidden rounded-2xl bg-paper lg:min-h-0 lg:overflow-visible lg:rounded-none lg:bg-transparent">
+              <Image
+                key={active.id}
+                src={withBase(active.image)}
+                alt={`${active.title} floor plan`}
+                width={1024}
+                height={819}
+                className="absolute inset-0 h-full w-full object-contain p-3 sm:p-4 lg:static lg:h-auto lg:w-full lg:p-0"
+                sizes="(min-width: 1024px) 55vw, 100vw"
+              />
+            </div>
           </div>
 
           <div className="order-3 lg:col-span-5 lg:col-start-8 lg:row-start-2">

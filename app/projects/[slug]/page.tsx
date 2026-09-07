@@ -75,7 +75,7 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
   const insightArticles = buildInsightArticles(stories);
 
   return (
-    <article className="bg-white">
+    <article className="overflow-x-clip bg-white">
       <ProjectDetailHero
         project={project}
         heroImage={heroImage}

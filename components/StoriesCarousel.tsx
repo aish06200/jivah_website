@@ -15,6 +15,55 @@ type StoryItem = {
 
 const HOLD = 5500;
 
+function ChevronLeftIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M14.5 6.5 9 12l5.5 5.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M9.5 6.5 15 12l-5.5 5.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CarouselNavButton({
+  label,
+  onClick,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className="flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-white text-ink shadow-[0_8px_24px_rgba(18,22,29,0.08)] transition hover:border-ink/20 hover:bg-ink hover:text-white"
+    >
+      {children}
+    </button>
+  );
+}
+
 function StoryCard({ story, className = "" }: { story: StoryItem; className?: string }) {
   return (
     <Link href={`/stories/${story.slug}`} className={`block ${className}`}>
@@ -36,6 +85,14 @@ export function StoriesCarousel({ stories }: { stories: StoryItem[] }) {
   const reduceMotion = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  const goNext = () => {
+    setIndex((current) => (current + 1) % stories.length);
+  };
+
+  const goPrev = () => {
+    setIndex((current) => (current - 1 + stories.length) % stories.length);
+  };
 
   useEffect(() => {
     if (reduceMotion || paused || stories.length < 2) return;
@@ -70,19 +127,33 @@ export function StoriesCarousel({ stories }: { stories: StoryItem[] }) {
           </AnimatePresence>
         </div>
 
-        <div className="mt-8 flex justify-center gap-2">
-          {stories.map((story, i) => (
-            <button
-              key={story.slug}
-              type="button"
-              aria-label={`Show story ${i + 1} of ${stories.length}: ${story.person}`}
-              aria-current={i === index ? true : undefined}
-              className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${
-                i === index ? "w-7 bg-forest" : "w-1.5 bg-forest/25 hover:bg-forest/40"
-              }`}
-              onClick={() => setIndex(i)}
-            />
-          ))}
+        <div className="mt-8 flex items-center justify-center gap-4">
+          {stories.length > 1 ? (
+            <CarouselNavButton label="Previous story" onClick={goPrev}>
+              <ChevronLeftIcon />
+            </CarouselNavButton>
+          ) : null}
+
+          <div className="flex items-center justify-center gap-2">
+            {stories.map((story, i) => (
+              <button
+                key={story.slug}
+                type="button"
+                aria-label={`Show story ${i + 1} of ${stories.length}: ${story.person}`}
+                aria-current={i === index ? true : undefined}
+                className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${
+                  i === index ? "w-7 bg-forest" : "w-1.5 bg-forest/25 hover:bg-forest/40"
+                }`}
+                onClick={() => setIndex(i)}
+              />
+            ))}
+          </div>
+
+          {stories.length > 1 ? (
+            <CarouselNavButton label="Next story" onClick={goNext}>
+              <ChevronRightIcon />
+            </CarouselNavButton>
+          ) : null}
         </div>
       </div>
 

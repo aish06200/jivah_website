@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { StoryPlayBadge } from "@/components/StoryPlayBadge";
 import { withBase } from "@/lib/base";
-import { stories } from "@/lib/data";
+import { stories, projects } from "@/lib/data";
 
 export function generateStaticParams() {
   return stories.map((s) => ({ slug: s.slug }));
@@ -19,6 +19,8 @@ export default async function StoryPage({ params }: PageProps<"/stories/[slug]">
   const { slug } = await params;
   const story = stories.find((s) => s.slug === slug);
   if (!story) notFound();
+
+  const project = projects.find((p) => p.slug === story.projectSlug);
 
   return (
     <article className="bg-white pb-24">
@@ -47,14 +49,16 @@ export default async function StoryPage({ params }: PageProps<"/stories/[slug]">
         {story.body.map((p) => (
           <p key={p}>{p}</p>
         ))}
-        <p className="pt-4">
-          <Link
-            href={`/projects/${story.projectSlug}`}
-            className="text-[13px] tracking-wide text-ink underline-offset-4 hover:underline"
-          >
-            See the neighbourhood
-          </Link>
-        </p>
+        {project ? (
+          <p className="pt-4">
+            <Link
+              href={`/projects/${story.projectSlug}`}
+              className="text-[13px] tracking-wide text-ink underline-offset-4 hover:underline"
+            >
+              See the neighbourhood
+            </Link>
+          </p>
+        ) : null}
       </div>
     </article>
   );

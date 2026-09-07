@@ -100,12 +100,12 @@ export function WhyJivahSection() {
             Bengal, Andhra Pradesh and Odisha — homes with everyday life already downstairs.
           </p>
 
-          <div className="mt-10 border-t border-ink">
+          <div className="mt-10 border-t border-line/70">
           {POINTS.map((point) => {
             const Icon = point.icon;
             const isOpen = open === point.id;
             return (
-              <div key={point.id} className="border-b border-ink">
+              <div key={point.id} className="border-b border-line/70">
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -115,7 +115,7 @@ export function WhyJivahSection() {
                   <PointIconBadge>
                     <Icon />
                   </PointIconBadge>
-                  <span className="flex-1 text-[18px] font-medium leading-[26px] text-ink md:text-[20px]">
+                  <span className="flex-1 text-[16px] font-medium leading-[22px] text-ink md:text-[18px] md:leading-[26px]">
                     {point.title}
                   </span>
                   <span aria-hidden className="text-[22px] leading-none text-ink">

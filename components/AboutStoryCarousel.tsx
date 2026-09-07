@@ -116,15 +116,16 @@ export function AboutStoryCarousel() {
   }, []);
 
   return (
-    <section className="relative bg-white py-20 md:py-28 lg:py-[112px]">
-      <Image
-        src={withBase("/images/figma/about/vector-bg.svg")}
-        alt=""
-        width={1011}
-        height={1054}
-        aria-hidden
-        className="pointer-events-none absolute -right-48 top-12 hidden w-[min(1011px,85vw)] max-w-none opacity-[0.06] md:block"
-      />
+    <section className="relative overflow-hidden bg-white py-20 md:py-28 lg:py-[112px]">
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden md:block">
+        <Image
+          src={withBase("/images/figma/about/vector-bg.svg")}
+          alt=""
+          width={1011}
+          height={1054}
+          className="absolute right-0 top-12 w-[min(1011px,85vw)] max-w-none opacity-[0.06] lg:-right-24"
+        />
+      </div>
 
       <div className="site-pad relative">
         <div

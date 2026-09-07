@@ -86,16 +86,14 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
       id="featured"
       className="relative scroll-mt-24 overflow-hidden bg-[#265943] py-20 md:py-24 lg:py-28"
     >
-      <img
-        src={withBase(BG_VECTOR)}
-        alt=""
-        aria-hidden
-        className="amenity-bg-drift pointer-events-none absolute -left-48 top-12 h-auto w-[min(1011px,90vw)] max-w-none opacity-90 motion-reduce:animate-none lg:-left-24"
-      />
-      <div
-        aria-hidden
-        className="amenity-header-glow pointer-events-none absolute left-1/2 top-24 h-40 w-40 -translate-x-1/2 rounded-full bg-[#00b364]/20 blur-3xl motion-reduce:animate-none"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <img
+          src={withBase(BG_VECTOR)}
+          alt=""
+          className="amenity-bg-drift absolute left-0 top-12 h-auto w-[min(1011px,90vw)] max-w-none opacity-90 motion-reduce:animate-none lg:-left-24"
+        />
+        <div className="amenity-header-glow absolute left-1/2 top-24 h-40 w-40 -translate-x-1/2 rounded-full bg-[#00b364]/20 blur-2xl motion-reduce:animate-none lg:blur-3xl" />
+      </div>
 
       <div className="site-pad relative z-10">
         <div className="flex flex-col gap-10 lg:gap-12">
@@ -122,7 +120,7 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
           </div>
 
           <div
-            className="relative mx-auto w-full max-w-[1400px] pb-24 md:pb-28 lg:pb-32"
+            className="relative mx-auto w-full max-w-[1400px] overflow-x-clip pb-24 md:pb-28 lg:pb-32"
             aria-roledescription="carousel"
             aria-label={`${project.name} amenity highlights`}
           >
@@ -155,9 +153,9 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
                   <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/35" />
                 </div>
 
-                <div className="absolute inset-x-6 bottom-0 z-10 translate-y-1/2 md:inset-x-10 lg:inset-x-12">
-                  <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
-                    <div className="w-full max-w-2xl rounded-[16px] bg-white p-5 shadow-[0_16px_48px_rgba(18,22,29,0.18)] md:p-6">
+                <div className="absolute inset-x-4 bottom-0 z-10 translate-y-1/2 sm:inset-x-6 md:inset-x-10 lg:inset-x-12">
+                  <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
+                    <div className="min-w-0 w-full max-w-2xl rounded-[16px] bg-white p-5 shadow-[0_16px_48px_rgba(18,22,29,0.18)] md:p-6">
                       <h3 className="text-[26px] font-medium leading-[1.3] tracking-[-0.01em] text-ink md:text-[32px] lg:text-[36px]">
                         {activeHighlight.title}
                       </h3>

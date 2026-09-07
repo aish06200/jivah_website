@@ -63,12 +63,13 @@ export function DeliveredProjectsView() {
       </section>
 
       <section className="relative overflow-hidden bg-white py-20 md:py-28 lg:py-[112px]">
-        <img
-          src={withBase(BG_VECTOR)}
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute -left-48 top-12 h-auto w-[min(1011px,90vw)] max-w-none opacity-40 lg:-left-24"
-        />
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <img
+            src={withBase(BG_VECTOR)}
+            alt=""
+            className="absolute left-0 top-12 h-auto w-[min(1011px,90vw)] max-w-none opacity-40 lg:-left-24"
+          />
+        </div>
 
         <div className="site-pad relative z-10">
           <div className="mx-auto max-w-[1400px]">

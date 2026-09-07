@@ -410,6 +410,75 @@ export const stories: Story[] = [
       "I bought a 2 BHK. First home. Wardha Road is still my city. I did not need a highway address to feel I had arrived.",
     ],
   },
+  {
+    slug: "vikram-shah-solapur",
+    person: "Vikram Shah",
+    title: "I bought for yield and stayed for the courtyard",
+    category: "Jivah Park · Solapur",
+    date: "02 Jun 2026",
+    readTime: "4 min",
+    excerpt:
+      "A year after handover, the grocer is still open and the benches are still used. That is how I know the neighbourhood works.",
+    image: "/images/story-vikram-shah.png",
+    video: true,
+    projectSlug: "jivah-park-solapur",
+    body: [
+      "I did not plan to live here. Solapur was a yield calculation — completed stock, a society already formed, a grocer that was not a showpiece. Then I sat in the courtyard on a Saturday and did not leave.",
+      "A year on, the benches are scuffed. The grocer asked for a second refrigerator. Someone’s parents occupy the sit-out every evening. Occupied buildings keep their value. Empty amenities do not.",
+      "If you are buying to rent, look at whether people actually use the ground floor. If they do, the rest of the spreadsheet follows.",
+    ],
+  },
+  {
+    slug: "meera-joshi-pune",
+    person: "Meera Joshi",
+    title: "East Pune, without a life lived in traffic",
+    category: "Jivah Ridge · Pune",
+    date: "19 Jun 2026",
+    readTime: "4 min",
+    excerpt:
+      "School run, grocer, pharmacy, a walk. I work in the city. I refused to make the commute a personality.",
+    image: pexels("15602469"),
+    projectSlug: "jivah-ridge-pune",
+    body: [
+      "Wagholi is where a lot of us landed because Kharadi filled up. The mistake is treating that as a waiting room for a ‘real’ neighbourhood. I wanted the weekday to finish at the building, not in a car.",
+      "The crèche, the grocer and the trail are why we signed. The third room is my mother’s when she visits, not a dumping ground for cartons. Kharadi is eighteen minutes when I need it. Most days I do not.",
+      "I am not waiting for the city to come to us. The errands already live downstairs.",
+    ],
+  },
+  {
+    slug: "aditya-more-kolhapur",
+    person: "Aditya More",
+    title: "The mango trees were already here. The house had to fit around them",
+    category: "Jivah Orchard · Kolhapur",
+    date: "04 Jul 2026",
+    readTime: "4 min",
+    excerpt:
+      "Kawala Naka is still home. We wanted a garden villa that did not pretend the orchard was landscaping.",
+    image: pexels("5746790"),
+    projectSlug: "jivah-orchard-kolhapur",
+    body: [
+      "My parents still measure distance in temples and market days, not in kilometres to a ring road. Kolhapur did not need replacing. The house did.",
+      "Jivah Orchard kept the mango and coconut line. The shops sit on the public edge so the inside stays a court. We are looking at a garden villa because the dining room should see trees, not a parking deck.",
+      "Pre-launch meant more conversation than pressure. That suited a family that already knows the street.",
+    ],
+  },
+  {
+    slug: "asha-pawar-sambhajinagar",
+    person: "Asha Pawar",
+    title: "Cidco is where we work. The ground floor is where the week happens",
+    category: "Jivah Ghat · Sambhajinagar",
+    date: "15 May 2026",
+    readTime: "4 min",
+    excerpt:
+      "A compact home above a pharmacy and a café — sized for a first salary, and for grandparents who still live in the same city.",
+    image: pexels("37607665"),
+    projectSlug: "jivah-ghat-aurangabad",
+    body: [
+      "I did not want a far suburb and a story about the future. I work in Cidco. My in-laws are twenty minutes away. The home had to sit in that triangle.",
+      "Jivah Ghat puts shops on the street and the residences on a lifted garden. I can send my father for milk without a two-wheeler. That sounds small until you live it.",
+      "We took a 2 BHK we can actually furnish. The bus hub is six minutes. First home, same city — that was the requirement.",
+    ],
+  },
 ];
 
 export const faqs = [

@@ -17,18 +17,19 @@ export function Hero() {
         }}
       />
 
-      <div className="site-pad relative z-10 flex min-h-[88svh] flex-col items-center justify-center pb-16 pt-[61px] text-center md:items-start md:justify-end md:pb-20 md:pt-[69px] md:text-left">
-        <h1 className="max-w-[18ch] text-[32px] font-medium leading-[1.12] tracking-[-0.03em] text-white/95 sm:text-[40px] sm:leading-[1.08] md:max-w-[16ch] md:text-[72px] md:leading-[1.04] md:tracking-[-1.6px]">
-          Better Homes.
-          <br />
-          Familiar Roots.
-        </h1>
-        <Link
-          href="/contact/?type=home-buyer"
-          className="btn-pill btn-forest mt-8 inline-flex lg:hidden"
-        >
-          Schedule a Visit
-        </Link>
+      <div className="site-pad relative z-10 flex min-h-[88svh] flex-col items-start justify-end pb-16 pt-[61px] text-left md:pb-20 md:pt-[69px]">
+        <div>
+          <h1 className="text-[32px] font-medium leading-[1.12] tracking-[-0.03em] text-white/95 sm:text-[40px] sm:leading-[1.08] md:max-w-[16ch] md:text-[72px] md:leading-[1.04] md:tracking-[-1.6px]">
+            <span className="block">Better Homes.</span>
+            <span className="block">Familiar Roots.</span>
+          </h1>
+          <Link
+            href="/contact/?type=home-buyer"
+            className="btn-pill btn-forest mt-8 inline-flex lg:hidden"
+          >
+            Schedule a Visit
+          </Link>
+        </div>
       </div>
     </section>
   );

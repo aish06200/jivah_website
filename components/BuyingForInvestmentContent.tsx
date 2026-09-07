@@ -572,7 +572,7 @@ function SectionKicker({
 export function BuyingForInvestmentContent() {
   return (
     <div className="bg-white">
-      <section className="relative min-h-[100svh] overflow-hidden">
+      <section className="relative min-h-[calc(100dvh-61px)] overflow-hidden md:min-h-[calc(100svh-69px)]">
         <Image
           src={withBase("/images/figma/investment/hero.png")}
           alt="Jivah Realty neighbourhood entrance at dusk"
@@ -583,27 +583,27 @@ export function BuyingForInvestmentContent() {
         />
         <div className="absolute inset-0 bg-black/11" aria-hidden />
 
-        <div className="site-pad relative flex min-h-[100svh] flex-col items-center justify-start pb-24 pt-[20vh] md:pt-[24vh]">
-          <div className="flex max-w-[640px] flex-col items-center gap-8 text-center md:gap-10">
-            <div className="flex flex-col gap-4">
+        <div className="site-pad relative z-10 flex min-h-[calc(100dvh-61px)] flex-col items-center justify-center py-8 pb-[max(2rem,env(safe-area-inset-bottom))] md:min-h-[calc(100svh-69px)] md:justify-start md:py-0 md:pb-24 md:pt-[24vh]">
+          <div className="flex w-full max-w-[640px] flex-col items-center gap-6 text-center md:gap-10">
+            <div className="flex flex-col gap-3 md:gap-4">
               <h1 className="text-[28px] font-medium leading-[1.12] tracking-[-0.04em] text-white/95 md:text-[clamp(2.25rem,5vw,4rem)] md:leading-[1.05]">
                 Invest where real life is growing
               </h1>
-              <p className="text-[18px] leading-[26px] text-white">
+              <p className="text-[16px] leading-[24px] text-white md:text-[18px] md:leading-[26px]">
                 Make your living experience even more memorable.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <div className="flex w-full max-w-[280px] flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-3 md:gap-4">
               <Link
                 href="/contact/?type=home-buyer&intent=investment"
-                className="btn-pill btn-white inline-flex h-[52px] min-w-[148px] items-center justify-center px-8 text-[16px]"
+                className="btn-pill btn-white inline-flex h-11 w-full items-center justify-center px-6 text-[15px] sm:w-auto sm:min-w-[120px] md:h-[52px] md:min-w-[148px] md:px-8 md:text-[16px]"
               >
                 Get in touch
               </Link>
               <Link
                 href="#opportunities"
-                className="inline-flex h-[52px] min-w-[148px] items-center justify-center rounded-full border border-white/70 bg-transparent px-8 text-[16px] font-medium leading-4 text-white transition hover:bg-white/10"
+                className="inline-flex h-11 w-full items-center justify-center rounded-full border border-white/70 bg-transparent px-6 text-[15px] font-medium leading-4 text-white transition hover:bg-white/10 sm:w-auto sm:min-w-[120px] md:h-[52px] md:min-w-[148px] md:px-8 md:text-[16px]"
               >
                 View details
               </Link>

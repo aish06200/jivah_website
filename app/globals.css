@@ -30,12 +30,17 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
   background: #fff;
   color: var(--ink);
   font-family: Inter, system-ui, sans-serif;
+  overflow-x: clip;
+  max-width: 100%;
+  overscroll-behavior-x: none;
 }
 
 ::selection {
