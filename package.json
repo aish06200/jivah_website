@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export:sitemap": "node scripts/export-sitemap.mjs",
     "start": "next start",
     "lint": "eslint"
   },

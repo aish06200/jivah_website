@@ -75,8 +75,8 @@ function StoryCard({ story, className = "" }: { story: StoryItem; className?: st
         />
         <StoryPlayBadge />
       </div>
-      <h3 className="mt-8 text-[24px] font-medium leading-8 text-ink">{story.person}</h3>
-      <p className="mt-2.5 max-w-[496px] text-[18px] leading-[26px] text-muted">{story.excerpt}</p>
+      <h3 className="card-title mt-8 text-[24px] leading-[1.25] text-ink">{story.person}</h3>
+      <p className="body-lede mt-2.5 max-w-[496px] text-[18px] text-muted">{story.excerpt}</p>
     </Link>
   );
 }

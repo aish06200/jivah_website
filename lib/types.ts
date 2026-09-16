@@ -56,12 +56,16 @@ export type ProjectConstructionProgress = {
   phase: string;
 };
 
+export type ProjectCatalogCategory = "Residential" | "Mixed-use" | "Plotted";
+
 export type Project = {
   slug: string;
   name: string;
   location: string;
   city: string;
   status: ProjectStatus;
+  /** Used on project listing pages for category filters. */
+  catalogCategory?: ProjectCatalogCategory;
   typology: string;
   units: string;
   startingPrice: string;

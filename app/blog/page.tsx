@@ -1,22 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BuyerGuidesSection } from "@/components/blog/BuyerGuidesSection";
 import { PageIntro } from "@/components/PageIntro";
 import { withBase } from "@/lib/base";
-import { getBlogListingPosts } from "@/lib/blog";
+import { getBlogArticle, getBlogListingPosts } from "@/lib/blog";
 
 export const metadata = { title: "Blog" };
 
 const posts = getBlogListingPosts();
 const featuredPost = posts[0];
-const latestPosts = posts.slice(1, 5);
-const gridPosts = posts.slice(2, 5);
+const featuredArticle = getBlogArticle(featuredPost.slug);
+const latestPosts = posts.slice(1);
+const buyerGuidePosts = posts.slice(5);
+const showBuyerGuides = buyerGuidePosts.length > 0;
 
-function CategoryPill({ label, light = false }: { label: string; light?: boolean }) {
+type ListingPost = (typeof posts)[number];
+
+function CategoryPill({
+  label,
+  light = false,
+  className = "",
+}: {
+  label: string;
+  light?: boolean;
+  className?: string;
+}) {
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[13px] font-medium tracking-[-0.01em] ${
+      className={`inline-flex w-fit max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-[13px] font-medium tracking-[-0.01em] ${
         light ? "bg-white/95 text-ink shadow-sm" : "bg-paper text-ink"
-      }`}
+      } ${className}`}
     >
       <span className="size-1.5 shrink-0 rounded-full bg-forest" aria-hidden />
       {label}
@@ -24,37 +37,92 @@ function CategoryPill({ label, light = false }: { label: string; light?: boolean
   );
 }
 
-function ArrowButton({
-  direction,
-  disabled = false,
+function FeaturedPostCard({
+  post,
+  previewParagraphs,
 }: {
-  direction: "prev" | "next";
-  disabled?: boolean;
+  post: ListingPost;
+  previewParagraphs: string[];
 }) {
   return (
-    <button
-      type="button"
-      disabled={disabled}
-      aria-label={direction === "prev" ? "Previous articles" : "Next articles"}
-      className="flex size-10 items-center justify-center rounded-full border border-line/80 text-ink transition-colors hover:bg-paper disabled:cursor-not-allowed disabled:opacity-35"
-    >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        aria-hidden
-        className={direction === "next" ? "rotate-180" : undefined}
-      >
-        <path
-          d="M10 3L5 8L10 13"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+    <article className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start lg:gap-12 xl:gap-16">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-paper lg:sticky lg:top-[calc(69px+2rem)] lg:aspect-[4/3]">
+        <Image
+          src={withBase(post.image)}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 55vw, 100vw"
+          priority
         />
-      </svg>
-    </button>
+      </div>
+
+      <div className="flex min-w-0 flex-col justify-center lg:pt-1">
+        <div className="max-w-[34rem]">
+          <CategoryPill label={post.tag} />
+          <h3 className="card-title mt-5 text-[22px] leading-[1.2] text-ink md:text-[28px] md:leading-[1.15]">
+            {post.title}
+          </h3>
+
+          <div className="mt-6 space-y-4 border-t border-line/60 pt-6">
+            <p className="body-lede text-[17px] font-medium text-ink md:text-[19px] md:leading-[1.6]">
+              {post.excerpt}
+            </p>
+            {previewParagraphs.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 48)}
+                className="body-lede text-[16px] text-muted md:text-[18px] md:leading-[1.62]"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col gap-5 border-t border-line/40 pt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
+            <p className="text-[13px] tabular-nums text-muted md:text-[14px]">
+              {post.date} · {post.readTime}
+            </p>
+            <Link
+              href={post.href}
+              className="inline-flex w-fit items-center justify-center rounded-full bg-forest px-7 py-3 text-[15px] font-semibold leading-none text-white transition-opacity hover:opacity-85 md:px-8 md:py-3.5 md:text-[16px]"
+            >
+              Read more
+            </Link>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function PostCard({ post }: { post: ListingPost }) {
+  return (
+    <Link href={post.href} className="group flex h-full min-w-0 flex-col gap-3 md:gap-4">
+      <div className="relative h-[240px] overflow-hidden rounded-[8px] bg-paper sm:h-[260px] md:h-[300px] lg:h-[340px]">
+        <Image
+          src={withBase(post.image)}
+          alt=""
+          fill
+          className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent transition-colors duration-500 group-hover:from-ink/90" />
+        <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-5 md:p-6">
+          <CategoryPill label={post.tag} light />
+          <p className="text-[13px] tabular-nums text-white/75 md:text-[14px]">
+            {post.date} · {post.readTime}
+          </p>
+        </div>
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col gap-2 pr-1">
+        <h3 className="card-title text-[20px] leading-[1.2] text-ink transition-opacity group-hover:opacity-70 md:text-[22px] lg:text-[24px]">
+          {post.title}
+        </h3>
+        <p className="body-lede line-clamp-2 text-[16px] text-muted md:text-[18px] md:leading-[1.58]">
+          {post.excerpt}
+        </p>
+      </div>
+    </Link>
   );
 }
 
@@ -62,104 +130,37 @@ export default function BlogPage() {
   return (
     <div className="bg-white pb-24">
       <PageIntro kicker="Resources" title="Real estate insights">
-        Practical guides for buyers — loans, RERA, documents and what to look for on a site visit.
+        Guides for first-time buyers and families in emerging cities — RERA, mixed-use, planning early
+        and choosing a home that works for the years ahead.
       </PageIntro>
 
       <div className="site-pad space-y-16 md:space-y-20 lg:space-y-24">
-        <section className="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
-          <Link
-            href={featuredPost.href}
-            className="group relative block min-h-[320px] overflow-hidden rounded-[24px] bg-paper sm:min-h-[380px] lg:min-h-[460px]"
-          >
-            <Image
-              src={withBase(featuredPost.image)}
-              alt=""
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              sizes="(min-width: 1024px) 60vw, 100vw"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/45 to-ink/10" />
-            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 lg:p-10">
-              <CategoryPill label={featuredPost.tag} light />
-              <h2 className="mt-4 max-w-2xl text-[22px] font-medium leading-[1.2] tracking-[-0.03em] text-white md:text-[clamp(1.5rem,2.4vw,2rem)] md:leading-[1.15]">
-                {featuredPost.title}
-              </h2>
-              <p className="mt-3 text-[14px] text-white/75">
-                {featuredPost.date} · {featuredPost.readTime}
-              </p>
-            </div>
-          </Link>
+        <section aria-label="Featured article">
+          <FeaturedPostCard
+            post={featuredPost}
+            previewParagraphs={featuredArticle?.intro.slice(0, 2) ?? []}
+          />
+        </section>
 
-          <div className="flex flex-col justify-center">
-            <h2 className="text-[22px] font-medium tracking-[-0.02em] text-ink md:text-[24px]">Latest posts</h2>
-            <ul className="mt-6 flex flex-col gap-6 md:gap-8">
+        {latestPosts.length > 0 ? (
+          <section aria-labelledby="latest-posts-heading">
+            <h2
+              id="latest-posts-heading"
+              className="text-[24px] font-medium tracking-[-0.02em] text-ink md:text-[28px]"
+            >
+              Latest posts
+            </h2>
+            <ul className="mt-8 grid list-none gap-6 sm:grid-cols-2 sm:gap-8 lg:mt-10 lg:gap-10">
               {latestPosts.map((item) => (
-                <li key={item.slug}>
-                  <Link href={item.href} className="group flex gap-4">
-                    <div className="relative size-[72px] shrink-0 overflow-hidden rounded-xl bg-paper md:size-20">
-                      <Image
-                        src={withBase(item.image)}
-                        alt=""
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                        sizes="80px"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1 py-0.5">
-                      <p className="text-[15px] font-medium leading-snug tracking-[-0.01em] text-ink transition-opacity group-hover:opacity-60 md:text-[16px]">
-                        {item.title}
-                      </p>
-                      <p className="mt-2 text-[13px] text-muted">
-                        {item.date} · {item.readTime}
-                      </p>
-                    </div>
-                  </Link>
+                <li key={item.slug} className="min-h-0">
+                  <PostCard post={item} />
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
-        <section>
-          <div className="mb-8 flex items-center justify-between gap-4 md:mb-10">
-            <h2 className="text-[22px] font-medium tracking-[-0.02em] text-ink md:text-[24px]">Buyer guides</h2>
-            <div className="flex gap-2">
-              <ArrowButton direction="prev" disabled />
-              <ArrowButton direction="next" />
-            </div>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
-            {gridPosts.map((item) => (
-              <Link
-                key={item.slug}
-                href={item.href}
-                className="group flex h-full flex-col overflow-hidden rounded-[20px] border border-line/70 bg-white p-3 transition-shadow hover:shadow-[0_12px_40px_rgba(18,22,29,0.06)]"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-paper">
-                  <Image
-                    src={withBase(item.image)}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col px-2 pb-3 pt-5">
-                  <CategoryPill label={item.tag} />
-                  <h3 className="mt-4 text-[18px] font-medium leading-snug tracking-[-0.02em] text-ink md:text-[20px]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 line-clamp-3 flex-1 text-[14px] leading-relaxed text-muted">{item.excerpt}</p>
-                  <p className="mt-5 text-[13px] text-muted">
-                    {item.date} · {item.readTime}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+        {showBuyerGuides ? <BuyerGuidesSection posts={buyerGuidePosts} /> : null}
       </div>
     </div>
   );

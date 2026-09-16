@@ -1,4 +1,4 @@
-import type { Project, ProjectStatus } from "./types";
+import type { Project, ProjectCatalogCategory, ProjectStatus } from "./types";
 
 export function uniqueImages(project: Project): string[] {
   return Array.from(new Set([project.image, ...project.gallery]));
@@ -14,6 +14,23 @@ export const statusLabel: Record<ProjectStatus, string> = {
   upcoming: "Upcoming",
   completed: "Completed",
 };
+
+export function projectCatalogCategory(project: Project): ProjectCatalogCategory {
+  if (project.catalogCategory) return project.catalogCategory;
+  const everyday = project.amenities.find((a) => a.group === "Everyday");
+  const hasRetail = everyday?.items.some((item) =>
+    /grocer|pharmacy|clinic|mart/i.test(item),
+  );
+  return hasRetail ? "Mixed-use" : "Residential";
+}
+
+/** Year shown on delivered / upcoming cards (from possession or update dates). */
+export function projectListingYear(project: Project): string | null {
+  const fromPossession = project.possession.match(/\b(20\d{2})\b/);
+  if (fromPossession) return fromPossession[1];
+  const fromUpdate = project.updates[0]?.date.match(/\b(20\d{2})\b/);
+  return fromUpdate ? fromUpdate[1] : null;
+}
 
 export function nextProject(projects: Project[], slug: string): Project | undefined {
   const i = projects.findIndex((p) => p.slug === slug);

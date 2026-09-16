@@ -3,9 +3,9 @@ import { projects } from "@/lib/data";
 import type { ProjectStatus } from "@/lib/types";
 
 const statusLinks: { href: string; label: string; status: ProjectStatus }[] = [
-  { href: "/#projects", label: "Active", status: "ongoing" },
+  { href: "/projects/active/", label: "Active", status: "ongoing" },
   { href: "/projects/delivered/", label: "Delivered", status: "completed" },
-  { href: "/#projects", label: "Upcoming", status: "upcoming" },
+  { href: "/projects/upcoming/", label: "Upcoming", status: "upcoming" },
 ];
 
 export { statusLinks };

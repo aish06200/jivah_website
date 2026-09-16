@@ -61,27 +61,33 @@ const SLIDES = [
 
 const POINTS = [
   {
-    id: "essentials",
-    title: "Everyday essentials just steps away",
-    body: "Groceries and medicines sit on the ground floor — a short walk, not a drive across town.",
-    icon: CartIcon,
+    id: "place",
+    title: "Rooted in place",
+    body: "Every city and neighbourhood has its own character, routines and aspirations. We seek to understand that context and create developments that belong there—not repeat the same formula everywhere.",
+    icon: PlaceIcon,
   },
   {
-    id: "family",
-    title: "Designed for family life",
-    body: "Homes, open space and neighbours in one frame — built for children, elders and the Tuesday in between.",
+    id: "life",
+    title: "Designed around real life",
+    body: "Good design should make everyday life work better. We consider how people move through a space, use it throughout the day and adapt it as their needs change.",
     icon: FamilyIcon,
   },
   {
-    id: "audience",
-    title: "Who we build for",
-    body: "Families upgrading without leaving. First-time buyers. Investors looking at high-growth towns.",
+    id: "connection",
+    title: "Space for connection",
+    body: "Buildings do not create community on their own. But thoughtful common areas, open spaces and active environments can make it easier for people to meet, interact and feel part of a place.",
     icon: PeopleIcon,
+  },
+  {
+    id: "future",
+    title: "Built for what comes next",
+    body: "Families grow. Businesses evolve. Neighbourhoods change. We plan spaces to remain useful and relevant through the years—not only impressive at launch.",
+    icon: FutureIcon,
   },
 ] as const;
 
 export function WhyJivahSection() {
-  const [open, setOpen] = useState<string | null>("family");
+  const [open, setOpen] = useState<string | null>("place");
 
   return (
     <section id="why-jivah" className="relative overflow-hidden bg-white text-ink">
@@ -89,15 +95,17 @@ export function WhyJivahSection() {
         <WhyPhotoCarousel />
 
         <div className="flex w-full max-w-[600px] flex-col md:max-w-none lg:max-w-[640px]">
-          <p className="text-[14px] leading-4 text-ink">Why Jivah</p>
+          <p className="text-[14px] font-medium uppercase tracking-[0.14em] text-ink">
+            Our philosophy
+          </p>
           <h2 className="section-heading mt-4 text-ink">
             <Link href="/why-jivah" className="transition-opacity hover:opacity-50">
-              Philosophy
+              Better living begins with better decisions
             </Link>
           </h2>
           <p className="mt-6 text-[18px] leading-[26px] text-muted md:text-[19px] md:leading-[28px]">
-            People shouldn’t have to leave their hometown to live better. Mixed-use neighbourhoods in West
-            Bengal, Andhra Pradesh and Odisha — homes with everyday life already downstairs.
+            Better living, closer to home is not one project format or a fixed list of amenities. It shapes
+            how we choose locations, plan spaces and consider the people and neighbourhoods around them.
           </p>
 
           <div className="mt-10 border-t border-line/70">
@@ -141,6 +149,10 @@ export function WhyJivahSection() {
             );
           })}
           </div>
+
+          <p className="mt-10 text-[17px] font-medium leading-[26px] text-ink md:text-[18px] md:leading-[28px]">
+            This is what better living, closer to home means to us.
+          </p>
         </div>
       </div>
     </section>
@@ -214,10 +226,18 @@ function PointIconBadge({ children }: { children: React.ReactNode }) {
   );
 }
 
-function CartIcon() {
+function PlaceIcon() {
   return (
     <svg className="size-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2Zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2ZM6.06 6h12.94l-1.5 6H7.56L6.06 6ZM5.02 4H2v2h2l3.6 14.25c.13.55.62.94 1.19.94h9.71c.55 0 1.03-.38 1.15-.91L21 7H6.8L5.77 4H5.02Z" />
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z" />
+    </svg>
+  );
+}
+
+function FutureIcon() {
+  return (
+    <svg className="size-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7 1.93 0 3.68.79 4.95 2.05L19 4.05A9.011 9.011 0 0 0 13 3Zm-2 14a9 9 0 0 0 9-9h3l-3.89-3.89-.07-.14L15 12h3c0 3.87-3.13 7-7 7a8.96 8.96 0 0 1-4.95-1.95L5 19.95A9.011 9.011 0 0 0 11 17Z" />
     </svg>
   );
 }

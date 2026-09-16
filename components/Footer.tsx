@@ -26,7 +26,7 @@ export function Footer() {
         <div className="relative z-10 site-pad grid gap-12 pb-12 pt-12 md:grid-cols-3 md:items-start md:gap-10 md:pb-16 md:pt-16 lg:gap-16">
           <div className="max-w-[36ch]">
             <Logo footer />
-            <p className="mt-6 text-[15px] leading-[1.65] text-white/80 md:text-[16px]">
+            <p className="footer-body mt-6 text-[15px] text-white/80 md:text-[16px]">
               Homes planned around the way families already live — mixed-use
               neighbourhoods with everyday life downstairs.
             </p>
@@ -42,8 +42,8 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <p className="text-[12px] font-medium uppercase tracking-[0.28em]">Extra links</p>
-            <ul className="mt-5 space-y-3 text-[15px] leading-5 text-white/70">
+            <p className="footer-kicker text-[12px] font-medium uppercase">Extra links</p>
+            <ul className="footer-body mt-5 space-y-3 text-[15px] text-white/70">
               {extraLinks.map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="transition-opacity hover:text-white">
@@ -55,8 +55,8 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="text-[12px] font-medium uppercase tracking-[0.28em]">Contact</p>
-            <ul className="mt-5 space-y-3 text-[15px] leading-6 text-white/70">
+            <p className="footer-kicker text-[12px] font-medium uppercase">Contact</p>
+            <ul className="footer-body mt-5 space-y-3 text-[15px] text-white/70">
               <li className="max-w-[24ch]">{headOffice.address}</li>
               <li>
                 <a href={`tel:${headOffice.phone.replace(/\s/g, "")}`} className="transition-opacity hover:text-white">

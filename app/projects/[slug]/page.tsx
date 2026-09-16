@@ -3,14 +3,10 @@ import { ProjectConstructionProgressSection } from "@/components/project/Project
 import { ProjectDetailHero } from "@/components/project/ProjectDetailHero";
 import { ProjectFeaturedSection } from "@/components/project/ProjectFeaturedSection";
 import { ProjectFloorPlansSection } from "@/components/project/ProjectFloorPlansSection";
-import {
-  buildInsightArticles,
-  ProjectInsightsSection,
-} from "@/components/project/ProjectInsightsSection";
 import { ProjectLifestyleSection } from "@/components/project/ProjectLifestyleSection";
 import { ProjectLocationSection } from "@/components/project/ProjectLocationSection";
 import { ProjectSitePlanSection } from "@/components/project/ProjectSitePlanSection";
-import { projects, stories } from "@/lib/data";
+import { projects } from "@/lib/data";
 import { uniqueImages } from "@/lib/project";
 import type { Project } from "@/lib/types";
 
@@ -72,8 +68,6 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
   const heroImage = projectHeroImage(project.slug, project.image);
   const sitePlanImage = projectSitePlanImage(project.slug, project.image);
   const lifestyleImages = projectLifestyleImages(project.slug, project);
-  const insightArticles = buildInsightArticles(stories);
-
   return (
     <article className="overflow-x-clip bg-white">
       <ProjectDetailHero
@@ -98,7 +92,6 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
 
       <ProjectConstructionProgressSection project={project} />
 
-      <ProjectInsightsSection articles={insightArticles} />
     </article>
   );
 }

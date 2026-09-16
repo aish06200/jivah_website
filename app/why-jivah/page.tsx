@@ -8,9 +8,9 @@ export const metadata = { title: "Why Jivah" };
 export default function WhyJivahPage() {
   return (
     <div className="bg-white">
-      <PageIntro kicker="Jivah Philosophy" title="People shouldn’t have to leave their hometown to live better">
-        Jivah develops thoughtfully designed residential communities in emerging growth markets — West
-        Bengal, Andhra Pradesh and Odisha.
+      <PageIntro kicker="Our philosophy" title="Better living begins with better decisions">
+        Better living, closer to home is not one project format or a fixed list of amenities. It shapes how
+        we choose locations, plan spaces and consider the people and neighbourhoods around them.
       </PageIntro>
 
       <div className="relative h-[60vh] min-h-[360px]">

@@ -8,7 +8,7 @@ const HOME_STORY_IMAGES = [
 ];
 
 export function BuyerResourcesSection() {
-  const journal = stories.map((story, i) => ({
+  const journal = stories.slice(0, 3).map((story, i) => ({
     ...story,
     image: HOME_STORY_IMAGES[i] ?? story.image,
   }));
