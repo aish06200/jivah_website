@@ -28,9 +28,7 @@ export default function Home() {
 
       <section id="projects" className="bg-white py-16 md:py-[120px]">
         <div className="site-pad flex items-center justify-between gap-6">
-          <h2 className="page-title text-ink">
-            Active projects
-          </h2>
+          <h2 className="title-ui-page text-ink">Active projects</h2>
           <Link
             href="/projects/active/"
             className="shrink-0 rounded-full bg-forest px-6 py-2.5 text-[16px] font-semibold leading-none text-white transition-opacity hover:opacity-80 md:px-7 md:py-3 md:text-[17px]"

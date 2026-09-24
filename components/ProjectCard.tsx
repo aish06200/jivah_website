@@ -25,7 +25,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
         <p className="text-[10px] tracking-[0.16em] uppercase text-on-accent/80">
           {statusLabel[project.status]} · {project.city}
         </p>
-        <h3 className="mt-1 font-serif text-2xl text-on-accent md:text-2xl">{project.name}</h3>
+        <h3 className="title-ui mt-1 text-2xl text-on-accent md:text-2xl">{project.name}</h3>
       </div>
     </Link>
   );

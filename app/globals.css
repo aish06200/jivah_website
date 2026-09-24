@@ -10,7 +10,7 @@
   --line: #e5e5e6;
   --forest: #0c7b54;
   --editorial: var(--font-jivah-serif), Georgia, "Times New Roman", serif;
-  --tracking-display: -0.018em;
+  --tracking-display: -0.015em;
   --tracking-ui: -0.004em;
 }
 
@@ -62,6 +62,22 @@ body {
   font-family: var(--font-jivah-serif), Georgia, serif;
   font-weight: 400;
   letter-spacing: var(--tracking-display);
+}
+
+/* UI headings — DM Sans (project names, catalog pages, cards) */
+.title-ui-page {
+  font-family: var(--font-jivah-sans), system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.title-ui {
+  font-family: var(--font-jivah-sans), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
 }
 
 .editorial-label {
@@ -147,7 +163,7 @@ body {
 .page-title {
   font-family: var(--font-jivah-serif), Georgia, serif;
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.12;
   letter-spacing: var(--tracking-display);
 }
@@ -155,15 +171,21 @@ body {
 .section-heading {
   font-family: var(--font-jivah-serif), Georgia, serif;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
   letter-spacing: var(--tracking-display);
 }
 
-.card-title {
+.hero-display {
   font-family: var(--font-jivah-serif), Georgia, serif;
-  font-weight: 500;
-  letter-spacing: var(--tracking-display);
+  font-weight: 400;
+}
+
+.card-title {
+  font-family: var(--font-jivah-sans), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
 .body-lede {
@@ -181,6 +203,12 @@ body {
 }
 
 @media (min-width: 768px) {
+  .title-ui-page {
+    font-size: 52px;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+  }
+
   .page-title {
     font-size: 52px;
     line-height: 1.06;

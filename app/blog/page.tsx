@@ -45,20 +45,20 @@ function FeaturedPostCard({
   previewParagraphs: string[];
 }) {
   return (
-    <article className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start lg:gap-12 xl:gap-16">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-[8px] bg-paper lg:sticky lg:top-[calc(69px+2rem)] lg:aspect-[4/3]">
+    <article className="flex w-full min-w-0 flex-col gap-8 lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-10 xl:gap-14">
+      <div className="relative aspect-[16/10] w-full min-w-0 overflow-hidden rounded-[8px] bg-paper lg:aspect-auto lg:h-full lg:min-h-[min(68vh,620px)] lg:sticky lg:top-[calc(69px+2rem)]">
         <Image
           src={withBase(post.image)}
           alt=""
           fill
-          className="object-cover"
-          sizes="(min-width: 1024px) 55vw, 100vw"
+          className="object-cover object-center"
+          sizes="(min-width: 1280px) 760px, (min-width: 1024px) 50vw, 100vw"
           priority
         />
       </div>
 
-      <div className="flex min-w-0 flex-col justify-center lg:pt-1">
-        <div className="max-w-[34rem]">
+      <div className="flex min-w-0 w-full flex-col justify-center lg:py-2">
+        <div className="w-full min-w-0 max-w-none">
           <CategoryPill label={post.tag} />
           <h3 className="card-title mt-5 text-[22px] leading-[1.2] text-ink md:text-[28px] md:leading-[1.15]">
             {post.title}
@@ -97,7 +97,7 @@ function FeaturedPostCard({
 
 function PostCard({ post }: { post: ListingPost }) {
   return (
-    <Link href={post.href} className="group flex h-full min-w-0 flex-col gap-3 md:gap-4">
+    <Link href={post.href} className="group flex h-full min-w-0 flex-col gap-4 md:gap-5">
       <div className="relative h-[240px] overflow-hidden rounded-[8px] bg-paper sm:h-[260px] md:h-[300px] lg:h-[340px]">
         <Image
           src={withBase(post.image)}
@@ -114,7 +114,7 @@ function PostCard({ post }: { post: ListingPost }) {
           </p>
         </div>
       </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-2 pr-1">
+      <div className="flex min-w-0 flex-1 flex-col gap-3 px-0.5 pb-1 pt-0.5 md:gap-3.5 md:px-1">
         <h3 className="card-title text-[20px] leading-[1.2] text-ink transition-opacity group-hover:opacity-70 md:text-[22px] lg:text-[24px]">
           {post.title}
         </h3>
@@ -135,7 +135,7 @@ export default function BlogPage() {
       </PageIntro>
 
       <div className="site-pad space-y-16 md:space-y-20 lg:space-y-24">
-        <section aria-label="Featured article">
+        <section aria-label="Featured article" className="w-full min-w-0">
           <FeaturedPostCard
             post={featuredPost}
             previewParagraphs={featuredArticle?.intro.slice(0, 2) ?? []}
@@ -143,16 +143,19 @@ export default function BlogPage() {
         </section>
 
         {latestPosts.length > 0 ? (
-          <section aria-labelledby="latest-posts-heading">
+          <section
+            aria-labelledby="latest-posts-heading"
+            className="border-t border-line/50 pt-12 md:pt-16 lg:pt-20"
+          >
             <h2
               id="latest-posts-heading"
               className="text-[24px] font-medium tracking-[-0.02em] text-ink md:text-[28px]"
             >
               Latest posts
             </h2>
-            <ul className="mt-8 grid list-none gap-6 sm:grid-cols-2 sm:gap-8 lg:mt-10 lg:gap-10">
+            <ul className="mt-10 grid list-none gap-8 sm:mt-12 sm:grid-cols-2 sm:gap-10 lg:mt-14 lg:gap-12 xl:gap-14">
               {latestPosts.map((item) => (
-                <li key={item.slug} className="min-h-0">
+                <li key={item.slug} className="min-h-0 py-1 md:py-2">
                   <PostCard post={item} />
                 </li>
               ))}

@@ -8,19 +8,22 @@
  *  280ms   divider line grows left → right
  *  400ms   coast path draws (1.1s)
  *  520ms   WB state + pin (spring)
- *  920ms   journey dot departs Kolkata (2s along arc)
- *  980ms   Odisha state + pin
- * 1460ms   Andhra state + pin
- * 2520ms   journey dot fades; map rests (hover to explore)
+ *  920ms   journey dot departs Kolkata (2s along arc, soft trail)
+ *        → blurb + state highlight sync at each pin
+ * 2520ms   journey ends; coast dash flows; gentle map float
+ * 3200ms   optional auto-tour cycles states (paused on hover)
  *  900ms   type columns rise (80ms stagger, parallel with map)
  * ───────────────────────────────────────────────────────── */
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
   useInView,
   useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
 } from "motion/react";
 import { indiaPins, indiaStatePaths } from "@/lib/indiaOutline";
 
@@ -34,7 +37,9 @@ const TIMING = {
   stateBase: 0.52,
   stateStagger: 0.46,
   journeyStart: 0.92,
-  journeyDuration: 2,
+  journeyDuration: 2.35,
+  exploreLoopStart: 3.35,
+  exploreInterval: 2.8,
   typesStart: 0.9,
   typeStagger: 0.08,
   typeDuration: 0.55,
@@ -116,9 +121,59 @@ function sampleSvgPath(d: string, count: number): { x: number; y: number }[] {
 export function GrowingSection() {
   const [activeId, setActiveId] = useState<StateId | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const explorePausedRef = useRef(false);
   const inSection = useInView(sectionRef, { once: true, margin: "-12% 0px" });
   const reduceMotion = useReducedMotion();
   const motionOn = inSection && !reduceMotion;
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 0.85", "end 0.15"],
+  });
+  const mapY = useTransform(scrollYProgress, [0, 0.45, 1], [18, 0, -14]);
+  const mapRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-1.25, 0, 1.1]);
+
+  useEffect(() => {
+    if (!motionOn) return;
+
+    const ms = (seconds: number) => seconds * 1000;
+    const journeyEnd = TIMING.journeyStart + TIMING.journeyDuration;
+    const journeyTimers = [
+      setTimeout(() => setActiveId("kolkata"), ms(TIMING.journeyStart)),
+      setTimeout(() => setActiveId("odisha"), ms(TIMING.journeyStart + TIMING.journeyDuration * 0.4)),
+      setTimeout(() => setActiveId("andhra"), ms(TIMING.journeyStart + TIMING.journeyDuration * 0.76)),
+      setTimeout(() => setActiveId(null), ms(journeyEnd + 0.25)),
+    ];
+
+    let exploreIndex = 0;
+    let exploreInterval: ReturnType<typeof setInterval> | undefined;
+
+    const exploreTimer = setTimeout(() => {
+      const tick = () => {
+        if (explorePausedRef.current) return;
+        setActiveId(COAST_IDS[exploreIndex] ?? null);
+        exploreIndex = (exploreIndex + 1) % COAST_IDS.length;
+      };
+      tick();
+      exploreInterval = setInterval(tick, ms(TIMING.exploreInterval));
+    }, ms(TIMING.exploreLoopStart));
+
+    return () => {
+      journeyTimers.forEach(clearTimeout);
+      clearTimeout(exploreTimer);
+      if (exploreInterval) clearInterval(exploreInterval);
+    };
+  }, [motionOn]);
+
+  const handleSelect = (id: StateId) => {
+    explorePausedRef.current = true;
+    setActiveId(id);
+  };
+
+  const handleLeave = () => {
+    explorePausedRef.current = false;
+    setActiveId(null);
+  };
 
   return (
     <section id="locations" ref={sectionRef} className="bg-forest text-white">
@@ -158,8 +213,10 @@ export function GrowingSection() {
                 motionOn={motionOn}
                 inView={inSection}
                 reduceMotion={!!reduceMotion}
-                onSelect={setActiveId}
-                onLeave={() => setActiveId(null)}
+                mapY={reduceMotion ? undefined : mapY}
+                mapRotate={reduceMotion ? undefined : mapRotate}
+                onSelect={handleSelect}
+                onLeave={handleLeave}
               />
             </div>
           </div>
@@ -209,6 +266,8 @@ function EastCoastMark({
   motionOn,
   inView,
   reduceMotion,
+  mapY,
+  mapRotate,
   onSelect,
   onLeave,
 }: {
@@ -216,19 +275,25 @@ function EastCoastMark({
   motionOn: boolean;
   inView: boolean;
   reduceMotion: boolean;
+  mapY?: MotionValue<number>;
+  mapRotate?: MotionValue<number>;
   onSelect: (id: StateId) => void;
   onLeave: () => void;
 }) {
-  const journeySamples = useMemo(() => sampleSvgPath(COAST_PATH, 36), []);
+  const journeySamples = useMemo(() => sampleSvgPath(COAST_PATH, 48), []);
   const journeyTimes = useMemo(
     () => journeySamples.map((_, i) => i / (journeySamples.length - 1)),
     [journeySamples],
   );
+  const coastFlowDelay = TIMING.coastDraw + TIMING.coastDrawDuration;
 
   const stateIndex = (id: StateId) => COAST_IDS.indexOf(id);
 
   return (
-    <div className="flex shrink-0 justify-center overflow-visible lg:justify-end">
+    <motion.div
+      className="flex shrink-0 justify-center overflow-visible lg:justify-end"
+      style={mapY && mapRotate ? { y: mapY, rotate: mapRotate } : undefined}
+    >
       <svg
         viewBox="-360 8 1040 1080"
         preserveAspectRatio="xMaxYMin meet"
@@ -259,26 +324,77 @@ function EastCoastMark({
           </filter>
         </defs>
 
+        <motion.g
+          animate={motionOn ? { y: [0, -6, 0] } : undefined}
+          transition={
+            motionOn
+              ? {
+                  y: {
+                    delay: coastFlowDelay + 0.35,
+                    duration: 5.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }
+              : undefined
+          }
+        >
         {motionOn ? (
-          <motion.path
-            d={COAST_PATH}
-            fill="none"
-            stroke="white"
-            strokeWidth={1.75}
-            strokeLinecap="round"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.28 }}
-            transition={{
-              pathLength: {
-                delay: TIMING.coastDraw,
-                duration: TIMING.coastDrawDuration,
-                ease: EASE,
-              },
-              opacity: { delay: TIMING.coastDraw, duration: 0.35 },
-            }}
-            pointerEvents="none"
-            aria-hidden
-          />
+          <>
+            <motion.path
+              d={COAST_PATH}
+              fill="none"
+              stroke="white"
+              strokeWidth={1.75}
+              strokeLinecap="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.22 }}
+              transition={{
+                pathLength: {
+                  delay: TIMING.coastDraw,
+                  duration: TIMING.coastDrawDuration,
+                  ease: EASE,
+                },
+                opacity: { delay: TIMING.coastDraw, duration: 0.35 },
+              }}
+              pointerEvents="none"
+              aria-hidden
+            />
+            <motion.path
+              d={COAST_PATH}
+              fill="none"
+              stroke="white"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeDasharray="5 14"
+              initial={{ pathLength: 0, opacity: 0, strokeDashoffset: 0 }}
+              animate={{
+                pathLength: 1,
+                opacity: [0, 0.55, 0.38],
+                strokeDashoffset: [0, -38],
+              }}
+              transition={{
+                pathLength: {
+                  delay: TIMING.coastDraw,
+                  duration: TIMING.coastDrawDuration,
+                  ease: EASE,
+                },
+                opacity: {
+                  delay: TIMING.coastDraw,
+                  duration: 0.45,
+                  times: [0, 0.6, 1],
+                },
+                strokeDashoffset: {
+                  delay: coastFlowDelay,
+                  duration: 2.8,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+              }}
+              pointerEvents="none"
+              aria-hidden
+            />
+          </>
         ) : (
           <path
             d={COAST_PATH}
@@ -353,42 +469,89 @@ function EastCoastMark({
         })}
 
         {motionOn ? (
-          <motion.circle
-            r={5}
-            fill="white"
-            initial={{
-              cx: journeySamples[0]?.x ?? indiaPins.kolkata.x,
-              cy: journeySamples[0]?.y ?? indiaPins.kolkata.y,
-              opacity: 0,
-            }}
-            animate={{
-              cx: journeySamples.map((p) => p.x),
-              cy: journeySamples.map((p) => p.y),
-              opacity: [0, 1, 1, 0],
-            }}
-            transition={{
-              cx: {
-                delay: TIMING.journeyStart,
-                duration: TIMING.journeyDuration,
-                ease: "linear",
-                times: journeyTimes,
-              },
-              cy: {
-                delay: TIMING.journeyStart,
-                duration: TIMING.journeyDuration,
-                ease: "linear",
-                times: journeyTimes,
-              },
-              opacity: {
-                delay: TIMING.journeyStart,
-                duration: TIMING.journeyDuration + 0.35,
-                times: [0, 0.08, 0.88, 1],
-                ease: "easeInOut",
-              },
-            }}
-            pointerEvents="none"
-            aria-hidden
-          />
+          <>
+            <motion.circle
+              r={11}
+              fill="white"
+              initial={{
+                cx: journeySamples[0]?.x ?? indiaPins.kolkata.x,
+                cy: journeySamples[0]?.y ?? indiaPins.kolkata.y,
+                opacity: 0,
+              }}
+              animate={{
+                cx: journeySamples.map((p) => p.x),
+                cy: journeySamples.map((p) => p.y),
+                opacity: [0, 0.22, 0.18, 0],
+              }}
+              transition={{
+                cx: {
+                  delay: TIMING.journeyStart + 0.06,
+                  duration: TIMING.journeyDuration,
+                  ease: [0.35, 0, 0.2, 1],
+                  times: journeyTimes,
+                },
+                cy: {
+                  delay: TIMING.journeyStart + 0.06,
+                  duration: TIMING.journeyDuration,
+                  ease: [0.35, 0, 0.2, 1],
+                  times: journeyTimes,
+                },
+                opacity: {
+                  delay: TIMING.journeyStart,
+                  duration: TIMING.journeyDuration + 0.4,
+                  times: [0, 0.12, 0.85, 1],
+                  ease: "easeInOut",
+                },
+              }}
+              pointerEvents="none"
+              aria-hidden
+            />
+            <motion.circle
+              r={5}
+              fill="white"
+              filter="url(#state-glow)"
+              initial={{
+                cx: journeySamples[0]?.x ?? indiaPins.kolkata.x,
+                cy: journeySamples[0]?.y ?? indiaPins.kolkata.y,
+                opacity: 0,
+                scale: 0.6,
+              }}
+              animate={{
+                cx: journeySamples.map((p) => p.x),
+                cy: journeySamples.map((p) => p.y),
+                opacity: [0, 1, 1, 0],
+                scale: [0.6, 1, 1, 0.85],
+              }}
+              transition={{
+                cx: {
+                  delay: TIMING.journeyStart,
+                  duration: TIMING.journeyDuration,
+                  ease: [0.35, 0, 0.2, 1],
+                  times: journeyTimes,
+                },
+                cy: {
+                  delay: TIMING.journeyStart,
+                  duration: TIMING.journeyDuration,
+                  ease: [0.35, 0, 0.2, 1],
+                  times: journeyTimes,
+                },
+                opacity: {
+                  delay: TIMING.journeyStart,
+                  duration: TIMING.journeyDuration + 0.35,
+                  times: [0, 0.08, 0.88, 1],
+                  ease: "easeInOut",
+                },
+                scale: {
+                  delay: TIMING.journeyStart,
+                  duration: TIMING.journeyDuration + 0.2,
+                  times: [0, 0.1, 0.9, 1],
+                  ease: "easeOut",
+                },
+              }}
+              pointerEvents="none"
+              aria-hidden
+            />
+          </>
         ) : null}
 
         {(Object.keys(indiaPins) as StateId[]).map((id) => {
@@ -437,24 +600,38 @@ function EastCoastMark({
                 }}
               />
               <circle cx={pin.x} cy={pin.y} r={2.5} fill={on ? "#0c7b54" : "#fafbfa"} />
-              <text
+              <motion.text
                 x={pin.x}
                 y={pin.y - 16}
                 textAnchor="middle"
                 fill="#fafbfa"
                 fontSize={11}
                 fontWeight={500}
-                style={{
-                  opacity: on ? 0.95 : 0,
-                  transition: "opacity 260ms cubic-bezier(0.22, 1, 0.36, 1)",
+                initial={reduceMotion ? false : { opacity: 0, y: 4 }}
+                animate={
+                  inView
+                    ? {
+                        opacity: on ? 1 : activeId ? 0.35 : 0.62,
+                        y: on ? 0 : 2,
+                      }
+                    : { opacity: 0, y: 4 }
+                }
+                transition={{
+                  opacity: {
+                    duration: 0.35,
+                    ease: EASE,
+                    delay: on ? 0 : pinDelay * 0.2,
+                  },
+                  y: { duration: 0.35, ease: EASE },
                 }}
               >
                 {PIN_LABELS[id]}
-              </text>
+              </motion.text>
             </g>
           );
         })}
+        </motion.g>
       </svg>
-    </div>
+    </motion.div>
   );
 }

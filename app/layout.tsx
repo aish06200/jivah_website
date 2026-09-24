@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { DM_Sans, Libre_Baskerville } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { LanguageProvider } from "@/components/LanguageProvider";
@@ -14,12 +14,14 @@ const sans = DM_Sans({
   display: "swap",
 });
 
-const serif = Fraunces({
+/** Editorial serif — classic letterforms (no decorative cap J). UI titles use DM Sans. */
+const serif = Libre_Baskerville({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
   style: ["normal", "italic"],
   variable: "--font-jivah-serif",
   display: "swap",
+  adjustFontFallback: true,
 });
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";

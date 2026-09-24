@@ -11,6 +11,8 @@ export type HomeProjectCard = {
   image: string;
   imageClass?: string;
   linked: boolean;
+  /** Target handover / launch window (catalog listings). */
+  launchYear?: string | null;
 };
 
 function HomeIcon({ className }: { className?: string }) {
@@ -130,7 +132,7 @@ function ProjectCardBody({
       </div>
       <div className="flex flex-col gap-2">
         <h2
-          className={`font-medium leading-[1.15] tracking-[-0.03em] text-ink ${
+          className={`title-ui text-ink ${
             compact ? "text-[18px] md:text-[20px]" : "text-[22px] md:text-[28px]"
           }`}
         >
