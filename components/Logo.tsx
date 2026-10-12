@@ -29,12 +29,14 @@ export function Logo({
   return (
     <Link
       href="/"
-      className="relative block h-[32px] w-[118px] no-underline notranslate md:h-[36px] md:w-[132px]"
+      className="relative block h-[40px] w-[58px] shrink-0 no-underline notranslate md:h-[44px] md:w-[64px]"
       aria-label="Jivah Realty home"
     >
       <img
-        src={withBase("/images/figma/logo-header.png")}
+        src={withBase("/images/figma/logo-nav-lockup.png")}
         alt=""
+        width={456}
+        height={317}
         className="absolute inset-0 h-full w-full object-contain object-left"
       />
     </Link>

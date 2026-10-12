@@ -34,7 +34,10 @@ export function IntentBanner() {
             <p className="text-[13px] font-medium tracking-[0.12em] text-forest uppercase">
               How we can help
             </p>
-            <h2 id="intent-heading" className="section-heading mt-3 max-w-2xl text-ink">
+            <h2
+              id="intent-heading"
+              className="section-heading mt-3 max-w-2xl tracking-[-0.035em] text-ink md:tracking-[-0.045em]"
+            >
               Looking to buy a home,
               <br />
               or looking to invest?
@@ -66,7 +69,7 @@ export function IntentBanner() {
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/88 via-ink/35 to-ink/10" />
 
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center md:p-8 lg:p-10">
-                    <p className="text-[11px] font-semibold tracking-[0.12em] text-[#7dffb8] uppercase">
+                    <p className="text-[11px] font-semibold tracking-[0.12em] text-[#f5d4bc] uppercase">
                       {path.eyebrow}
                     </p>
                     <h3 className="card-title mt-2 text-[22px] leading-[1.12] text-white md:text-[42px] md:leading-[1.08] lg:text-[46px]">

@@ -38,7 +38,7 @@ function HomeIcon({ className }: { className?: string }) {
 function CardArrowButton() {
   return (
     <span
-      className="flex size-11 shrink-0 items-center justify-center rounded-full bg-forest text-white shadow-[0_4px_14px_rgba(12,123,84,0.35)] transition-transform duration-300 group-hover:translate-x-1 md:size-12"
+      className="flex size-11 shrink-0 items-center justify-center rounded-full bg-forest text-white shadow-[0_4px_14px_rgba(214,112,62,0.35)] transition-transform duration-300 group-hover:translate-x-1 md:size-12"
       aria-hidden
     >
       <svg className="size-[18px] md:size-5" viewBox="0 0 16 16" fill="none">

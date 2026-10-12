@@ -39,10 +39,10 @@ function CategoryPill({
 
 function FeaturedPostCard({
   post,
-  previewParagraphs,
+  bodyPreview,
 }: {
   post: ListingPost;
-  previewParagraphs: string[];
+  bodyPreview: string;
 }) {
   return (
     <article className="flex w-full min-w-0 flex-col gap-8 lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-10 xl:gap-14">
@@ -64,18 +64,10 @@ function FeaturedPostCard({
             {post.title}
           </h3>
 
-          <div className="mt-6 space-y-4 border-t border-line/60 pt-6">
-            <p className="body-lede text-[17px] font-medium text-ink md:text-[19px] md:leading-[1.6]">
-              {post.excerpt}
+          <div className="mt-5 border-t border-line/60 pt-5">
+            <p className="body-lede text-[16px] leading-[1.58] text-muted md:text-[17px] md:leading-[1.6]">
+              {bodyPreview}
             </p>
-            {previewParagraphs.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 48)}
-                className="body-lede text-[16px] text-muted md:text-[18px] md:leading-[1.62]"
-              >
-                {paragraph}
-              </p>
-            ))}
           </div>
 
           <div className="mt-8 flex flex-col gap-5 border-t border-line/40 pt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
@@ -127,6 +119,10 @@ function PostCard({ post }: { post: ListingPost }) {
 }
 
 export default function BlogPage() {
+  const featuredBodyPreview = featuredArticle
+    ? [featuredPost.excerpt, ...featuredArticle.intro.slice(0, 2)].join(" ")
+    : featuredPost.excerpt;
+
   return (
     <div className="bg-white pb-24">
       <PageIntro kicker="Resources" title="Real estate insights">
@@ -136,10 +132,7 @@ export default function BlogPage() {
 
       <div className="site-pad space-y-16 md:space-y-20 lg:space-y-24">
         <section aria-label="Featured article" className="w-full min-w-0">
-          <FeaturedPostCard
-            post={featuredPost}
-            previewParagraphs={featuredArticle?.intro.slice(0, 2) ?? []}
-          />
+          <FeaturedPostCard post={featuredPost} bodyPreview={featuredBodyPreview} />
         </section>
 
         {latestPosts.length > 0 ? (

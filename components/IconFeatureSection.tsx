@@ -21,7 +21,7 @@ function SectionKicker({
 }) {
   return (
     <div
-      className={`flex items-center gap-2.5 text-[#3e545d] ${centered ? "justify-center" : ""}`}
+      className={`flex items-center gap-2.5 text-forest ${centered ? "justify-center" : ""}`}
     >
       <Image
         src={withBase(icon)}
@@ -37,7 +37,7 @@ function SectionKicker({
 
 export function FeatureIconBadge({ children }: { children: ReactNode }) {
   return (
-    <span className="flex size-12 shrink-0 items-center justify-center rounded-[14px] bg-forest text-white shadow-[0_10px_24px_-16px_rgba(12,123,84,0.85)]">
+    <span className="flex size-12 shrink-0 items-center justify-center rounded-[14px] bg-forest text-white shadow-[0_10px_24px_-16px_rgba(214,112,62,0.55)]">
       {children}
     </span>
   );

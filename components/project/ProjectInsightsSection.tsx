@@ -32,7 +32,7 @@ export function ProjectInsightsSection({ articles }: Props) {
                   aria-hidden
                 />
               </span>
-              <p className="text-[16px] font-semibold tracking-[-0.01em] text-[#3e545d]">Blog</p>
+              <p className="text-[16px] font-semibold tracking-[-0.01em] text-forest">Blog</p>
             </div>
             <h2 className="section-heading mt-3 text-ink lg:text-[52px]">
               Real estate insights

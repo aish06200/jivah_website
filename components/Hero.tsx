@@ -7,7 +7,7 @@ export function Hero() {
       <img
         src={withBase("/images/hero.png")}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover object-[74%_14%] md:object-[76%_12%]"
+        className="absolute inset-0 h-full w-full object-cover object-[62%_42%] md:object-[58%_38%]"
       />
       <div
         className="absolute inset-0"
@@ -19,7 +19,7 @@ export function Hero() {
 
       <div className="site-pad relative z-10 flex min-h-[88svh] flex-col items-start justify-end pb-16 pt-[61px] text-left md:pb-20 md:pt-[69px]">
         <div>
-          <h1 className="hero-display text-[32px] leading-[1.1] tracking-[-0.018em] text-white/95 sm:text-[40px] sm:leading-[1.06] md:max-w-[16ch] md:text-[68px] md:leading-[1.04] md:tracking-[-0.022em]">
+          <h1 className="hero-display text-[32px] leading-[1.1] tracking-[-0.035em] text-white/95 sm:text-[40px] sm:leading-[1.06] md:max-w-[16ch] md:text-[68px] md:leading-[1.04] md:tracking-[-0.045em]">
             <span className="block">Better Homes.</span>
             <span className="block">Familiar Roots.</span>
           </h1>

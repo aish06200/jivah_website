@@ -183,7 +183,7 @@ function WhyPhotoCarousel() {
         onPointerEnter={() => setPaused(true)}
         onPointerLeave={() => setPaused(false)}
       >
-        <div className="absolute -inset-px bg-forest" style={maskStyle} aria-hidden />
+        <div className="absolute -inset-px bg-forest-muted" style={maskStyle} aria-hidden />
 
         <div className="absolute inset-0" style={maskStyle}>
           {SLIDES.map((slide, i) => (
@@ -220,7 +220,7 @@ function WhyPhotoCarousel() {
 
 function PointIconBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="flex size-12 shrink-0 items-center justify-center rounded-[14px] bg-forest text-white shadow-[0_10px_24px_-16px_rgba(12,123,84,0.85)]">
+    <span className="flex size-12 shrink-0 items-center justify-center rounded-[14px] bg-forest text-white shadow-[0_10px_24px_-16px_rgba(214,112,62,0.55)]">
       {children}
     </span>
   );

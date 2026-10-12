@@ -25,7 +25,7 @@ const tools = [
   {
     href: "/downloads/",
     title: "Downloads",
-    body: "Brochures, floor plans and RERA certificates, listed by neighbourhood.",
+    body: "Jivah logos and marks, plus brochures, floor plans and RERA certificates by project.",
   },
   {
     href: "/rera/",

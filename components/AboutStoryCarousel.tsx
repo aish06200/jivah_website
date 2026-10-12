@@ -90,7 +90,7 @@ function CarouselNavButton({
 
 function SectionKicker({ children }: { children: string }) {
   return (
-    <div className="flex items-center gap-2.5 text-[#3e545d]">
+    <div className="flex items-center gap-2.5 text-forest">
       <Image
         src={withBase("/images/figma/about/section-icon.svg")}
         alt=""
@@ -116,7 +116,7 @@ export function AboutStoryCarousel() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-white py-20 md:py-28 lg:py-[112px]">
+    <section className="relative overflow-hidden bg-[#f7f3ec] py-20 md:py-28 lg:py-[112px]">
       <div aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden md:block">
         <Image
           src={withBase("/images/figma/about/vector-bg.svg")}

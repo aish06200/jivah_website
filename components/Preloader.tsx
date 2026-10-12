@@ -3,9 +3,9 @@
 /* ─────────────────────────────────────────────────────────
  * ANIMATION STORYBOARD — strict sequence, no overlap
  *
- *  PHASE 1  FILL   (~3.5s) J fills upward slowly until 100%
- *  PHASE 2  HOLD   (~1s)   full J sits still — nothing moves
- *  PHASE 3  MELT   (~1s)   J drifts away as the white screen fades out
+ *  PHASE 1  FILL   (~3.5s) mark fills upward slowly until 100%
+ *  PHASE 2  HOLD   (~1s)   full mark sits still — nothing moves
+ *  PHASE 3  MELT   (~1s)   mark drifts away as the orange screen fades out
  * ───────────────────────────────────────────────────────── */
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -78,7 +78,7 @@ export function Preloader() {
     <AnimatePresence mode="wait">
       {visible ? (
         <motion.div
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-white"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-forest"
           initial={{ opacity: 1 }}
           animate={{ opacity: stage === "melt" ? 0 : 1 }}
           transition={
@@ -94,7 +94,7 @@ export function Preloader() {
             preloader
             preloaderStage={stage}
             animate={!reduceMotion}
-            size={128}
+            size={120}
             fillDuration={fillDuration}
             meltDuration={meltDuration}
             onFillComplete={onFillComplete}

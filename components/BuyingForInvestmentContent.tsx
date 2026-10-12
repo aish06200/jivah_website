@@ -8,7 +8,7 @@ import { projects, stories } from "@/lib/data";
 import type { Project, ProjectStatus } from "@/lib/types";
 
 const statusStyles: Record<ProjectStatus, { label: string; className: string }> = {
-  completed: { label: "Delivered", className: "bg-[#00b364] text-white" },
+  completed: { label: "Delivered", className: "bg-forest text-white" },
   ongoing: { label: "Ongoing", className: "bg-forest text-white" },
   upcoming: { label: "Upcoming", className: "bg-white/95 text-ink shadow-sm" },
 };
@@ -514,7 +514,7 @@ function InvestmentReasonsSection() {
 
 function InvestmentClosingSection() {
   return (
-    <section className="bg-forest py-16 text-white md:py-20">
+    <section className="bg-forest-muted py-16 text-white md:py-20">
       <div className="site-pad">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center md:gap-8">
           <h2 className="section-heading max-w-[640px] md:text-[clamp(1.75rem,3vw,2.75rem)] md:leading-[1.15] md:tracking-[-0.03em]">
@@ -555,7 +555,7 @@ function SectionKicker({
 }) {
   return (
     <div
-      className={`flex items-center gap-2.5 text-[#3e545d] ${centered ? "justify-center" : ""}`}
+      className={`flex items-center gap-2.5 text-forest ${centered ? "justify-center" : ""}`}
     >
       <Image
         src={withBase(icon)}

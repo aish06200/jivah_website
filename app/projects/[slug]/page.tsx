@@ -11,7 +11,7 @@ import { uniqueImages } from "@/lib/project";
 import type { Project } from "@/lib/types";
 
 const FIGMA_HERO = "/images/figma/project-detail/hero.png";
-const FIGMA_SITE_PLAN = "/images/figma/project-detail/site-plan.png";
+const FIGMA_SITE_PLAN = "/images/figma/project-detail/site-plan.jpg";
 const FIGMA_LIFESTYLE_EXTERIOR = "/images/figma/project-detail/lifestyle-exterior.png";
 const FIGMA_LIFESTYLE_POOL = "/images/figma/project-detail/lifestyle-pool.png";
 const FIGMA_LIFESTYLE_COMMUNITY = "/images/figma/project-detail/lifestyle-community.png";

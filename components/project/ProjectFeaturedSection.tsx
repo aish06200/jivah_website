@@ -55,7 +55,7 @@ function CarouselNavButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/30 bg-transparent text-white transition hover:border-white hover:bg-white hover:text-[#265943]"
+      className="flex size-11 shrink-0 items-center justify-center rounded-full border border-ink/15 bg-white text-ink shadow-sm transition hover:border-forest hover:bg-forest hover:text-white"
     >
       {children}
     </button>
@@ -84,15 +84,15 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
   return (
     <section
       id="featured"
-      className="relative scroll-mt-24 overflow-hidden bg-[#265943] py-20 md:py-24 lg:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-[#f7f3ec] py-20 md:py-24 lg:py-28"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <img
           src={withBase(BG_VECTOR)}
           alt=""
-          className="amenity-bg-drift absolute left-0 top-12 h-auto w-[min(1011px,90vw)] max-w-none opacity-90 motion-reduce:animate-none lg:-left-24"
+          className="amenity-bg-drift absolute left-0 top-12 h-auto w-[min(1011px,90vw)] max-w-none opacity-40 motion-reduce:animate-none lg:-left-24"
         />
-        <div className="amenity-header-glow absolute left-1/2 top-24 h-40 w-40 -translate-x-1/2 rounded-full bg-[#00b364]/20 blur-2xl motion-reduce:animate-none lg:blur-3xl" />
+        <div className="amenity-header-glow absolute left-1/2 top-24 h-40 w-40 -translate-x-1/2 rounded-full bg-forest/10 blur-2xl motion-reduce:animate-none lg:blur-3xl" />
       </div>
 
       <div className="site-pad relative z-10">
@@ -102,17 +102,17 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
               <span className="flex size-5 shrink-0 items-center justify-center overflow-hidden motion-safe:animate-pulse">
                 <img src={withBase(LIFESTYLE_ICON)} alt="" className="size-5" aria-hidden />
               </span>
-              <p className="text-[16px] font-semibold tracking-[-0.01em] text-white">
+              <p className="text-[16px] font-semibold tracking-[-0.01em] text-forest">
                 {featured.eyebrow}
               </p>
             </div>
 
             <div className="space-y-3">
-              <h2 className="section-heading tracking-[-0.04em] text-white md:tracking-[-0.06em] lg:leading-[1.2] lg:text-[52px]">
+              <h2 className="section-heading tracking-[-0.04em] text-ink md:tracking-[-0.06em] lg:leading-[1.2] lg:text-[52px]">
                 {headline}
               </h2>
               {intro ? (
-                <p className="mx-auto max-w-2xl text-[16px] leading-[1.4] tracking-[-0.01em] text-white/80 md:text-[18px]">
+                <p className="mx-auto max-w-2xl text-[16px] leading-[1.4] tracking-[-0.01em] text-muted md:text-[18px]">
                   {intro}
                 </p>
               ) : null}
@@ -179,8 +179,8 @@ export function ProjectFeaturedSection({ project, featured }: Props) {
                             onClick={() => setActive(index)}
                             className={`h-1.5 rounded-full transition-[width,background-color,transform] duration-300 ${
                               index === active
-                                ? "w-7 scale-100 bg-white"
-                                : "w-1.5 scale-90 bg-white/40 hover:scale-100 hover:bg-white/65"
+                                ? "w-7 scale-100 bg-forest"
+                                : "w-1.5 scale-90 bg-ink/20 hover:scale-100 hover:bg-ink/35"
                             }`}
                           />
                         ))}

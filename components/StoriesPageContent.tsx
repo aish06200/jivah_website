@@ -267,7 +267,7 @@ export function StoriesPageContent({ stories }: Props) {
       </section>
 
       <section className="site-pad py-14 md:py-20">
-        <div className="rounded-[20px] bg-forest px-8 py-12 text-center text-white md:px-12 md:py-16">
+        <div className="rounded-[20px] bg-forest-muted px-8 py-12 text-center text-white md:px-12 md:py-16">
           <h2 className="section-heading text-white">Ready to find your neighbourhood?</h2>
           <p className="mx-auto mt-4 max-w-xl text-[16px] leading-[1.6] text-white/80 md:text-[17px]">
             Walk a sample apartment, meet the site team, and see how mixed-use living works in your city.

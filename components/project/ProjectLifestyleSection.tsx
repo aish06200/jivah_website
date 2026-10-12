@@ -34,19 +34,19 @@ function LifestyleWaves() {
     >
       <path
         d="M-80 120C180 40 420 180 720 100C980 30 1180 160 1520 80"
-        stroke="#0c7b54"
+        stroke="#d6703e"
         strokeOpacity="0.12"
         strokeWidth="1.5"
       />
       <path
         d="M-60 680C220 760 480 620 760 700C1020 770 1240 640 1500 720"
-        stroke="#0c7b54"
+        stroke="#d6703e"
         strokeOpacity="0.1"
         strokeWidth="1.5"
       />
       <path
         d="M200 400C420 320 640 460 900 380C1100 320 1280 420 1480 360"
-        stroke="#0c7b54"
+        stroke="#d6703e"
         strokeOpacity="0.08"
         strokeWidth="1.5"
       />

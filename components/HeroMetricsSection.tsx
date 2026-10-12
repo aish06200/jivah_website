@@ -9,7 +9,7 @@ export function HeroMetricsSection() {
             <div
               key={stat.label}
               className={`min-w-0 ${
-                index > 0 ? "md:border-l md:border-forest/15 md:pl-8 lg:pl-10" : ""
+                index > 0 ? "md:border-l md:border-ink/12 md:pl-8 lg:pl-10" : ""
               } ${index < heroMetrics.length - 1 ? "md:pr-8 lg:pr-10" : ""}`}
             >
               <dd className="text-[clamp(1.625rem,2.6vw,2rem)] font-semibold leading-none tracking-[-0.02em] text-forest tabular-nums">

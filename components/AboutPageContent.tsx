@@ -32,7 +32,7 @@ function SectionKicker({
   light?: boolean;
 }) {
   return (
-    <div className={`flex items-center gap-2.5 ${light ? "text-white" : "text-[#3e545d]"}`}>
+    <div className={`flex items-center gap-2.5 ${light ? "text-white" : "text-forest"}`}>
       <Image
         src={withBase(icon)}
         alt=""
@@ -50,8 +50,8 @@ export function AboutPageContent() {
     <div className="bg-white">
       <section className="relative h-[min(480px,55vh)] min-h-[240px] w-full overflow-hidden">
         <Image
-          src={withBase("/images/figma/about/hero.png")}
-          alt="Jivah Realty neighbourhood entrance at dusk"
+          src={withBase("/images/figma/about/hero.jpg")}
+          alt="Jivah Realty gated entrance with brand signage at golden hour"
           fill
           priority
           className="object-cover object-center"
@@ -74,23 +74,23 @@ export function AboutPageContent() {
         titleClassName="page-title text-[#172023]"
       />
 
-      <section className="bg-forest py-20 text-white md:py-28 lg:py-[112px]">
+      <section className="bg-[#f7f3ec] py-20 text-ink md:py-28 lg:py-[112px]">
         <div className="site-pad">
           <div className="mx-auto max-w-[1400px]">
-            <SectionKicker icon="/images/figma/about/section-icon.svg" light>
+            <SectionKicker icon="/images/figma/about/section-icon.svg">
               Meet our Team
             </SectionKicker>
-            <h2 className="section-heading mt-3 md:text-[clamp(2rem,4vw,3.25rem)] md:leading-[1.2] md:tracking-[-0.06em]">
+            <h2 className="section-heading mt-3 text-ink md:text-[clamp(2rem,4vw,3.25rem)] md:leading-[1.2] md:tracking-[-0.06em]">
               Leadership
             </h2>
-            <p className="mt-2 max-w-xl text-[18px] leading-[1.4] tracking-[-0.01em] text-white/70">
+            <p className="mt-2 max-w-xl text-[18px] leading-[1.4] tracking-[-0.01em] text-muted">
               The people who hold the line between what looks good in a render and what works in April heat.
             </p>
 
             <div className="mt-10 grid gap-10 md:grid-cols-3 lg:gap-10">
               {leaders.map((person) => (
                 <article key={person.name}>
-                  <div className="relative aspect-[440/287] overflow-hidden rounded-2xl bg-white/10">
+                  <div className="relative aspect-[440/287] overflow-hidden rounded-2xl bg-white ring-1 ring-line/60">
                     <Image
                       src={person.image}
                       alt={person.name}
@@ -102,7 +102,7 @@ export function AboutPageContent() {
                   <h3 className="mt-8 text-[20px] font-medium leading-[1.2] tracking-[-0.02em]">
                     {person.name}
                   </h3>
-                  <p className="mt-1 text-[16px] leading-[1.4] tracking-[-0.01em] text-white/70">
+                  <p className="mt-1 text-[16px] leading-[1.4] tracking-[-0.01em] text-muted">
                     {person.role}
                   </p>
                 </article>

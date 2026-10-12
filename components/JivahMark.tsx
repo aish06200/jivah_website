@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { withBase } from "@/lib/base";
 
-/** Figma Union node 103:17 — 558 × 691 */
-export const J_MARK_SRC = "/images/figma/j-mark-figma-103-17.png";
-export const J_MARK_ASPECT = 558 / 691;
+/** Brand twin-bar mark (preloader / lockup icon) */
+export const J_MARK_SRC = "/images/figma/j-mark-preloader.png";
+export const J_MARK_ASPECT = 256 / 332;
 
 export type PreloaderStage = "fill" | "hold" | "melt";
 
@@ -23,26 +23,32 @@ function JMarkShape({
   width,
   height,
   className = "",
+  ghost = false,
+  light = false,
 }: {
   width: number;
   height: number;
   className?: string;
+  ghost?: boolean;
+  /** White mark (e.g. on terracotta preloader) */
+  light?: boolean;
 }) {
+  const ghostOpacity = light ? "opacity-[0.28]" : "opacity-[0.2]";
+
   return (
-    <div
+    <img
+      src={withBase(J_MARK_SRC)}
+      alt=""
       aria-hidden
-      className={`bg-forest ${className}`}
+      draggable={false}
+      className={`block max-w-none select-none object-contain object-center ${
+        ghost ? ghostOpacity : ""
+      } ${className}`}
       style={{
         width,
         height,
-        WebkitMaskImage: `url(${withBase(J_MARK_SRC)})`,
-        maskImage: `url(${withBase(J_MARK_SRC)})`,
-        WebkitMaskSize: "100% 100%",
-        maskSize: "100% 100%",
-        WebkitMaskRepeat: "no-repeat",
-        maskRepeat: "no-repeat",
-        WebkitMaskPosition: "center",
-        maskPosition: "center",
+        // PNG must be terracotta bars on transparent (not white fill), or invert tints the whole rect white.
+        filter: light ? "brightness(0) invert(1)" : undefined,
       }}
     />
   );
@@ -74,7 +80,7 @@ export function JivahMark({
   const reduceMotion = useReducedMotion();
   const shouldAnimate = animate && !reduceMotion;
   const width = size;
-  const height = (size * 691) / 558;
+  const height = size / J_MARK_ASPECT;
   const fillDoneRef = useRef(false);
   const meltDoneRef = useRef(false);
   const fillTimerRef = useRef<number | null>(null);
@@ -108,7 +114,7 @@ export function JivahMark({
     return (
       <div className={`relative ${className}`} style={{ width, height }} aria-hidden>
         {preloaderStage === "fill" ? (
-          <JMarkShape width={width} height={height} className="opacity-[0.12]" />
+          <JMarkShape width={width} height={height} ghost light />
         ) : null}
 
         {/* Phase 1 — load: clip reveal only. Unmounts when fill finishes. */}
@@ -125,7 +131,7 @@ export function JivahMark({
               onFillComplete?.();
             }}
           >
-            <JMarkShape width={width} height={height} />
+            <JMarkShape width={width} height={height} light />
           </motion.div>
         ) : null}
 
@@ -159,7 +165,7 @@ export function JivahMark({
               onMeltComplete?.();
             }}
           >
-            <JMarkShape width={width} height={height} />
+            <JMarkShape width={width} height={height} light />
           </motion.div>
         ) : null}
       </div>
@@ -169,7 +175,7 @@ export function JivahMark({
   if (preloader) {
     return (
       <div className={`relative ${className}`} style={{ width, height }} aria-hidden>
-        <JMarkShape width={width} height={height} />
+        <JMarkShape width={width} height={height} light />
       </div>
     );
   }

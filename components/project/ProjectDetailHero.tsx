@@ -7,7 +7,7 @@ const statusStyles: Record<
   ProjectStatus,
   { label: string; className: string }
 > = {
-  completed: { label: "Delivered", className: "bg-[#00b364] text-white" },
+  completed: { label: "Delivered", className: "bg-forest text-white" },
   ongoing: { label: "Ongoing", className: "bg-forest text-white" },
   upcoming: { label: "Upcoming", className: "bg-white/90 text-ink" },
 };

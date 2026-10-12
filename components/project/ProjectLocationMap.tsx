@@ -83,7 +83,7 @@ function DummyLocationMap({
       />
       <div className="absolute inset-0 bg-gradient-to-br from-[#fafbfa]/80 via-transparent to-[#f5f0e8]/90" />
       <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-full flex-col items-center">
-        <span className="flex size-10 items-center justify-center rounded-full bg-forest text-white shadow-[0_4px_14px_rgba(12,123,84,0.35)] ring-4 ring-white">
+        <span className="flex size-10 items-center justify-center rounded-full bg-forest text-white shadow-[0_4px_14px_rgba(214,112,62,0.35)] ring-4 ring-white">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path
               d="M12 21s6-5.2 6-10a6 6 0 10-12 0c0 4.8 6 10 6 10Z"

@@ -23,7 +23,10 @@ type Props = {
 
 export function ProjectSitePlanSection({ project, sitePlanImage }: Props) {
   return (
-    <section id="site-plan" className="scroll-mt-24 bg-forest text-white">
+    <section
+      id="site-plan"
+      className="scroll-mt-24 bg-[#a85838] text-white"
+    >
       <div className="site-pad grid gap-10 py-14 md:grid-cols-2 md:items-center md:gap-12 md:py-16 lg:py-20">
         <img
           src={withBase(sitePlanImage)}

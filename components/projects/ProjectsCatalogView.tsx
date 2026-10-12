@@ -16,10 +16,10 @@ import type { Project } from "@/lib/types";
 
 const CARD_IMAGES: Record<string, Pick<HomeProjectCard, "image">> = {
   "jivah-greens-nashik": {
-    image: "/images/figma/project-1.png",
+    image: "/images/figma/project-1.jpg",
   },
   "jivah-gardens-nagpur": {
-    image: "/images/figma/project-2.png",
+    image: "/images/figma/project-2.jpg",
   },
 };
 
@@ -113,7 +113,7 @@ export function ProjectsCatalogView({ variant, allProjects }: Props) {
 
       <section className="bg-white py-16 md:py-[120px]">
         <div className="site-pad flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="title-ui-page text-ink">{config.title}</h1>
+          <h1 className="section-heading text-ink">{config.title}</h1>
           <Link
             href={config.cta.href}
             className="shrink-0 self-start rounded-full bg-forest px-6 py-2.5 text-[16px] font-semibold leading-none text-white transition-opacity hover:opacity-80 sm:self-auto md:px-7 md:py-3 md:text-[17px]"
