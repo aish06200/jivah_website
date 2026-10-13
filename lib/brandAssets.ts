@@ -10,7 +10,7 @@ export type BrandAsset = {
 export const brandAssets: BrandAsset[] = [
   {
     title: "Logo — header / nav",
-    description: "Stacked mark with JIVAH Realty on light backgrounds (transparent PNG)",
+    description: "Horizontal mark + wordmark for light backgrounds (transparent PNG)",
     path: "/images/figma/logo-nav-lockup.png",
     filename: "jivah-logo-nav-lockup.png",
     type: "PNG",

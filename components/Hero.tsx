@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { withBase } from "@/lib/base";
 
 export function Hero() {
@@ -23,12 +22,6 @@ export function Hero() {
             <span className="block">Better Homes.</span>
             <span className="block">Familiar Roots.</span>
           </h1>
-          <Link
-            href="/contact/?type=home-buyer"
-            className="btn-pill btn-forest mt-8 inline-flex lg:hidden"
-          >
-            Schedule a Visit
-          </Link>
         </div>
       </div>
     </section>

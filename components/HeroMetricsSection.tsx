@@ -12,13 +12,13 @@ export function HeroMetricsSection() {
                 index > 0 ? "md:border-l md:border-ink/12 md:pl-8 lg:pl-10" : ""
               } ${index < heroMetrics.length - 1 ? "md:pr-8 lg:pr-10" : ""}`}
             >
-              <dd className="text-[clamp(1.625rem,2.6vw,2rem)] font-semibold leading-none tracking-[-0.02em] text-forest tabular-nums">
+              <dd className="text-[clamp(1.625rem,2.6vw,2rem)] font-semibold leading-none tracking-[-0.02em] text-ink tabular-nums">
                 {stat.value}
                 {"suffix" in stat && stat.suffix ? (
                   <span className="ml-0.5 text-[0.72em] font-semibold">{stat.suffix}</span>
                 ) : null}
               </dd>
-              <dt className="mt-1.5 whitespace-nowrap text-[10px] font-medium uppercase leading-none tracking-[0.12em] text-forest md:text-[11px]">
+              <dt className="mt-1.5 whitespace-nowrap text-[10px] font-medium uppercase leading-none tracking-[0.12em] text-ink/70 md:text-[11px]">
                 {stat.label}
               </dt>
             </div>
